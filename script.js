@@ -1,4 +1,5 @@
 /* CONFIG */
+const CONFIG_SOLSCAN_KEY = ""; // optional later; public endpoints used by default
 const TOKEN_ADDRESS = "5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk";
 const STREAMFLOW_DASHBOARD = "https://app.streamflow.finance/token-dashboard/solana/mainnet/" + TOKEN_ADDRESS;
 
@@ -6,7 +7,7 @@ const STREAMFLOW_DASHBOARD = "https://app.streamflow.finance/token-dashboard/sol
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-/* RAINBOW HEADINGS - wrap letters (keep behavior) */
+/* RAINBOW HEADINGS - wrap letters */
 function wrapRainbow(el){
   const textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
   if(!textNode) return;
@@ -30,7 +31,7 @@ $$('.rainbow-heading').forEach(h => wrapRainbow(h));
 /* NAV: hamburger */
 const hamburger = $('#hamburger');
 const navLinks = $('#navLinks');
-if(hamburger) hamburger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+hamburger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
 $$('#navLinks a').forEach(a => a.addEventListener('click', ()=> navLinks.classList.remove('open')));
 
 /* FADE on scroll */
@@ -49,10 +50,8 @@ async function copyToClipboard(text){
     alert("Contract: " + text);
   }
 }
-const copyBtn = $('#copyCA');
-const headerBtn = $('#headerCA');
-if(copyBtn) copyBtn.addEventListener('click', ()=> copyToClipboard(TOKEN_ADDRESS));
-if(headerBtn) headerBtn.addEventListener('click', ()=> copyToClipboard(TOKEN_ADDRESS));
+$('#copyCA').addEventListener('click', ()=> copyToClipboard(TOKEN_ADDRESS));
+$('#headerCA').addEventListener('click', ()=> copyToClipboard(TOKEN_ADDRESS));
 
 /* show toast with rainbow gradient */
 function showToast(msg){
@@ -69,151 +68,124 @@ function showToast(msg){
   setTimeout(()=> { t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(()=>t.remove(),450) }, 1500);
 }
 
-/* HOW TO BUY expandable with smooth slide */
+/* HOW TO BUY expandable */
 const howBtn = $('#howToBuyBtn');
 const howBox = $('#howToBuy');
-if(howBtn && howBox){
-  howBtn.addEventListener('click', () => {
-    howBox.classList.toggle('open');
-    const expanded = howBox.classList.contains('open');
-    howBtn.setAttribute('aria-expanded', String(expanded));
-    const arrow = howBtn.querySelector('.arrow');
-    if(arrow) arrow.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
-  });
-}
+howBtn.addEventListener('click', () => {
+  const open = howBox.classList.toggle('hidden') ? false : true;
+  howBtn.setAttribute('aria-expanded', String(!howBox.classList.contains('hidden')));
+  const arrow = howBtn.querySelector('.arrow');
+  if(arrow) arrow.style.transform = howBox.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+});
 
-/* FAQ expand/collapse smooth */
+/* FAQ expand/collapse */
 $$('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const a = btn.nextElementSibling;
+    a.classList.toggle('hidden');
+    btn.classList.toggle('collapsed');
     const toggle = btn.querySelector('.faq-toggle');
-    const isOpen = a.classList.toggle('open');
-    btn.classList.toggle('collapsed', !isOpen);
-    if(toggle) toggle.textContent = isOpen ? '▴' : '▾';
+    if(toggle) toggle.textContent = a.classList.contains('hidden') ? '▾' : '▴';
   });
 });
 
 /* =========================
-   Canvas: natural starfall (circular meteors with trailing glow)
+   Canvas: stars + meteors
    ========================= */
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
-
-/* resize & star/meteor builders */
 function resizeCanvas(){ canvas.width = innerWidth; canvas.height = innerHeight; }
-window.addEventListener('resize', ()=> { resizeCanvas(); buildStars(Math.max(140, Math.floor((innerWidth*innerHeight)/10000))); });
+window.addEventListener('resize', ()=> { resizeCanvas(); buildStars(Math.max(120, Math.floor((innerWidth*innerHeight)/8000))); });
 resizeCanvas();
 
-/* Stars with depth layers */
+/* pulsing white stars (bigger/brighter) */
 let stars = [];
 function buildStars(count = 220){
   stars = [];
-  // create layers by depth: 0 = close (fast/bright), 2 = far (slow/dim)
   for(let i=0;i<count;i++){
-    const depth = Math.random() < 0.6 ? 0 : (Math.random() < 0.6 ? 1 : 2); // bias toward closer
-    const baseSpeed = depth === 0 ? 0.02 : depth === 1 ? 0.01 : 0.004;
-    const baseAlpha = depth === 0 ? (0.5 + Math.random()*0.5) : depth === 1 ? (0.25 + Math.random()*0.4) : (0.08 + Math.random()*0.16);
     stars.push({
       x: Math.random()*canvas.width,
       y: Math.random()*canvas.height,
-      r: Math.random()*1.8 + (depth === 0 ? 1.2 : 0.6),
-      a: Math.random()*0.9 + 0.05,
-      d: (Math.random()*baseSpeed) * (Math.random() < 0.5 ? -1 : 1),
-      depth,
-      baseAlpha
+      r: Math.random()*2.8 + 0.9,
+      a: Math.random()*0.9 + 0.1,
+      d: -0.015 + Math.random()*0.03
     });
   }
 }
 buildStars();
 
-/* Meteors: circular glowing particles leaving short trails */
+/* shooting meteors (star-shaped head, short tapered trail) */
 let meteors = [];
 function spawnMeteor(){
-  // spawn chance varied so they appear staggered like a shower
-  if(Math.random() < 0.016){
-    const startX = Math.random() * canvas.width * 0.9;
-    const startY = Math.random() * canvas.height * 0.5;
+  if(Math.random() < 0.012){
+    const sx = Math.random() * canvas.width * 0.9;
+    const sy = Math.random() * canvas.height * 0.45;
     meteors.push({
-      x: startX,
-      y: startY,
-      vx: (Math.random()*0.6 + 1.6) * (Math.random() < 0.5 ? 1 : -1), // some go left/right
-      vy: Math.random()*1.2 + 1.6,
-      life: 1,
-      hue: Math.floor(Math.random()*60) + 40, // warm hues
-      size: Math.random()*3 + 2,
-      trail: [] // store previous positions for a soft tail
+      x: sx, y: sy, vx: (Math.random()*1.0 + 2.0), vy: (Math.random()*0.8 + 1.8),
+      len: Math.random()*70 + 40, life:1, hue: Math.random()*360, size: Math.random()*3 + 2
     });
   }
 }
 
-/* draw a soft glowing circle */
-function drawGlowCircle(x,y,r,hue,alpha){
-  const g = ctx.createRadialGradient(x,y,0,x,y,r*2);
-  g.addColorStop(0, `hsla(${hue},100%,85%,${alpha})`);
-  g.addColorStop(0.4, `hsla(${hue},95%,70%,${alpha*0.45})`);
-  g.addColorStop(1, `rgba(0,0,0,0)`);
+/* draw small star shape */
+function drawStarShape(x,y,r,fill){
+  ctx.save();
   ctx.beginPath();
-  ctx.fillStyle = g;
-  ctx.arc(x,y,r*1.2,0,Math.PI*2);
-  ctx.fill();
-}
-
-/* draw meteor with trailing soft dots */
-function drawMeteor(m){
-  // draw trailing small glows from oldest->newest
-  const step = Math.max(2, Math.floor(m.trail.length / 8));
-  for(let i = 0; i < m.trail.length; i += step){
-    const p = m.trail[i];
-    const tAlpha = (i / m.trail.length) * m.life * 0.6;
-    drawGlowCircle(p.x, p.y, m.size * (0.7 + (i / m.trail.length)), m.hue, tAlpha);
+  for(let i=0;i<5;i++){
+    ctx.lineTo(x + r*Math.cos((18 + i*72)*Math.PI/180), y - r*Math.sin((18 + i*72)*Math.PI/180));
+    ctx.lineTo(x + (r/2)*Math.cos((54 + i*72)*Math.PI/180), y - (r/2)*Math.sin((54 + i*72)*Math.PI/180));
   }
-  // main head
-  drawGlowCircle(m.x, m.y, m.size * 1.6, m.hue, m.life);
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  ctx.restore();
 }
 
-/* animation frame */
+function drawMeteor(m){
+  // trail: short tapered triangle/gradient
+  const ex = m.x - m.len*0.6;
+  const ey = m.y + m.len*0.6;
+  const g = ctx.createLinearGradient(m.x, m.y, ex, ey);
+  g.addColorStop(0, `hsla(${m.hue},100%,85%,${m.life})`);
+  g.addColorStop(1, `hsla(${m.hue},100%,60%,0)`);
+  ctx.save();
+  ctx.strokeStyle = g;
+  ctx.lineWidth = Math.max(1, m.size);
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(m.x, m.y);
+  ctx.lineTo(ex, ey);
+  ctx.stroke();
+  // star head
+  drawStarShape(m.x, m.y, Math.max(1.6, m.size*1.2), `hsla(${m.hue},100%,90%,${m.life})`);
+  ctx.restore();
+}
+
+/* animation loop */
 function frame(){
-  // slightly translucent clear for subtle trails
-  ctx.fillStyle = 'rgba(0,0,0,0.14)';
+  // semi-transparent clear for trails
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // update & render stars
+  // pulsing stars
   for(const s of stars){
-    // twinkle
     ctx.beginPath();
-    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.03, Math.min(1, s.baseAlpha * Math.abs(s.a)))})`;
+    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.06, Math.min(1, s.a))})`;
     ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
     ctx.fill();
     s.a += s.d;
-    // gentle drifting horizontally to mimic parallax
-    s.x += (s.depth === 2 ? 0.02 : s.depth === 1 ? 0.06 : 0.12) * (Math.random() < 0.5 ? -1 : 1);
-    // wrap
-    if(s.x < -10) s.x = canvas.width + 10;
-    if(s.x > canvas.width + 10) s.x = -10;
-    if(s.a <= 0.02 || s.a >= 1) s.d *= -1;
+    if(s.a <= 0.06 || s.a >= 0.98) s.d *= -1;
   }
 
-  // spawn meteors occasionally
+  // spawn meteors
   spawnMeteor();
 
   // draw meteors
-  for(let i = meteors.length-1; i >= 0; i--){
+  for(let i = meteors.length-1;i>=0;i--){
     const m = meteors[i];
-    // add previous pos to trail
-    m.trail.push({x: m.x, y: m.y});
-    if(m.trail.length > 26) m.trail.shift();
-
-    // move
-    m.x += m.vx;
-    m.y += m.vy;
-    m.life -= 0.009;
-
     drawMeteor(m);
-
-    // if out of bounds or dead -> remove
-    if(m.x < -200 || m.x > canvas.width + 200 || m.y > canvas.height + 200 || m.life <= 0){
-      meteors.splice(i,1);
-    }
+    m.x += m.vx; m.y += m.vy; m.life -= 0.012;
+    if(m.x > canvas.width + 200 || m.y > canvas.height + 200 || m.life <= 0) meteors.splice(i,1);
   }
 
   requestAnimationFrame(frame);
@@ -221,21 +193,54 @@ function frame(){
 frame();
 
 /* =========================
-   Static Tokenomics UI
+   Solscan public API polling
    ========================= */
 const supplyEl = $('#supplyValue');
 const holdersEl = $('#holdersValue');
 const updatedEl = $('#updatedAt');
 
-if(supplyEl) supplyEl.textContent = '1,000,000,000';
-if(holdersEl) holdersEl.textContent = '—';
-if(updatedEl) updatedEl.textContent = new Date().toLocaleString();
+async function fetchSolscanMeta(){
+  try{
+    // prefer public API
+    const metaUrl = `https://public-api.solscan.io/token/meta?address=${TOKEN_ADDRESS}`;
+    const holdersUrl = `https://public-api.solscan.io/token/holders?address=${TOKEN_ADDRESS}&page=1&page_size=1`;
+    const [metaR, holdersR] = await Promise.all([ fetch(metaUrl), fetch(holdersUrl) ]);
+    if(!metaR.ok || !holdersR.ok) throw new Error('public API error');
+    const metaJ = await metaR.json();
+    const holdersJ = await holdersR.json();
+    // metaJ may include data.supply (raw) or supply, decimals
+    const supply = metaJ?.data?.supply ?? metaJ?.supply ?? null;
+    const decimals = metaJ?.data?.decimals ?? metaJ?.decimals ?? 0;
+    const totalSupply = supply !== null ? Number(supply) / Math.pow(10, decimals) : null;
+    const holders = holdersJ?.data?.total ?? (Array.isArray(holdersJ?.data?.rows) ? holdersJ.data.rows.length : null);
+
+    if(totalSupply !== null){
+      supplyEl.textContent = Intl.NumberFormat().format(totalSupply);
+    } else {
+      supplyEl.textContent = "Unavailable";
+    }
+    if(holders !== null){
+      holdersEl.textContent = String(holders);
+    } else {
+      holdersEl.textContent = "Unavailable";
+    }
+    updatedEl.textContent = new Date().toLocaleString();
+  }catch(e){
+    console.warn('Solscan fetch failed', e);
+    supplyEl.textContent = "Live data unavailable";
+    holdersEl.textContent = "Live data unavailable";
+    updatedEl.textContent = "—";
+  }
+}
+
+// initial fetch and repeat
+fetchSolscanMeta();
+setInterval(fetchSolscanMeta, 30000);
 
 /* =========================
    Misc UI tweaks on load
    ========================= */
 $$('.nav-socials .social').forEach(a => { a.style.fontSize = '15px'; a.style.padding = '10px 14px'; });
 
-/* ensure interactive aria states */
-if(headerBtn) headerBtn.setAttribute('aria-pressed', 'false');
-if(copyBtn) copyBtn.setAttribute('aria-pressed', 'false');
+/* ensure the FAQ icon only in FAQ heading (already in HTML) */
+
