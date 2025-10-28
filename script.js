@@ -1,217 +1,246 @@
-/* -------------------------
-   DOM helpers and setup
-   ------------------------- */
-const wrapRainbow = (el) => {
-  // wrap the element's text content into colored spans
-  const text = el.textContent.trim();
-  el.innerHTML = "";
+/* CONFIG */
+const CONFIG_SOLSCAN_KEY = ""; // optional later; public endpoints used by default
+const TOKEN_ADDRESS = "5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk";
+const STREAMFLOW_DASHBOARD = "https://app.streamflow.finance/token-dashboard/solana/mainnet/" + TOKEN_ADDRESS;
+
+/* SMALL HELPERS */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+/* RAINBOW HEADINGS - wrap letters */
+function wrapRainbow(el){
+  const textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+  if(!textNode) return;
+  const text = textNode.textContent.trim();
+  if(!text) return;
   const colors = ['c0','c1','c2','c3','c4','c5','c6'];
+  const wrapper = document.createElement('span');
+  wrapper.className = 'rainbow-plain';
   for(let i=0;i<text.length;i++){
     const ch = text[i] === ' ' ? '\u00A0' : text[i];
-    const span = document.createElement('span');
-    span.className = `rainbow-letter ${colors[i % colors.length]}`;
-    span.textContent = ch;
-    el.appendChild(span);
+    const sp = document.createElement('span');
+    sp.className = `rainbow-letter ${colors[i % colors.length]}`;
+    sp.textContent = ch;
+    wrapper.appendChild(sp);
   }
-};
+  el.insertBefore(wrapper, textNode);
+  el.removeChild(textNode);
+}
+$$('.rainbow-heading').forEach(h => wrapRainbow(h));
 
-// Apply rainbow to headings (text-only parts) - headings are all-caps in HTML
-document.querySelectorAll('.rainbow-heading').forEach(h => {
-  // remove any existing wrapped text nodes first
-  const textNode = Array.from(h.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
-  if (textNode && textNode.textContent.trim().length){
-    const wrapper = document.createElement('span');
-    wrapper.className = 'rainbow-plain';
-    wrapper.textContent = textNode.textContent.trim();
-    h.insertBefore(wrapper, textNode);
-    h.removeChild(textNode);
-    wrapRainbow(wrapper);
+/* NAV: hamburger */
+const hamburger = $('#hamburger');
+const navLinks = $('#navLinks');
+hamburger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+$$('#navLinks a').forEach(a => a.addEventListener('click', ()=> navLinks.classList.remove('open')));
+
+/* FADE on scroll */
+const fades = document.querySelectorAll('.fade-section');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.18});
+fades.forEach(f => obs.observe(f));
+
+/* Copy CA (header and home buttons) */
+async function copyToClipboard(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    showToast("Contract copied to clipboard");
+  }catch(e){
+    alert("Contract: " + text);
   }
-});
+}
+$('#copyCA').addEventListener('click', ()=> copyToClipboard(TOKEN_ADDRESS));
+$('#headerCA').addEventListener('click', ()=> copyToClipboard(TOKEN_ADDRESS));
 
-/* -------------------------
-   NAV (hamburger toggle)
-   ------------------------- */
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-
-/* close menu when link clicked (mobile) */
-document.querySelectorAll('#navLinks a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
-});
-
-/* -------------------------
-   Fade on scroll (IntersectionObserver)
-   ------------------------- */
-const sections = document.querySelectorAll('.fade-section');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(ent => { if(ent.isIntersecting) ent.target.classList.add('visible'); });
-}, { threshold: 0.18 });
-sections.forEach(s => obs.observe(s));
-
-/* -------------------------
-   Copy Contract
-   ------------------------- */
-document.getElementById('copyCA').addEventListener('click', async () => {
-  const ca = document.getElementById('contractAddress').textContent.trim();
-  try {
-    await navigator.clipboard.writeText(ca);
-    showToast('Contract copied to clipboard');
-  } catch (e) {
-    alert('Contract: ' + ca);
-  }
-});
-
+/* show toast with rainbow gradient */
 function showToast(msg){
+  const root = $('#toast-root');
   const t = document.createElement('div');
+  t.className = 'toast';
   t.textContent = msg;
-  t.style.position = 'fixed';
-  t.style.bottom = '22px';
-  t.style.left = '50%';
-  t.style.transform = 'translateX(-50%)';
-  t.style.background = 'linear-gradient(90deg,#ff9cff,#6ef0ff)';
-  t.style.color = '#000';
-  t.style.padding = '10px 16px';
-  t.style.borderRadius = '999px';
-  t.style.zIndex = 600;
-  t.style.fontWeight = 700;
+  Object.assign(t.style, {
+    position: 'fixed', bottom:'22px', left:'50%', transform:'translateX(-50%)',
+    padding:'10px 18px', borderRadius:'999px', fontWeight:'800', zIndex:9999, color:'#000',
+    background:'linear-gradient(90deg,#ff7a00,#ffd100,#00d2ff,#5a6bff)'
+  });
   document.body.appendChild(t);
-  setTimeout(()=>{ t.style.transition='opacity .5s'; t.style.opacity=0; setTimeout(()=>t.remove(),500); },1500);
+  setTimeout(()=> { t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(()=>t.remove(),450) }, 1500);
 }
 
-/* How to Buy toggle */
-document.getElementById('howToBuyBtn').addEventListener('click', () => {
-  document.getElementById('howToBuy').classList.toggle('hidden');
+/* HOW TO BUY expandable */
+const howBtn = $('#howToBuyBtn');
+const howBox = $('#howToBuy');
+howBtn.addEventListener('click', () => {
+  const open = howBox.classList.toggle('hidden') ? false : true;
+  howBtn.setAttribute('aria-expanded', String(!howBox.classList.contains('hidden')));
+  const arrow = howBtn.querySelector('.arrow');
+  if(arrow) arrow.style.transform = howBox.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
 });
 
-/* -------------------------
-   CANVAS: Stars + Rainbow Shooting Stars
-   ------------------------- */
+/* FAQ expand/collapse */
+$$('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const a = btn.nextElementSibling;
+    a.classList.toggle('hidden');
+    btn.classList.toggle('collapsed');
+    const toggle = btn.querySelector('.faq-toggle');
+    if(toggle) toggle.textContent = a.classList.contains('hidden') ? '▾' : '▴';
+  });
+});
+
+/* =========================
+   Canvas: stars + meteors
+   ========================= */
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
-
-function resizeCanvas(){
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
+function resizeCanvas(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+window.addEventListener('resize', ()=> { resizeCanvas(); buildStars(Math.max(120, Math.floor((innerWidth*innerHeight)/8000))); });
 resizeCanvas();
 
-/* pulsing static stars (bigger/brighter now) */
+/* pulsing white stars (bigger/brighter) */
 let stars = [];
 function buildStars(count = 220){
-  stars.length = 0;
+  stars = [];
   for(let i=0;i<count;i++){
     stars.push({
       x: Math.random()*canvas.width,
       y: Math.random()*canvas.height,
-      r: Math.random()*2.8 + 0.8,      // larger radius
-      alpha: Math.random()*0.9 + 0.15, // brighter baseline
-      d: -0.015 + Math.random()*0.03   // faster subtle pulse
+      r: Math.random()*2.8 + 0.9,
+      a: Math.random()*0.9 + 0.1,
+      d: -0.015 + Math.random()*0.03
     });
   }
 }
 buildStars();
 
-/* shooting stars (random, tapered streaks) */
-let shooting = [];
-function spawnShooting(){
-  // subtle spawn rate; keep them sporadic
+/* shooting meteors (star-shaped head, short tapered trail) */
+let meteors = [];
+function spawnMeteor(){
   if(Math.random() < 0.012){
-    const startX = Math.random() * canvas.width * 0.9;
-    const startY = Math.random() * canvas.height * 0.45;
-    shooting.push({
-      x: startX,
-      y: startY,
-      vx: (Math.random()*1.0 + 2.0),
-      vy: (Math.random()*1.0 + 2.0),
-      len: (Math.random()*80 + 90), // moderate length
-      life: 1,
-      hue: Math.random()*360,
-      thickness: Math.random()*1.2 + 0.8
+    const sx = Math.random() * canvas.width * 0.9;
+    const sy = Math.random() * canvas.height * 0.45;
+    meteors.push({
+      x: sx, y: sy, vx: (Math.random()*1.0 + 2.0), vy: (Math.random()*0.8 + 1.8),
+      len: Math.random()*70 + 40, life:1, hue: Math.random()*360, size: Math.random()*3 + 2
     });
   }
 }
 
-function drawShooting(s){
-  const ex = s.x - s.len * 0.8;
-  const ey = s.y + s.len * 0.8;
-
+/* draw small star shape */
+function drawStarShape(x,y,r,fill){
   ctx.save();
-  ctx.lineCap = 'round';
-
-  // gradient along the streak
-  const g = ctx.createLinearGradient(s.x, s.y, ex, ey);
-  g.addColorStop(0, `hsla(${s.hue},100%,85%,${s.life})`);
-  g.addColorStop(0.45, `hsla(${s.hue},100%,70%,${Math.max(0.5, s.life - 0.15)})`);
-  g.addColorStop(1, `hsla(${s.hue},100%,60%,0)`);
-
-  ctx.strokeStyle = g;
-  ctx.lineWidth = Math.max(1, s.thickness * 2.2);
-  ctx.shadowColor = `hsla(${s.hue},100%,70%,0.6)`;
-  ctx.shadowBlur = 10;
   ctx.beginPath();
-  ctx.moveTo(s.x, s.y);
-  ctx.lineTo(ex, ey);
-  ctx.stroke();
-
-  // head glow
-  ctx.beginPath();
-  ctx.fillStyle = `hsla(${s.hue},100%,92%,${s.life})`;
-  ctx.arc(s.x, s.y, s.thickness*3 + 1.5, 0, Math.PI*2);
+  for(let i=0;i<5;i++){
+    ctx.lineTo(x + r*Math.cos((18 + i*72)*Math.PI/180), y - r*Math.sin((18 + i*72)*Math.PI/180));
+    ctx.lineTo(x + (r/2)*Math.cos((54 + i*72)*Math.PI/180), y - (r/2)*Math.sin((54 + i*72)*Math.PI/180));
+  }
+  ctx.closePath();
+  ctx.fillStyle = fill;
   ctx.fill();
-
   ctx.restore();
 }
 
-/* main frame loop */
+function drawMeteor(m){
+  // trail: short tapered triangle/gradient
+  const ex = m.x - m.len*0.6;
+  const ey = m.y + m.len*0.6;
+  const g = ctx.createLinearGradient(m.x, m.y, ex, ey);
+  g.addColorStop(0, `hsla(${m.hue},100%,85%,${m.life})`);
+  g.addColorStop(1, `hsla(${m.hue},100%,60%,0)`);
+  ctx.save();
+  ctx.strokeStyle = g;
+  ctx.lineWidth = Math.max(1, m.size);
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(m.x, m.y);
+  ctx.lineTo(ex, ey);
+  ctx.stroke();
+  // star head
+  drawStarShape(m.x, m.y, Math.max(1.6, m.size*1.2), `hsla(${m.hue},100%,90%,${m.life})`);
+  ctx.restore();
+}
+
+/* animation loop */
 function frame(){
-  // dark translucent clear to produce trailing effect
+  // semi-transparent clear for trails
   ctx.fillStyle = 'rgba(0,0,0,0.18)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // draw pulsing stars
-  for(const st of stars){
+  // pulsing stars
+  for(const s of stars){
     ctx.beginPath();
-    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.06, Math.min(1, st.alpha))})`;
-    ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.06, Math.min(1, s.a))})`;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
     ctx.fill();
-    st.alpha += st.d;
-    if(st.alpha <= 0.06 || st.alpha >= 0.98) st.d *= -1;
+    s.a += s.d;
+    if(s.a <= 0.06 || s.a >= 0.98) s.d *= -1;
   }
 
-  // shoot stars occasionally
-  spawnShooting();
+  // spawn meteors
+  spawnMeteor();
 
-  // draw shooting stars and update positions
-  for(let i = shooting.length - 1; i >= 0; i--){
-    const s = shooting[i];
-    drawShooting(s);
-    s.x += s.vx;
-    s.y += s.vy;
-    s.life -= 0.01;
-    if(s.x > canvas.width + 200 || s.y > canvas.height + 200 || s.life <= 0) shooting.splice(i,1);
+  // draw meteors
+  for(let i = meteors.length-1;i>=0;i--){
+    const m = meteors[i];
+    drawMeteor(m);
+    m.x += m.vx; m.y += m.vy; m.life -= 0.012;
+    if(m.x > canvas.width + 200 || m.y > canvas.height + 200 || m.life <= 0) meteors.splice(i,1);
   }
 
   requestAnimationFrame(frame);
 }
 frame();
 
-/* ensure stars rebuild on large resizes */
-let resizeTimeout;
-window.addEventListener('resize', ()=> {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(()=> buildStars(Math.max(120, Math.floor((innerWidth*innerHeight)/8000))), 250);
-});
+/* =========================
+   Solscan public API polling
+   ========================= */
+const supplyEl = $('#supplyValue');
+const holdersEl = $('#holdersValue');
+const updatedEl = $('#updatedAt');
 
-/* increase social button tactile size */
-document.querySelectorAll('.nav-socials .social').forEach(a => {
-  a.style.fontSize = '15px';
-  a.style.padding = '10px 14px';
-});
+async function fetchSolscanMeta(){
+  try{
+    // prefer public API
+    const metaUrl = `https://public-api.solscan.io/token/meta?address=${TOKEN_ADDRESS}`;
+    const holdersUrl = `https://public-api.solscan.io/token/holders?address=${TOKEN_ADDRESS}&page=1&page_size=1`;
+    const [metaR, holdersR] = await Promise.all([ fetch(metaUrl), fetch(holdersUrl) ]);
+    if(!metaR.ok || !holdersR.ok) throw new Error('public API error');
+    const metaJ = await metaR.json();
+    const holdersJ = await holdersR.json();
+    // metaJ may include data.supply (raw) or supply, decimals
+    const supply = metaJ?.data?.supply ?? metaJ?.supply ?? null;
+    const decimals = metaJ?.data?.decimals ?? metaJ?.decimals ?? 0;
+    const totalSupply = supply !== null ? Number(supply) / Math.pow(10, decimals) : null;
+    const holders = holdersJ?.data?.total ?? (Array.isArray(holdersJ?.data?.rows) ? holdersJ.data.rows.length : null);
 
-/* ensure the FAQ icon only exists next to the FAQ heading (already set in HTML) */
-/* wrapped headings are done at top */
+    if(totalSupply !== null){
+      supplyEl.textContent = Intl.NumberFormat().format(totalSupply);
+    } else {
+      supplyEl.textContent = "Unavailable";
+    }
+    if(holders !== null){
+      holdersEl.textContent = String(holders);
+    } else {
+      holdersEl.textContent = "Unavailable";
+    }
+    updatedEl.textContent = new Date().toLocaleString();
+  }catch(e){
+    console.warn('Solscan fetch failed', e);
+    supplyEl.textContent = "Live data unavailable";
+    holdersEl.textContent = "Live data unavailable";
+    updatedEl.textContent = "—";
+  }
+}
+
+// initial fetch and repeat
+fetchSolscanMeta();
+setInterval(fetchSolscanMeta, 30000);
+
+/* =========================
+   Misc UI tweaks on load
+   ========================= */
+$$('.nav-socials .social').forEach(a => { a.style.fontSize = '15px'; a.style.padding = '10px 14px'; });
+
+/* ensure the FAQ icon only in FAQ heading (already in HTML) */
+
