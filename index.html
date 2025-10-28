@@ -19,9 +19,14 @@
       <img id="mascot" src="usd1.base.png" alt="mascot">
       <div class="brand">
         <div id="usd1Ticker" class="gold-shimmer">USD1</div>
-        <button id="headerCA" class="ca-btn" title="Click to copy contract">
+        <div class="brand-sub">
+          <div class="brand-home">HOME</div>
+          <div class="join-cult" aria-hidden="false">JOIN THE CULT</div>
+        </div>
+
+        <button id="headerCA" class="ca-box" title="Click to copy contract" aria-label="Copy contract address">
           <span class="mono">5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk</span>
-          <small class="click-note">click to copy</small>
+          <small class="click-note white">click to copy</small>
         </button>
       </div>
     </div>
@@ -49,13 +54,13 @@
   <main>
     <!-- HOME -->
     <section id="home" class="fade-section">
-      <h2 class="rainbow-heading">HOME</h2>
+      <h2 class="rainbow-heading">HOME <img class="qa-icon" src="faq.questionexclamation.png" alt=""></h2>
       <div class="section-inner">
         <h3 class="hero"><span class="usd1-hero"> $USD1 </span> <span class="cult">JOIN THE CULT</span></h3>
 
         <div class="home-controls">
-          <button id="copyCA" class="btn rainbow">COPY CONTRACT</button>
-          <button id="howToBuyBtn" class="btn outline" aria-expanded="false">
+          <button id="copyCA" class="btn rainbow ca-btn-main">COPY CONTRACT</button>
+          <button id="howToBuyBtn" class="btn outline howto-toggle" aria-expanded="false">
             HOW TO BUY
             <span class="arrow">▾</span>
           </button>
@@ -94,14 +99,14 @@
       <div class="section-inner centered-grid token-grid">
         <div class="token-card">
           <h4>TOTAL SUPPLY</h4>
-          <div id="supplyValue" class="big section-text">—</div>
+          <div id="supplyValue" class="big section-text">1,000,000,000</div>
           <div class="muted">Symbol: <strong>USD1</strong></div>
         </div>
 
         <div class="token-card">
           <h4>HOLDERS</h4>
           <div id="holdersValue" class="big section-text">—</div>
-          <div class="muted">Live holders (public Solscan API)</div>
+          <div class="muted">Live holders (static for now)</div>
         </div>
 
         <div class="token-card">
@@ -112,7 +117,7 @@
 
         <div class="token-card">
           <h4>LOCKED TOKENS</h4>
-          <div id="lockedPct" class="big section-text">2% of supply</div>
+          <div id="lockedPct" class="big section-text">2%</div>
           <div class="muted">Locked until 10/8/2026</div>
           <div style="margin-top:10px">
             <a id="streamflowBtn" class="btn rainbow small" href="https://app.streamflow.finance/token-dashboard/solana/mainnet/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank" rel="noopener">View Locked Tokens</a>
@@ -121,20 +126,56 @@
       </div>
 
       <div class="section-inner" style="margin-top:18px;">
-        <div class="muted section-text centered">Live data updates every 30s. Last update: <span id="updatedAt">—</span></div>
+        <div class="muted section-text centered">Static data for now. Last update: <span id="updatedAt">—</span></div>
       </div>
     </section>
 
     <!-- ROADMAP -->
     <section id="roadmap" class="fade-section">
       <h2 class="rainbow-heading">ROADMAP</h2>
-      <div class="section-inner centered">
-        <ol class="roadmap-list section-text">
-          <li><strong>1 — Launch</strong><br>• CTO on bonk.fun<br>• Buybacks and locks<br>• Cult of day-1 believers</li>
-          <li><strong>2 — Growth</strong><br>• Art, character & culture development<br>• Meme campaigns & content drops<br>• Listings on major DEX trackers</li>
-          <li><strong>3 — Product</strong><br>• New utilities incoming<br>• Ecosystem expansions<br>• Community events</li>
-          <li><strong>4 — Ecosystem</strong><br>• Strategic collaborations<br>• Cross-chain exploration<br>• Long-term rewards<br>• …and whatever comes next</li>
-        </ol>
+      <div class="section-inner centered roadmap-grid">
+        <div class="phase">
+          <div class="phase-title">1 — Launch</div>
+          <ul class="phase-list">
+            <li>CTO on bonk.fun</li>
+            <li>Buybacks and locks</li>
+            <li>Cult of day-1 believers</li>
+          </ul>
+        </div>
+
+        <div class="divider-rainbow" aria-hidden="true"></div>
+
+        <div class="phase">
+          <div class="phase-title">2 — Growth</div>
+          <ul class="phase-list">
+            <li>Art, character & culture development</li>
+            <li>Meme campaigns & content drops</li>
+            <li>Listings on major DEX trackers</li>
+          </ul>
+        </div>
+
+        <div class="divider-rainbow" aria-hidden="true"></div>
+
+        <div class="phase">
+          <div class="phase-title">3 — Product</div>
+          <ul class="phase-list">
+            <li>New utilities incoming</li>
+            <li>Ecosystem expansions</li>
+            <li>Community events</li>
+          </ul>
+        </div>
+
+        <div class="divider-rainbow" aria-hidden="true"></div>
+
+        <div class="phase">
+          <div class="phase-title">4 — Ecosystem</div>
+          <ul class="phase-list">
+            <li>Strategic collaborations</li>
+            <li>Cross-chain exploration</li>
+            <li>Long-term rewards</li>
+            <li>…and whatever comes next</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -183,10 +224,10 @@
       <h2 class="rainbow-heading">CONTACT US</h2>
       <div class="footer-grid section-inner">
         <div class="footer-col">
-          <h4>Explore</h4>
-          <a class="small-link" href="https://explorer.solana.com/address/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk?cluster=mainnet-beta" target="_blank">Solana Explorer</a><br/>
-          <a class="small-link" href="https://phantom.com/" target="_blank">Phantom Wallet</a><br/>
-          <a class="small-link" href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank">Jupiter Swap</a>
+          <h4>Contact Info</h4>
+          <a class="small-link" href="mailto:support@theunicornsheep.dog">support@theunicornsheep.dog</a><br/>
+          <small class="muted">Explorer</small><br/>
+          <a class="small-link" href="https://explorer.solana.com/address/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk?cluster=mainnet-beta" target="_blank">Solana Explorer</a>
         </div>
 
         <div class="footer-col">
@@ -198,8 +239,9 @@
         </div>
 
         <div class="footer-col">
-          <h4>Support</h4>
-          <a class="small-link" href="mailto:support@theunicornsheep.dog">support@theunicornsheep.dog</a>
+          <h4>Useful Links</h4>
+          <a class="small-link" href="https://phantom.com/" target="_blank">Phantom Wallet</a><br/>
+          <a class="small-link" href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank">Jupiter Swap</a>
         </div>
 
         <div class="footer-col">
@@ -219,9 +261,5 @@
 
   <!-- placeholder for toast -->
   <div id="toast-root" aria-hidden="true"></div>
-</body>
-</html>
-
-
 </body>
 </html>
