@@ -1,263 +1,129 @@
 :root{
-  --nav-h: 98px;
+  --nav-h:96px;
   --muted: rgba(255,255,255,0.78);
-  --bubble-bg: #141414;  /* still grey fill */
-  --spark-size: 2px;     /* thickness of border */
-  --spark-speed: 6s;     /* speed of sparkle rotation */
 }
 
-/* Reset */
+/* Reset + base */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
-  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  background: #000;
-  color: #fff;
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.6;
+  font-family:"Poppins",system-ui,Segoe UI,Roboto,Arial;
+  background:#000;color:#fff;-webkit-font-smoothing:antialiased;line-height:1.5;
 }
 
-/* Star canvas */
-#stars{position:fixed;inset:0;z-index:0;display:block}
+/* Canvas behind everything */
+canvas#stars{position:fixed;inset:0;z-index:0;display:block}
 
-/* Navbar */
+/* NAV */
 .navbar{
-  height:var(--nav-h);
-  position:fixed;top:0;left:0;width:100%;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 22px;
-  background:linear-gradient(180deg, rgba(0,0,0,0.96), rgba(0,0,0,0.86));
-  z-index:20;border-bottom:1px solid rgba(255,255,255,0.06);
+  height:var(--nav-h);position:fixed;top:0;left:0;width:100%;
+  display:flex;align-items:center;justify-content:space-between;padding:12px 24px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.96), rgba(0,0,0,0.86));z-index:90;border-bottom:1px solid rgba(255,255,255,0.03)
 }
-.brand-wrap{display:flex;flex-direction:column;align-items:flex-start}
-.brand-title{font-weight:900;font-size:28px;letter-spacing:0.5px}
-.brand-usd{
-  margin-top:4px;
-  font-weight:900;
-  font-size:22px;
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  color:inherit;
-}
-.copy-hint{font-size:12px;color:#fff;opacity:0.9;margin-top:2px}
-.nav-links{display:flex;gap:18px;align-items:center}
+.nav-left{display:flex;align-items:center;gap:12px}
+#mascot{width:72px;height:72px;border-radius:12px;object-fit:cover;border:2px solid rgba(255,255,255,0.03)}
+.brand{display:flex;flex-direction:column}
+.brand-rainbow{font-family:"Fredoka One",sans-serif;font-weight:900;font-size:30px;line-height:1}
+.brand-usd{font-family:"Fredoka One",sans-serif;font-weight:900;font-size:22px;margin-top:4px}
+
+/* apply per-letter rainbow via JS - letters styled inline */
+.brand-rainbow span{display:inline-block}
+
+/* nav links */
+.nav-links{display:flex;gap:20px;align-items:center}
 .nav-links a{color:#fff;text-decoration:none;font-weight:800}
-.nav-links a:hover{text-decoration:underline}
 .nav-socials{display:flex;gap:10px;align-items:center}
-.nav-socials .social{color:#fff;text-decoration:underline}
+.nav-socials .social{padding:8px 12px;border-radius:10px;text-decoration:none;color:#000;font-weight:800;background:linear-gradient(90deg,#00ffd5,#00a7ff);}
 
-/* Main layout */
-.content{position:relative;z-index:5;padding-top:calc(var(--nav-h) + 14px)}
-.panel{padding:56px 16px 84px;min-height:60vh;text-align:center}
+/* main pushes below header */
+main{position:relative;z-index:10;padding-top:calc(var(--nav-h) + 14px)}
 
-/* Section titles (animated rainbow) */
+/* panels + titles */
+.panel{padding:52px 20px 80px;min-height:64vh}
 .section-title{
-  font-weight:900;
-  font-size:56px;
-  margin-bottom:18px;
-  letter-spacing:1.5px;
-}
-.rainbow-animated{
-  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size: 400% 100%;
-  animation: rainbowMove 6s linear infinite;
-}
-.rainbow-animated-inline{
-  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size: 400% 100%;
-  animation: rainbowMove 6s linear infinite;
-}
-
-/* Hero gold shimmer */
-.hero{font-size:42px;margin-bottom:14px}
-.shimmering-gold{
-  background: linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:400% 100%;
-  animation: shimmer 2.6s linear infinite;
-}
-
-/* Rainbow animation keyframes */
-@keyframes rainbowMove{from{background-position:0% 50%}to{background-position:100% 50%}}
-@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
-
-/* Buttons */
-.btn-rainbow{
-  display:inline-block;
-  margin-top:8px;
-  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  background-size: 400% 100%;
-  animation: rainbowMove 6s linear infinite;
-  color:#000;font-weight:900;border:0;cursor:pointer;
-  padding:12px 18px;border-radius:12px;
-}
-.btn-rainbow.small{padding:8px 12px;border-radius:10px}
-
-/* How-to toggle button */
-.toggle-button{
-  margin:16px auto 8px auto;
-  background:#222;color:#fff;
-  border:0;cursor:pointer;padding:12px 18px;border-radius:10px;font-weight:900
-}
-.toggle-button .arrow{display:inline-block;transition:transform .28s ease}
-
-/* Bubbles (still grey fill) with animated rainbow perimeter + subtle moving sparkle */
-.center{display:flex;justify-content:center}
-.bubble{
-  display:inline-block;            /* fit content */
-  max-width: 900px;
-  text-align:left;
-  background: var(--bubble-bg);    /* still grey */
+  font-family:"Fredoka One",sans-serif;
+  font-size:64px;
   color:#fff;
-  border-radius:14px;
-  padding:16px 18px;
+  font-weight:900;
+  text-align:center;
+  margin-bottom:18px;
+  letter-spacing:2px;
+}
+
+/* hero */
+.hero-line{font-size:44px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+.rainbow-flow{font-weight:900;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:400% 100%;animation:rainMove 5s linear infinite}
+.hero-usd{font-weight:900;font-size:56px}
+
+/* shimmer */
+.gold-shimmer{background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:400% 100%;animation:shimmer 2.6s linear infinite}
+@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
+@keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
+
+/* ===== CA bubble: GREY BACKGROUND WITH RAINBOW OUTLINE (no gradient fill) ===== */
+.ca-wrap{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ca-bubble{
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  color:#fff;font-weight:800;padding:12px 18px;border-radius:14px;border:4px solid transparent;cursor:pointer;font-family:monospace;
   position:relative;
 }
-
-/* Base rainbow border ring */
-.sparkle-border::before{
-  content:"";
-  position:absolute; inset: calc(-1 * var(--spark-size));
-  border-radius: inherit;
-  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  z-index:-1;
+.ca-bubble::before{
+  content:'';position:absolute;inset:-4px;border-radius:18px;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);z-index:-1;filter:blur(0.6px);
+  background-size:400% 100%;animation:rainMove 6s linear infinite;
 }
 
-/* Mask out interior so only the border shows */
-.sparkle-border{
-  /* Create a 2px border via mask (so the center doesn't get covered) */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  padding:16px 18px;               /* re-apply padding after content-box mask */
-  box-shadow:0 0 0 999px transparent; /* Safari mask bug helper */
-}
+/* copy note */
+.copy-note{font-size:12px;color:#fff;opacity:0.95}
 
-/* Subtle sparkle/light traveling around the ring (thin white arc) */
-.sparkle-border::after{
-  content:"";
-  position:absolute; inset: calc(-1 * var(--spark-size));
-  border-radius: inherit;
-  background:
-    conic-gradient(from var(--spark-angle, 0deg), 
-      rgba(255,255,255,0) 0deg,
-      rgba(255,255,255,0) 340deg,
-      rgba(255,255,255,0.9) 350deg,
-      rgba(255,255,255,0) 360deg);
-  z-index:-1;
-  animation: sparkRotate var(--spark-speed) linear infinite;
-}
+/* How to buy */
+.howto-wrap{margin-top:16px}
+.how-toggle{background:#222;border:0;color:#fff;padding:12px 18px;border-radius:10px;cursor:pointer;font-weight:800;display:inline-flex;align-items:center;gap:10px}
+.how-arrow{display:inline-block;transition:transform .28s ease}
 
-@keyframes sparkRotate{
-  to { --spark-angle: 360deg; }
-}
+/* how content (GREY BACKGROUND with RAINBOW OUTLINE) */
+.how-content{margin-top:12px;max-width:880px;margin-left:auto;margin-right:auto;text-align:left;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));position:relative;border:4px solid transparent}
+.how-content::before{content:'';position:absolute;inset:-4px;border-radius:16px;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);z-index:-1;background-size:400% 100%;animation:rainMove 6s linear infinite}
 
-/* Subtext */
-.subcenter{margin-top:10px;font-weight:700;letter-spacing:0.5px}
+/* Panel-body style (used in About, and answers) */
+.panel-body{max-width:980px;margin:10px auto;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,0.66),rgba(0,0,0,0.55));position:relative;border:4px solid transparent}
+.panel-body::before{content:'';position:absolute;inset:-4px;border-radius:16px;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);z-index:-1;background-size:400% 100%;animation:rainMove 6s linear infinite}
 
-/* Meme placeholder */
-.meme-placeholder{
-  margin:14px auto 0 auto;
-  width:min(900px,90%);
-  height:160px;
-  background: rgba(255,255,255,0.06);
-  border-radius:12px;
-}
+/* meme placeholder */
+.meme-placeholder{min-height:140px;border-radius:12px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;margin:14px 0}
 
-/* Tokenomics */
-.token-row{
-  display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:flex-start;margin-top:6px
-}
-.token-card{min-width:240px}
+/* tokenomics cards (same grey+rainbow outline) */
+.token-row{display:flex;gap:18px;justify-content:center;align-items:start;flex-wrap:wrap;margin-top:18px}
+.card{min-width:240px;max-width:320px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,0.62),rgba(0,0,0,0.45));position:relative;border:4px solid transparent}
+.card::before{content:'';position:absolute;inset:-4px;border-radius:16px;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);z-index:-1;background-size:400% 100%;animation:rainMove 6s linear infinite}
+.card h3{font-size:14px;margin-bottom:8px;color:#fff}
+.card-value{font-size:20px;font-weight:900}
+
+/* rainbow-filled button (streamflow) */
+.rainbow-btn{display:inline-block;padding:10px 14px;border-radius:10px;color:#000;font-weight:900;border:0;cursor:pointer;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);background-size:400% 100%;animation:rainMove 6s linear infinite;text-decoration:none}
 
 /* FAQ */
-.faq-list{max-width: 980px; margin: 0 auto; display:flex; flex-direction:column; gap:12px}
-.faq-item{display:flex;flex-direction:column;align-items:center}
-.faq-q{
-  display:inline-block;
-  background: var(--bubble-bg);
-  color:#fff;
-  border-radius:12px;
-  padding:14px 16px;
-  font-weight:900;
-  cursor:pointer;
-  position:relative;
-  text-align:left;
-  max-width:900px;
-}
+.faq-grid{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{position:relative}
+.faq-q{width:100%;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6b,#00d2ff,#5a6bff);border:0;padding:14px;border-radius:10px;color:#000;cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+.faq-a{margin-top:8px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));border-radius:8px;display:none;position:relative;border:4px solid transparent}
+.faq-a::before{content:'';position:absolute;inset:-4px;border-radius:12px;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff);z-index:-1;background-size:400% 100%;animation:rainMove 6s linear infinite}
 
-/* Answers: still rainbow background, black text */
-.rainbow-fill{
-  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  color:#000;
-  border-radius:12px;
-  margin-top:8px;
-  width:min(900px, 95%);
-  align-self:center;
-}
-.faq-a-inner{padding:14px 16px}
+/* gallery 3x3 */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:18px auto}
+.meme-slot{background:rgba(255,255,255,0.03);padding:26px;border-radius:10px;min-height:120px;display:flex;align-items:center;justify-content:center;font-weight:800}
 
+/* footer */
+.footer-dark{background:#000;padding-top:12px}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1400px;margin:0 auto}
+.footer-col a{color:#fff;text-decoration:none}
+.footer-bottom{margin-top:18px;text-align:center;color:rgba(255,255,255,0.6)}
+.footer-rainbow{background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;font-family:"Fredoka One",sans-serif}
+
+/* misc */
+.mono{font-family:monospace}
+.muted{color:rgba(255,255,255,0.6)}
 .hidden{display:none}
 
-/* Gallery */
-.gallery-grid{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap:12px;
-  width:min(1100px,94%);
-  margin: 10px auto 12px auto;
-}
-.gallery-slot{
-  background: rgba(255,255,255,0.06);
-  border-radius:12px;
-  min-height:120px;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:900;color:#fff;opacity:0.8
-}
-.carousel-placeholder{
-  width:min(1000px,94%);
-  margin: 6px auto 0 auto;
-  background: rgba(255,255,255,0.06);
-  border-radius:12px;
-  padding:16px;
-}
-
-/* Footer */
-.site-footer{background:#000;padding:36px 16px 28px 16px;margin-top:10px}
-.footer-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  width:min(1400px,94%);
-  margin: 0 auto 8px auto;
-}
-.footer-heading{font-weight:900;font-size:22px;margin-bottom:6px}
-.site-footer a{color:#fff;text-decoration:underline}
-.footer-note{text-align:center;margin-top:8px;color:#fff}
-
-/* Mono helper */
-.mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-
-/* Responsive */
-@media (max-width: 960px){
-  .section-title{font-size:42px}
-  .hero{font-size:34px}
-  .brand-title{font-size:24px}
-  .brand-usd{font-size:20px}
-}
-@media (max-width: 640px){
-  .nav-socials{display:none}
-  .nav-links{gap:12px}
-  .section-title{font-size:34px}
-  .hero{font-size:28px}
-  .gallery-grid{grid-template-columns: repeat(2, minmax(0,1fr))}
-}
-@media (max-width: 420px){
-  .gallery-grid{grid-template-columns: 1fr}
-}
-
+/* responsive */
+@media (max-width:1000px){.gallery-grid{grid-template-columns:repeat(2,1fr)}.token-row{flex-direction:column;align-items:center}.footer-grid{grid-template-columns:repeat(2,1fr)}.section-title{font-size:44px}.brand-rainbow{font-size:28px}.brand-usd{font-size:20px}}
+@media (max-width:560px){.nav-links{display:none}.brand-rainbow{font-size:22px}.hero-usd{font-size:36px}.section-title{font-size:34px}.gallery-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
