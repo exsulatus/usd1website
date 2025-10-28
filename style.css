@@ -1,175 +1,263 @@
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: black;
-  color: white;
-  text-align: center;
+:root{
+  --nav-h: 98px;
+  --muted: rgba(255,255,255,0.78);
+  --bubble-bg: #141414;  /* still grey fill */
+  --spark-size: 2px;     /* thickness of border */
+  --spark-speed: 6s;     /* speed of sparkle rotation */
 }
 
-/* Header */
-header {
-  background: rgba(0,0,0,0.8);
-  padding: 20px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
-.logo {
-  font-size: 2.5rem;
-  color: white;
+/* Star canvas */
+#stars{position:fixed;inset:0;z-index:0;display:block}
+
+/* Navbar */
+.navbar{
+  height:var(--nav-h);
+  position:fixed;top:0;left:0;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 22px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.96), rgba(0,0,0,0.86));
+  z-index:20;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.brand-wrap{display:flex;flex-direction:column;align-items:flex-start}
+.brand-title{font-weight:900;font-size:28px;letter-spacing:0.5px}
+.brand-usd{
+  margin-top:4px;
+  font-weight:900;
+  font-size:22px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  color:inherit;
+}
+.copy-hint{font-size:12px;color:#fff;opacity:0.9;margin-top:2px}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{color:#fff;text-decoration:none;font-weight:800}
+.nav-links a:hover{text-decoration:underline}
+.nav-socials{display:flex;gap:10px;align-items:center}
+.nav-socials .social{color:#fff;text-decoration:underline}
+
+/* Main layout */
+.content{position:relative;z-index:5;padding-top:calc(var(--nav-h) + 14px)}
+.panel{padding:56px 16px 84px;min-height:60vh;text-align:center}
+
+/* Section titles (animated rainbow) */
+.section-title{
+  font-weight:900;
+  font-size:56px;
+  margin-bottom:18px;
+  letter-spacing:1.5px;
+}
+.rainbow-animated{
+  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size: 400% 100%;
+  animation: rainbowMove 6s linear infinite;
+}
+.rainbow-animated-inline{
+  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size: 400% 100%;
+  animation: rainbowMove 6s linear infinite;
 }
 
-.usd1-header {
-  font-size: 2rem;
-  background: linear-gradient(90deg, gold, orange, gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  cursor: pointer;
+/* Hero gold shimmer */
+.hero{font-size:42px;margin-bottom:14px}
+.shimmering-gold{
+  background: linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:400% 100%;
+  animation: shimmer 2.6s linear infinite;
 }
 
-.copy-sub {
-  font-size: 0.8rem;
-  color: white;
+/* Rainbow animation keyframes */
+@keyframes rainbowMove{from{background-position:0% 50%}to{background-position:100% 50%}}
+@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
+
+/* Buttons */
+.btn-rainbow{
+  display:inline-block;
+  margin-top:8px;
+  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  background-size: 400% 100%;
+  animation: rainbowMove 6s linear infinite;
+  color:#000;font-weight:900;border:0;cursor:pointer;
+  padding:12px 18px;border-radius:12px;
+}
+.btn-rainbow.small{padding:8px 12px;border-radius:10px}
+
+/* How-to toggle button */
+.toggle-button{
+  margin:16px auto 8px auto;
+  background:#222;color:#fff;
+  border:0;cursor:pointer;padding:12px 18px;border-radius:10px;font-weight:900
+}
+.toggle-button .arrow{display:inline-block;transition:transform .28s ease}
+
+/* Bubbles (still grey fill) with animated rainbow perimeter + subtle moving sparkle */
+.center{display:flex;justify-content:center}
+.bubble{
+  display:inline-block;            /* fit content */
+  max-width: 900px;
+  text-align:left;
+  background: var(--bubble-bg);    /* still grey */
+  color:#fff;
+  border-radius:14px;
+  padding:16px 18px;
+  position:relative;
 }
 
-nav ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Rainbow Text Animation */
-.rainbow-text {
-  background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 400%;
-  animation: rainbowShift 5s linear infinite;
-}
-
-@keyframes rainbowShift {
-  from { background-position: 0% }
-  to { background-position: 400% }
-}
-
-/* Gold shimmer text */
-.gold-text {
-  background: linear-gradient(90deg, gold, orange, gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 3s infinite linear;
-}
-
-@keyframes shimmer {
-  0% { filter: brightness(1); }
-  50% { filter: brightness(1.5); }
-  100% { filter: brightness(1); }
-}
-
-/* Buttons & Borders */
-.ca-button {
-  background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.expand-btn {
-  background: grey;
-  border: 3px solid transparent;
-  padding: 10px 25px;
-  font-size: 1.2rem;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-/* Sparkling rainbow border */
-.sparkle-border {
-  position: relative;
-  background: grey;
-  color: white;
-  padding: 20px;
-  border-radius: 15px;
-  margin: 15px auto;
-  width: 80%;
-}
-
-.sparkle-border::before {
-  content: "";
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  background: conic-gradient(from var(--angle), red, orange, yellow, green, cyan, blue, violet, red);
+/* Base rainbow border ring */
+.sparkle-border::before{
+  content:"";
+  position:absolute; inset: calc(-1 * var(--spark-size));
   border-radius: inherit;
-  z-index: -1;
-  animation: spin 4s linear infinite;
+  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  z-index:-1;
 }
 
-@keyframes spin {
-  from { --angle: 0deg; }
-  to { --angle: 360deg; }
+/* Mask out interior so only the border shows */
+.sparkle-border{
+  /* Create a 2px border via mask (so the center doesn't get covered) */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding:16px 18px;               /* re-apply padding after content-box mask */
+  box-shadow:0 0 0 999px transparent; /* Safari mask bug helper */
 }
+
+/* Subtle sparkle/light traveling around the ring (thin white arc) */
+.sparkle-border::after{
+  content:"";
+  position:absolute; inset: calc(-1 * var(--spark-size));
+  border-radius: inherit;
+  background:
+    conic-gradient(from var(--spark-angle, 0deg), 
+      rgba(255,255,255,0) 0deg,
+      rgba(255,255,255,0) 340deg,
+      rgba(255,255,255,0.9) 350deg,
+      rgba(255,255,255,0) 360deg);
+  z-index:-1;
+  animation: sparkRotate var(--spark-speed) linear infinite;
+}
+
+@keyframes sparkRotate{
+  to { --spark-angle: 360deg; }
+}
+
+/* Subtext */
+.subcenter{margin-top:10px;font-weight:700;letter-spacing:0.5px}
+
+/* Meme placeholder */
+.meme-placeholder{
+  margin:14px auto 0 auto;
+  width:min(900px,90%);
+  height:160px;
+  background: rgba(255,255,255,0.06);
+  border-radius:12px;
+}
+
+/* Tokenomics */
+.token-row{
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:flex-start;margin-top:6px
+}
+.token-card{min-width:240px}
 
 /* FAQ */
-.faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
+.faq-list{max-width: 980px; margin: 0 auto; display:flex; flex-direction:column; gap:12px}
+.faq-item{display:flex;flex-direction:column;align-items:center}
+.faq-q{
+  display:inline-block;
+  background: var(--bubble-bg);
+  color:#fff;
+  border-radius:12px;
+  padding:14px 16px;
+  font-weight:900;
+  cursor:pointer;
+  position:relative;
+  text-align:left;
+  max-width:900px;
 }
 
-.faq-question {
-  background: grey;
-  color: white;
-  padding: 15px;
-  width: 80%;
-  font-size: 1.1rem;
-  border-radius: 10px;
-  cursor: pointer;
+/* Answers: still rainbow background, black text */
+.rainbow-fill{
+  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  color:#000;
+  border-radius:12px;
+  margin-top:8px;
+  width:min(900px, 95%);
+  align-self:center;
 }
+.faq-a-inner{padding:14px 16px}
 
-.faq-answer {
-  display: none;
-  background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
-  padding: 15px;
-  border-radius: 10px;
-  color: black;
-  width: 80%;
+.hidden{display:none}
+
+/* Gallery */
+.gallery-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:12px;
+  width:min(1100px,94%);
+  margin: 10px auto 12px auto;
+}
+.gallery-slot{
+  background: rgba(255,255,255,0.06);
+  border-radius:12px;
+  min-height:120px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#fff;opacity:0.8
+}
+.carousel-placeholder{
+  width:min(1000px,94%);
+  margin: 6px auto 0 auto;
+  background: rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:16px;
 }
 
 /* Footer */
-footer {
-  padding: 40px 20px;
-  background: rgba(0,0,0,0.9);
+.site-footer{background:#000;padding:36px 16px 28px 16px;margin-top:10px}
+.footer-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  width:min(1400px,94%);
+  margin: 0 auto 8px auto;
 }
+.footer-heading{font-weight:900;font-size:22px;margin-bottom:6px}
+.site-footer a{color:#fff;text-decoration:underline}
+.footer-note{text-align:center;margin-top:8px;color:#fff}
 
-.footer-sections {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+/* Mono helper */
+.mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+
+/* Responsive */
+@media (max-width: 960px){
+  .section-title{font-size:42px}
+  .hero{font-size:34px}
+  .brand-title{font-size:24px}
+  .brand-usd{font-size:20px}
 }
-
-footer a {
-  color: white;
-  text-decoration: underline;
+@media (max-width: 640px){
+  .nav-socials{display:none}
+  .nav-links{gap:12px}
+  .section-title{font-size:34px}
+  .hero{font-size:28px}
+  .gallery-grid{grid-template-columns: repeat(2, minmax(0,1fr))}
 }
-
-.footer-note {
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: white;
+@media (max-width: 420px){
+  .gallery-grid{grid-template-columns: 1fr}
 }
 
