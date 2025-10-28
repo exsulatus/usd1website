@@ -1,327 +1,162 @@
-/* ===== General Reset ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root{
+  --nav-height:82px;
+  --bg-black: #000;
+  --muted: rgba(255,255,255,0.7);
 }
 
-html, body {
-  font-family: "Poppins", sans-serif;
-  background: radial-gradient(ellipse at bottom, #0b0c10 0%, #000 100%);
-  color: #fff;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:#000;
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
 }
 
-section {
-  padding: 80px 20px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
+/* Canvas */
+canvas#stars{position:fixed;inset:0;z-index:0;display:block}
+
+/* NAVBAR */
+.navbar{
+  --pad:18px;
+  height:var(--nav-height);
+  position:fixed;top:0;left:0;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad);
+  background:linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.86));
+  z-index:50;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.nav-left{display:flex;align-items:center;gap:12px}
+#mascot{width:60px;height:60px;border-radius:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.03)}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand-sub{font-size:12px;color:var(--muted)}
+
+/* rainbow heading letters (brand and section titles) */
+.rainbow-heading,.rainbow-letters{font-weight:800;letter-spacing:1px}
+.rainbow-letters{font-size:28px}
+.rainbow-heading{font-size:20px}
+
+/* wrap letters into color classes via JS to allow per-letter rainbow */
+.rainbow-letter{display:inline-block}
+.rainbow-letter.c0{color:#ff005e}
+.rainbow-letter.c1{color:#ff7a00}
+.rainbow-letter.c2{color:#ffd100}
+.rainbow-letter.c3{color:#3cff6a}
+.rainbow-letter.c4{color:#00d2ff}
+.rainbow-letter.c5{color:#5a6bff}
+.rainbow-letter.c6{color:#b84cff}
+
+/* brand element (UnicornSheepDog1) will be filled letters by JS */
+.brand .rainbow-heading{font-size:20px}
+
+/* nav links */
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{color:#fff;text-decoration:none;font-weight:700;opacity:0.98}
+.nav-socials{display:flex;gap:10px;align-items:center}
+.nav-socials .social{
+  display:inline-block;padding:8px 12px;border-radius:10px;font-weight:800;color:#000;text-decoration:none;
+  background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  background-size:400% 100%; animation:rainbowMove 6s linear infinite;
+  box-shadow:0 6px 18px rgba(0,0,0,0.45)
 }
 
-h1, h2 {
-  text-transform: uppercase;
-  margin-bottom: 20px;
+/* continuous rainbow gradient */
+@keyframes rainbowMove { from { background-position:0% 50% } to { background-position:100% 50% } }
+
+/* MAIN + SECTIONS */
+main{position:relative;z-index:5}
+.panel{padding:calc(var(--nav-height) + 30px) 20px 80px;min-height:72vh;text-align:center}
+.section-title{font-size:40px;margin-bottom:20px}
+
+/* hero */
+.hero-line{font-size:36px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+.gold-shimmer{
+  font-weight:900;font-family:inherit;padding:0 6px;
+  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:400% 100%; animation:shimmer 2.6s linear infinite;
 }
+@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
 
-h1 {
-  font-size: 3.5rem;
+/* rainbow flow for JOIN THE (rolling) */
+.rainbow-flow{
+  font-weight:900;
+  background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  background-size:400% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rainFlow 4s linear infinite;
 }
+@keyframes rainFlow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
 
-h2 {
-  font-size: 2.2rem;
-  letter-spacing: 2px;
+/* CA bubble */
+.ca-wrap{margin:18px 0 6px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ca-bubble{
+  background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
+  background-size:400% 100%; animation:rainbowMove 6s linear infinite;
+  color:#000;font-weight:800;padding:12px 18px;border-radius:14px;border:0;cursor:pointer;font-family:monospace;
 }
+.copy-note{font-size:12px;color:#fff;margin-top:0}
 
-/* ===== Navbar ===== */
-nav {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
-  backdrop-filter: blur(6px);
+/* How to buy toggle */
+.howto-wrap{margin-top:12px}
+.how-toggle{
+  margin-top:10px;background:#222;border:0;color:#fff;padding:12px 18px;border-radius:10px;cursor:pointer;font-weight:800;
+  display:inline-flex;align-items:center;gap:8px;
 }
+.how-arrow{display:inline-block;transition:transform .28s ease}
 
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* how content */
+.how-content{margin-top:12px;max-width:760px;margin-left:auto;margin-right:auto;text-align:left;background:rgba(255,255,255,0.02);padding:14px;border-radius:8px}
+
+/* cards */
+.cards{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;min-width:220px;max-width:300px;text-align:center}
+.card h3{font-size:16px;margin-bottom:8px}
+.card-value{font-size:20px;font-weight:800}
+
+/* rainbow button style (used for streamflow) */
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;color:#000;font-weight:800;border:0;cursor:pointer;background:linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);background-size:400% 100%;animation:rainbowMove 6s linear infinite;text-decoration:none}
+
+/* FAQ */
+.faq-grid{max-width:980px;margin:0 auto;text-align:left}
+.faq-item{margin-bottom:12px}
+.faq-q{width:100%;background:rgba(255,255,255,0.02);border:0;padding:14px;border-radius:10px;color:#fff;cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+.faq-a{margin-top:8px;padding:12px;background:rgba(255,255,255,0.01);border-radius:8px;display:none}
+
+/* gallery 3x3 */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:18px auto}
+.meme-slot{background:rgba(255,255,255,0.03);padding:26px;border-radius:10px;min-height:120px;display:flex;align-items:center;justify-content:center;font-weight:800}
+
+/* carousel placeholder */
+.carousel-placeholder{margin-top:18px;padding:18px;border-radius:10px;background:rgba(255,255,255,0.02);max-width:980px;margin-left:auto;margin-right:auto;text-align:center;color:rgba(255,255,255,0.6)}
+
+/* footer */
+.footer-dark{background:#000;padding-top:12px}
+footer.panel{padding-top:40px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:1080px;margin:0 auto}
+.footer-col a{color:#fff;text-decoration:none}
+.footer-bottom{margin-top:18px;text-align:center;color:rgba(255,255,255,0.6)}
+
+/* misc text */
+.section-text{max-width:980px;margin:0 auto;font-size:17px}
+.meme-placeholder{min-height:160px;border-radius:12px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center}
+
+/* small screens */
+@media (max-width:920px){
+  .section-title{font-size:28px}
+  .hero-line{font-size:20px;flex-direction:column}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  #mascot{width:48px;height:48px}
+  .card{max-width:100%}
 }
-
-.logo {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
-
-.gold-text {
-  background: linear-gradient(90deg, #d4af37, #fff6b7, #d4af37);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 3s infinite linear;
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-nav ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-nav ul li a:hover {
-  color: #ff8ff8;
-}
-
-.socials a {
-  margin-left: 15px;
-  color: white;
-  text-decoration: none;
-  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffee);
-  padding: 5px 10px;
-  border-radius: 10px;
-  background-size: 200% 200%;
-  animation: gradientShift 5s infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-/* ===== Canvas for Stars ===== */
-#stars {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background: transparent;
-}
-
-/* ===== Home Section ===== */
-#home h1 {
-  margin-top: 100px;
-  font-size: 2.8rem;
-}
-
-.rainbow-text {
-  background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rainbowFlow 4s linear infinite;
-}
-
-@keyframes rainbowFlow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-.contract-box {
-  display: inline-block;
-  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffee);
-  padding: 15px 25px;
-  border-radius: 15px;
-  background-size: 200% 200%;
-  animation: gradientShift 5s infinite;
-  cursor: pointer;
-  margin: 25px 0;
-}
-
-.contract-box p {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: white;
-}
-
-.click-to-copy {
-  font-size: 0.8rem;
-  color: white;
-  display: block;
-  margin-top: 5px;
-}
-
-#copy-popup {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #00ffee, #3333ff);
-  padding: 10px 25px;
-  border-radius: 15px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-/* ===== Expand Button ===== */
-.expand-btn {
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s;
-}
-
-.expand-btn:hover {
-  background: #444;
-}
-
-.hidden {
-  display: none;
-}
-
-/* ===== About Section ===== */
-.meme-img {
-  width: 250px;
-  border-radius: 20px;
-  margin: 20px auto;
-  display: block;
-}
-
-/* ===== Tokenomics ===== */
-#tokenomics p {
-  font-size: 1.1rem;
-  margin: 10px 0;
-}
-
-.rainbow-btn {
-  background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet);
-  background-size: 400% 400%;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  padding: 12px 20px;
-  cursor: pointer;
-  animation: rainbowFlow 5s linear infinite;
-}
-
-/* ===== FAQ ===== */
-.faq-icon {
-  width: 30px;
-  vertical-align: middle;
-  margin-left: 8px;
-}
-
-.faq-item {
-  margin: 15px 0;
-  text-align: left;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.faq-question {
-  background: #111;
-  color: white;
-  width: 100%;
-  border: none;
-  text-align: left;
-  padding: 15px;
-  font-size: 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.faq-question:hover {
-  background: #222;
-}
-
-.faq-answer {
-  background: #0a0a0a;
-  margin-top: 5px;
-  border-radius: 10px;
-  padding: 15px;
-  display: none;
-}
-
-/* ===== Art Gallery ===== */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.placeholder {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 60px 0;
-}
-
-/* ===== Footer ===== */
-footer {
-  background: rgba(0, 0, 0, 0.7);
-  padding: 60px 20px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.footer-meme {
-  width: 100px;
-  border-radius: 15px;
-  margin-top: 10px;
-}
-
-.share-text {
-  margin-top: 25px;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-/* ===== Mobile Responsive ===== */
-@media (max-width: 768px) {
-  nav ul {
-    display: none;
-  }
-
-  .socials {
-    display: none;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-  section {
-    padding: 60px 15px;
-  }
-
-  .contract-box p {
-    font-size: 0.8rem;
-  }
-
-  .faq-item {
-    text-align: center;
-  }
+@media (max-width:560px){
+  .gallery-grid{grid-template-columns:1fr}
+  .hero-line{font-size:18px}
+  .brand-sub{display:none}
+  .nav-links{display:none}
+  .nav-socials{display:none}
 }
