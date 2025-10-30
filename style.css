@@ -1,233 +1,231 @@
-:root {
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+:root{
   --rbw: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  --grey-bg: rgba(30,30,30,0.9);
+  --grey: rgba(28,28,28,0.92); /* dark, non-animated fill for text bubbles */
 }
 
-body {
-  background: #000;
-  color: #fff;
-  font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
+/* =========================================================
+   BASE
+   ========================================================= */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:#000;
+  color:#fff;
+  font-family:"Poppins",system-ui,Segoe UI,Roboto,Arial;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  overflow-x:hidden;
 }
 
-canvas#stars {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+canvas#stars{position:fixed;inset:0;z-index:0;display:block}
+
+/* =========================================================
+   NAV / BRAND
+   ========================================================= */
+.navbar{
+  position:fixed;top:0;left:0;width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;z-index:100;
+  background:rgba(0,0,0,0.92);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-left{display:flex;align-items:center;gap:12px}
+#mascot{width:64px;height:64px;border-radius:12px;object-fit:cover}
+
+.brand{display:flex;flex-direction:column}
+.brand-rainbow{font-family:"Fredoka One",sans-serif;font-size:28px;font-weight:900}
+.brand-rainbow span{display:inline-block} /* colored per-letter via JS */
+.brand-usd{
+  font-family:"Fredoka One",sans-serif;font-size:20px;font-weight:900;
+  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:400% 100%;animation:shimmer 2.8s linear infinite;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.9);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 100;
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{
+  color:#fff;text-decoration:none;font-weight:800;
+  font-family:"Fredoka One",sans-serif;font-size:18px;
 }
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-family: "Fredoka One";
-  font-size: 18px;
-  margin: 0 10px;
-}
-.nav-links a:hover {
-  text-decoration: underline;
-}
-.brand-rainbow {
-  font-family: "Fredoka One";
-  font-size: 28px;
-  font-weight: 900;
-}
-.brand-usd {
-  font-family: "Fredoka One";
-  font-size: 20px;
-  font-weight: 900;
-  background: linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: shimmer 3s linear infinite;
-}
-@keyframes shimmer {
-  to { background-position: 100% 0; }
+.nav-links a:hover{text-decoration:underline}
+
+.nav-socials{display:flex;gap:10px;align-items:center}
+.nav-socials .social{
+  display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;
+  color:#000;font-weight:900;background:var(--rbw);background-size:400% 100%;
+  animation:rainMove 6s linear infinite;
 }
 
-/* Section titles */
-.section-title {
-  font-family: "Fredoka One";
-  font-size: 50px;
-  margin: 60px 0 20px;
-  background: var(--rbw);
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: rbw 5s linear infinite;
-}
-@keyframes rbw {
-  to { background-position: 100% 0; }
+/* Push content below header */
+main{position:relative;z-index:10;padding-top:110px}
+
+/* =========================================================
+   SECTION TITLES (animated rainbow text)
+   ========================================================= */
+.section-title{
+  font-family:"Fredoka One",sans-serif;
+  font-size:64px;font-weight:900;letter-spacing:2px;text-align:center;
+  background:var(--rbw);background-size:400% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rainMove 5s linear infinite;
+  margin:40px 0 18px;
 }
 
-.panel {
-  padding: 100px 20px 60px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
+/* Hero line (JOIN THE $USD1 CULT) — shimmering gold */
+.hero-line{
+  font-size:44px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;
 }
+.gold-shimmer{
+  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:400% 100%;animation:shimmer 2.6s linear infinite;
+}
+@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
+@keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
 
-/* Hero */
-.hero-line {
-  font-size: 36px;
-  margin: 20px 0;
-  background: linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: shimmer 3s linear infinite;
-}
+.panel{padding:52px 20px 80px;min-height:64vh}
 
-/* CA Button */
-.ca-wrap { margin: 10px 0; }
-.ca-bubble {
-  background: var(--grey-bg);
-  color: #fff;
-  border: 2px solid transparent;
-  border-radius: 14px;
-  padding: 12px 18px;
-  position: relative;
+/* =========================================================
+   CA BUTTON (grey fill + rainbow perimeter + subtle spark)
+   ========================================================= */
+.ca-wrap{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ca-bubble{
+  background:var(--grey);color:#fff;font-weight:800;
+  padding:12px 18px;border-radius:14px;border:2px solid transparent;cursor:pointer;
+  position:relative;font-family:monospace;
 }
-.ca-bubble::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: var(--rbw);
-  background-size: 400% 100%;
-  animation: rbw 4s linear infinite;
-  z-index: -1;
+.ca-bubble::before{
+  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
+  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
-.ca-bubble::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--glow,0deg),#fff0 0deg,#fff6 45deg,#fff0 90deg);
-  animation: spin 2s linear infinite;
-  mix-blend-mode: screen;
+.ca-bubble::after{
+  content:'';position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;
+  background:conic-gradient(from var(--a,0deg),#fff0 0deg,#fff7 45deg,#fff0 90deg);
+  mix-blend-mode:screen;animation:spark 2.4s linear infinite;
 }
-@keyframes spin {
-  to { --glow: 360deg; }
-}
-.copy-note { font-size: 12px; color: #fff; }
+@keyframes spark{to{--a:360deg}}
+.copy-note{font-size:12px;opacity:.95}
 
-/* FIXED — Section bubbles and boxes */
+/* =========================================================
+   UNIVERSAL TEXT BUBBLES (About body, How-to body, Cards, FAQ Q)
+   Dark grey fill + animated rainbow outline ONLY
+   ========================================================= */
 .panel-body,
 .how-content,
 .card,
-.faq-q {
-  background: rgba(30,30,30,0.9);
-  color: #fff;
-  border: 2px solid transparent;
-  border-radius: 14px;
-  position: relative;
-  padding: 18px 22px;
-  max-width: 900px;
-  margin: 0 auto 16px;
+.faq-q{
+  background:var(--grey);
+  color:#fff;
+  border:2px solid transparent;
+  border-radius:14px;
+  position:relative;
+  padding:18px 22px;
+  max-width:980px;
+  margin:0 auto 16px;
+  text-align:left;
 }
 .panel-body::before,
 .how-content::before,
 .card::before,
-.faq-q::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: var(--rbw);
-  background-size: 400% 100%;
-  animation: rainbowFlow 5s linear infinite;
-  z-index: -1;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
-}
-@keyframes rainbowFlow {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
+.faq-q::before{
+  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
+  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
 
-/* FAQ answers */
-.faq-a {
-  background: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  color: #000;
-  border-radius: 12px;
-  padding: 14px 18px;
-  max-width: 900px;
-  margin: 0 auto;
+/* HOW TO BUY toggle button */
+.howto-wrap{margin-top:16px;text-align:center}
+.how-toggle{
+  background:#222;border:0;color:#fff;padding:12px 18px;border-radius:10px;cursor:pointer;
+  font-weight:800;display:inline-flex;align-items:center;gap:10px
 }
-.hidden { display: none; }
+.how-arrow{display:inline-block;transition:transform .28s ease}
+.hidden{display:none}
 
-/* Tokenomics and gallery */
-.token-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+/* TOKENOMICS CARDS ROW */
+.token-row{
+  display:flex;gap:18px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin-top:18px
 }
-.card { width: 250px; }
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 10px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-.gallery-grid img {
-  width: 100%;
-  border-radius: 10px;
+.card{min-width:240px;max-width:320px}
+.card h3{font-size:14px;margin-bottom:8px;color:#fff}
+.card-value{font-size:20px;font-weight:900}
+
+/* Rainbow button (Streamflow etc.) */
+.rainbow-btn{
+  display:inline-block;padding:10px 14px;border-radius:10px;
+  color:#000;font-weight:900;border:0;cursor:pointer;text-decoration:none;
+  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
 }
 
-/* Carousel */
-.carousel-container {
-  position: relative;
-  width: min(900px,90%);
-  margin: 20px auto;
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq-grid{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{position:relative}
+.faq-q{
+  width:100%;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  font-weight:800;font-size:18px; /* ensure readable size */
 }
-.carousel {
-  position: relative;
-  height: 300px;
-  overflow: hidden;
-  border-radius: 12px;
+.faq-a{
+  margin-top:8px;padding:14px 18px;border-radius:12px;max-width:980px;margin-inline:auto;
+  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
+  color:#000; /* black text on rainbow answer */
 }
-.carousel-item {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity .4s;
-}
-.carousel-item.active { opacity: 1; }
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
 
-/* Footer */
-.footer-dark {
-  background: #000;
-  padding: 40px 0;
-  text-align: center;
+/* =========================================================
+   GALLERY 3x3 + CAROUSEL (underneath)
+   ========================================================= */
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:18px auto;
 }
-.footer-rainbow {
-  background: var(--rbw);
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: rbw 5s linear infinite;
+.meme-slot, .gallery-grid img{
+  background:rgba(255,255,255,0.03);border-radius:10px;min-height:120px;
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;
+}
+
+/* Simple carousel shell (kept minimal; your JS handles slides) */
+.carousel-container{position:relative;width:min(1080px,92%);margin:20px auto}
+.carousel{position:relative;height:320px;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.4)}
+.carousel-item{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.carousel-item.active{opacity:1}
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,0.6);color:#fff;font-size:20px
+}
+.carousel-btn.prev{left:10px}.carousel-btn.next{right:10px}
+
+/* =========================================================
+   FOOTER (4 cols on desktop)
+   ========================================================= */
+.footer-dark{background:#000;padding:36px 0 24px}
+.footer-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+  max-width:1400px;margin:0 auto;padding:0 20px;text-align:left;
+}
+.footer-col a{color:#fff;text-decoration:underline}
+.footer-rainbow{
+  background:var(--rbw);background-size:400% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rainMove 6s linear infinite;font-weight:900;font-family:"Fredoka One",sans-serif
+}
+.footer-bottom{margin-top:18px;text-align:center;color:rgba(255,255,255,0.6)}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:1000px){
+  .section-title{font-size:48px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .nav-links{display:none}
+  .section-title{font-size:36px}
+  .gallery-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
 }
