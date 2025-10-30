@@ -203,5 +203,3 @@ window.addEventListener('resize', ()=> {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(()=> buildStars(Math.max(120, Math.floor((innerWidth*innerHeight)/9000))), 200);
 });
-
-});
