@@ -1,19 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>UnicornSheepDog1 ($USD1)</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <!-- Starfield canvas -->
   <canvas id="stars" aria-hidden="true"></canvas>
 
   <!-- NAV -->
   <header class="navbar" role="banner">
     <div class="nav-left">
-      <img id="mascot" src="usd1.base.png" alt="mascot" />
+      <img id="mascot" src="usd1.base.png" alt="mascot"/>
       <div class="brand">
         <div id="brandRainbow" class="brand-rainbow">UnicornSheepDog1</div>
         <div id="brandUsd" class="brand-usd gold-shimmer">$USD1</div>
@@ -40,15 +41,13 @@
   <main id="main">
     <!-- HOME -->
     <section id="home" class="panel">
-      <h2 class="section-title">HOME</h2>
+      <h2 class="section-title rainbow-title">HOME</h2>
 
-      <h1 class="hero-line">
-        <span class="rainbow-flow">JOIN THE</span>
-        <span class="gold-shimmer hero-usd">$USD1</span>
-        <span class="rainbow-flow">CULT</span>
+      <h1 class="hero-line gold-shimmer">
+        JOIN THE $USD1 CULT
       </h1>
 
-      <!-- CA bubble (grey background, rainbow outline) -->
+      <!-- CA: grey bubble + rainbow border -->
       <div class="ca-wrap">
         <button id="caButton" class="ca-bubble" aria-label="Copy contract address">
           CA: <span class="mono">5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk</span>
@@ -56,7 +55,7 @@
         <div class="copy-note">click to copy</div>
       </div>
 
-      <!-- HOW TO BUY collapsed by default (centered under CA) -->
+      <!-- HOW TO BUY -->
       <div class="howto-wrap">
         <div style="text-align:center">
           <button id="howToggle" class="how-toggle" aria-expanded="false">
@@ -77,22 +76,26 @@
 
     <!-- ABOUT -->
     <section id="about" class="panel">
-      <h2 class="section-title">ABOUT</h2>
+      <h2 class="section-title rainbow-title">ABOUT</h2>
 
       <div class="panel-body">
-        <p>UnicornSheepDog1 (<strong>$USD1</strong>), launched on bonk.fun, is a Solana memecoin with a mythic edge — Unicorn magic meets Sheepdog loyalty. We’re a tight-knit cult shaping a bold, unforgettable identity on the blockchain.</p>
+        <p class="center-text">
+          UnicornSheepDog1 (<strong>$USD1</strong>), launched on bonk.fun, is a Solana memecoin with a mythic edge — Unicorn magic meets Sheepdog loyalty. We’re a tight-knit cult shaping a bold, unforgettable identity on the blockchain.
+          <br><br>
+          Built on humor, community, and pure chaos, $USD1 aims to unify degens and dreamers alike.
+        </p>
 
         <div class="meme-under">
           <div class="meme-placeholder">TOP COMMUNITY MEME</div>
         </div>
 
-        <p class="cute-line">JUST LOOK AT HOW CUTE OUR MASCOT IS.</p>
+        <p class="cute-line">Just look at how cute our mascot is.</p>
       </div>
     </section>
 
     <!-- TOKENOMICS -->
     <section id="tokenomics" class="panel">
-      <h2 class="section-title">TOKENOMICS</h2>
+      <h2 class="section-title rainbow-title">TOKENOMICS</h2>
 
       <div class="token-row">
         <div class="card rainbow-box">
@@ -115,45 +118,49 @@
 
     <!-- FAQ -->
     <section id="faq" class="panel">
-      <h2 class="section-title">WHAT DA FAQ?!</h2>
+      <h2 class="section-title rainbow-title">WHAT DA FAQ?!</h2>
 
       <div class="faq-grid">
         <div class="faq-item">
-          <button class="faq-q rainbow-fill">What is UnicornSheepDog1?</button>
-          <div class="faq-a hidden">USD1 is a Solana memecoin launched on bonk.fun. It's a cult-driven project building a bold, mythical brand on Solana.</div>
+          <button class="faq-q rainbow-border">What is UnicornSheepDog1?</button>
+          <div class="faq-a rainbow-static hidden">USD1 is a Solana memecoin launched on bonk.fun. It's a cult-driven project building a bold, mythical brand on Solana.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q rainbow-fill">Is there a whitepaper or roadmap?</button>
-          <div class="faq-a hidden">Millions will shhh... Trust THE WOOL, Trust THE HORN, THE CULT WILL KEEP YOU SAFE.</div>
+          <button class="faq-q rainbow-border">Is there a whitepaper or roadmap?</button>
+          <div class="faq-a rainbow-static hidden">Millions will shhh... Trust THE WOOL, Trust THE HORN, THE CULT WILL KEEP YOU SAFE.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q rainbow-fill">Why a Unicorn & Sheepdog?</button>
-          <div class="faq-a hidden">Unicorns bring magic & beauty; sheepdogs bring grit & loyalty. Together they're a quirky, iconic mascot for our BONKers.</div>
+          <button class="faq-q rainbow-border">Why a Unicorn & Sheepdog?</button>
+          <div class="faq-a rainbow-static hidden">Unicorns bring magic & beauty; sheepdogs bring grit & loyalty. Together they're a quirky, iconic mascot for our BONKers.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q rainbow-fill">How do I join the Cult?</button>
-          <div class="faq-a hidden">Buy $USD1 tokens and join the (CULT)mmunity. Follow How to Buy and connect with the community.</div>
+          <button class="faq-q rainbow-border">How do I join the Cult?</button>
+          <div class="faq-a rainbow-static hidden">Buy $USD1 tokens and join the (CULT)mmunity. Follow How to Buy and connect with the community.</div>
         </div>
       </div>
     </section>
 
     <!-- ART GALLERY -->
     <section id="artgallery" class="panel">
-      <h2 class="section-title">ART GALLERY</h2>
-      <div class="gallery-grid">
-        <div class="meme-slot">1</div><div class="meme-slot">2</div><div class="meme-slot">3</div>
-        <div class="meme-slot">4</div><div class="meme-slot">5</div><div class="meme-slot">6</div>
-        <div class="meme-slot">7</div><div class="meme-slot">8</div><div class="meme-slot">9</div>
+      <h2 class="section-title rainbow-title">ART GALLERY</h2>
+
+      <div class="carousel-container">
+        <button class="carousel-btn prev" aria-label="Previous">❮</button>
+        <div class="carousel">
+          <div class="carousel-item active"><img src="img/gallery1.jpg" alt="Gallery 1"></div>
+          <div class="carousel-item"><img src="img/gallery2.jpg" alt="Gallery 2"></div>
+          <div class="carousel-item"><img src="img/gallery3.jpg" alt="Gallery 3"></div>
+        </div>
+        <button class="carousel-btn next" aria-label="Next">❯</button>
       </div>
-      <div class="carousel-placeholder">Carousel placeholder — 100+ memes</div>
     </section>
 
     <!-- CONTACT / FOOTER -->
     <footer id="contact" class="panel footer-dark">
-      <h2 class="section-title footer-heading">CONTACT US</h2>
+      <h2 class="section-title rainbow-title">CONTACT US</h2>
       <div class="footer-grid">
         <div class="footer-col">
           <h4 class="footer-rainbow">Explore</h4>
@@ -183,7 +190,7 @@
       </div>
 
       <div class="footer-bottom">
-        <small>© UnicornSheepDog1 — Built with cult love.</small>
+        <small>© UnicornSheepDog1 — Built with <span class="footer-rainbow">cult</span> love.</small>
       </div>
     </footer>
   </main>
