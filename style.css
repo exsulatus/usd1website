@@ -93,32 +93,33 @@ main{position:relative;z-index:10;padding-top:110px}
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
+  flex-direction:column;
+  gap:8px;
   margin-bottom:28px;
 }
-.ca-inline span{
-  font-size:32px;
+.ca-label{
+  font-size:38px;
   font-family:"Fredoka One",sans-serif;
   font-weight:900;
   color:#fff;
   text-shadow:0 0 8px rgba(255,255,255,0.2);
+  margin-bottom:6px;
 }
 .ca-bubble{
-  width:650px; /* roughly matches hero text width */
+  width:min(90%,700px);
   background:var(--rbw);
   background-size:400% 100%;
   animation:rainMove 6s linear infinite;
   color:#000;
   font-weight:800;
-  padding:16px 22px;
+  padding:18px 22px;
   border-radius:14px;
   border:2px solid transparent;
   cursor:pointer;
   position:relative;
   font-family:monospace;
   text-shadow:0 0 3px rgba(255,255,255,0.5);
-  font-size:16px;
+  font-size:18px;
 }
 .ca-bubble::before{
   content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
@@ -134,7 +135,7 @@ main{position:relative;z-index:10;padding-top:110px}
   text-align:center;
   font-weight:900;
   flex-wrap:wrap;
-  margin:16px 0;
+  margin:24px 0 16px;
 }
 
 /* HOW TO BUY section centered + larger button */
@@ -150,11 +151,11 @@ main{position:relative;z-index:10;padding-top:110px}
   background:#222;
   border:0;
   color:#fff;
-  padding:16px 26px;
+  padding:18px 32px;
   border-radius:12px;
   cursor:pointer;
   font-weight:800;
-  font-size:18px;
+  font-size:20px;
   display:inline-flex;
   align-items:center;
   gap:10px;
