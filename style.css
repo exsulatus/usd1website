@@ -321,3 +321,46 @@ main { position:relative; z-index:10; padding-top:110px; }
    CLEANUP FIX — REMOVE EXTRA HOW TO BUY
    ========================================================= */
 #home .howto-wrap:first-of-type ~ .howto-wrap { display:none !important; }
+/* =========================================================
+   HOME SECTION — FINAL ALIGNMENT + SPACING FIXES
+   (append to the very end of style.css)
+   ========================================================= */
+
+/* Put CA: and the CA button on the same center line */
+#home .ca-row,
+#home .ca-inline {
+  display: flex;
+  justify-content: center;
+  align-items: center;           /* <- vertical centering */
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;           /* even spacing above copy note */
+}
+
+/* Make CA: visually match the button height */
+#home .ca-label {
+  font-size: clamp(44px, 5vw, 56px);
+  line-height: 56px;             /* match bubble height */
+  display: flex;
+  align-items: center;           /* center glyphs within the line box */
+  padding: 0;
+}
+
+/* Tight, centered rainbow CA bubble */
+#home .ca-bubble {
+  display: flex;
+  align-items: center;           /* vertically center the text */
+  height: 56px;                  /* the reference height */
+  padding: 0 18px;               /* no extra vertical padding */
+  white-space: nowrap;
+}
+
+/* Keep the helper text snug under the bubble */
+#home .copy-note {
+  margin-top: 4px;               /* closer to the bubble */
+}
+
+/* Give the HOME panel a touch more bottom room to match other sections */
+#home.home-section {
+  padding-bottom: 120px;         /* increases space before ABOUT */
+}
