@@ -4,7 +4,7 @@
 const TOKEN = "5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk";
 
 /* ============================
-   Rainbow-per-letter (brand)
+   Rainbow-per-letter (brand & any element with .brand-rainbow)
    ============================ */
 function applyRainbowPerLetter(selector){
   const el = document.querySelector(selector);
@@ -15,12 +15,13 @@ function applyRainbowPerLetter(selector){
   for(let i=0;i<text.length;i++){
     const ch = document.createElement('span');
     ch.style.color = colors[i % colors.length];
-    ch.style.fontWeight = 900;
     ch.textContent = text[i];
+    ch.style.fontWeight = 900;
     el.appendChild(ch);
   }
 }
 applyRainbowPerLetter('#brandRainbow');
+/* also make section titles all-white already in CSS */
 
 /* ============================
    CA copy + rainbow toast
@@ -36,7 +37,7 @@ function showRainbowToast(msg){
     backgroundSize:'400% 100%', animation:'rainMove 6s linear infinite'
   });
   document.body.appendChild(t);
-  setTimeout(()=> { t.style.transition='opacity .4s'; t.style.opacity=0; setTimeout(()=> t.remove(),400); }, 1500);
+  setTimeout(()=> { t.style.transition='opacity .4s'; t.style.opacity=0; setTimeout(()=> t.remove(),400); }, 1600);
 }
 if(caButton){
   caButton.addEventListener('click', async () => {
@@ -50,56 +51,38 @@ if(caButton){
 }
 
 /* ============================
-   HOW TO BUY toggle (collapsed default)
+   HOW TO BUY toggle
    ============================ */
 const howToggle = document.getElementById('howToggle');
 const howContent = document.getElementById('howContent');
 if(howToggle && howContent){
+  // start collapsed
   howContent.classList.add('hidden');
   howToggle.setAttribute('aria-expanded', 'false');
   howToggle.addEventListener('click', () => {
-    const hidden = howContent.classList.toggle('hidden');
+    const open = howContent.classList.toggle('hidden');
     howToggle.setAttribute('aria-expanded', String(!howContent.classList.contains('hidden')));
     const arrow = howToggle.querySelector('.how-arrow');
     if(arrow) arrow.style.transform = howContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-    // slide animation
-    if(!howContent.classList.contains('hidden')){
-      howContent.style.display = 'block';
-      howContent.style.height = '0px';
-      const full = howContent.scrollHeight + 'px';
-      requestAnimationFrame(()=> {
-        howContent.style.transition = 'height 320ms ease';
-        howContent.style.height = full;
-      });
-      setTimeout(()=> { howContent.style.height = ''; howContent.style.transition = ''; }, 360);
-    } else {
-      // collapse
-      const curH = howContent.scrollHeight + 'px';
-      howContent.style.height = curH;
-      requestAnimationFrame(()=> {
-        howContent.style.transition = 'height 260ms ease';
-        howContent.style.height = '0px';
-      });
-      setTimeout(()=> { howContent.style.display = 'none'; howContent.style.height = ''; howContent.style.transition = ''; }, 300);
-    }
   });
 }
 
 /* ============================
-   FAQ accordion (stacked layout)
+   FAQ accordion
    ============================ */
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const a = btn.nextElementSibling;
     if(!a) return;
-    const hidden = a.classList.toggle('hidden');
+    const open = a.classList.toggle('hidden');
     a.style.display = a.classList.contains('hidden') ? 'none' : 'block';
   });
 });
 
 /* ============================
-   Canvas: pulsing white stars + colored meteor dots (top-left -> bottom-right)
-   (same working logic as previous version)
+   Canvas: pulsing white stars + colored meteor dots
+   - meteors move top-left -> bottom-right (so vx positive, vy positive)
+   - trail follows in same direction (short, faded)
    ============================ */
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
@@ -108,7 +91,7 @@ function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeigh
 window.addEventListener('resize', resize);
 resize();
 
-/* still stars */
+/* static pulsing stars */
 let stars = [];
 function buildStars(n = 200){
   stars = [];
@@ -124,27 +107,34 @@ function buildStars(n = 200){
 }
 buildStars();
 
-/* meteors */
+/* meteors (colored dot heads with trailing gradient in same direction) */
 let meteors = [];
 function spawnMeteor(force=false){
   const prob = force ? 0.14 : 0.012;
   if(Math.random() < prob){
-    const sx = Math.random()*W*0.6;
-    const sy = Math.random()*H*0.35;
+    // spawn near top-left to top area for natural look
+    const sx = Math.random()*W*0.6; // more left bias
+    const sy = Math.random()*H*0.35; // top quadrant bias
     const speed = Math.random()*1.8 + 2.8;
+    const angleJitter = (Math.random()*0.12 - 0.06); // tiny jitter
     const vx = speed + Math.random()*0.4;
-    const vy = speed * (0.5 + Math.random()*0.7);
+    const vy = speed * (0.5 + Math.random()*0.7); // ensure downwards component
     meteors.push({
-      x: sx, y: sy, vx: vx, vy: vy, len: Math.random()*30 + 40,
-      hue: Math.floor(Math.random()*360), life: 1, size: Math.random()*2 + 1.6
+      x: sx, y: sy,
+      vx: vx*(1+angleJitter), vy: vy*(1+angleJitter),
+      len: Math.random()*30 + 40,
+      hue: Math.floor(Math.random()*360),
+      life: 1,
+      size: Math.random()*2 + 1.6
     });
   }
 }
 
-/* draw meteor dot + short trail in same direction */
+/* draw small circular head + short tapered trail in same direction */
 function drawMeteor(m){
   const ex = m.x - m.vx * (m.len/ (m.vx + m.vy));
   const ey = m.y - m.vy * (m.len/ (m.vx + m.vy));
+  // trail gradient from head to tail
   const g = ctx.createLinearGradient(m.x, m.y, ex, ey);
   g.addColorStop(0, `hsla(${m.hue},100%,85%,${m.life})`);
   g.addColorStop(0.6, `hsla(${m.hue},100%,70%,${0.45*m.life})`);
@@ -157,11 +147,13 @@ function drawMeteor(m){
   ctx.lineTo(ex, ey);
   ctx.stroke();
 
+  // draw bright circular head
   ctx.beginPath();
   ctx.fillStyle = `hsla(${m.hue},100%,90%,${m.life})`;
   ctx.arc(m.x, m.y, Math.max(1.6, m.size*1.6), 0, Math.PI*2);
   ctx.fill();
 
+  // small glow
   ctx.beginPath();
   ctx.fillStyle = `hsla(${m.hue},100%,80%,${0.28*m.life})`;
   ctx.arc(m.x, m.y, Math.max(3, m.size*3.5), 0, Math.PI*2);
@@ -170,9 +162,11 @@ function drawMeteor(m){
 
 /* main loop */
 function frame(){
+  // subtle translucent fill for gentle trails
   ctx.fillStyle = 'rgba(0,0,0,0.16)';
   ctx.fillRect(0,0,W,H);
 
+  // pulsing still stars
   for(const s of stars){
     ctx.beginPath();
     ctx.fillStyle = `rgba(255,255,255,${Math.max(0.06, Math.min(1, s.alpha))})`;
@@ -182,12 +176,16 @@ function frame(){
     if(s.alpha <= 0.06 || s.alpha >= 0.98) s.d *= -1;
   }
 
+  // spawn meteors occasionally
   spawnMeteor();
 
+  // draw meteors
   for(let i=meteors.length-1;i>=0;i--){
     const m = meteors[i];
     drawMeteor(m);
-    m.x += m.vx; m.y += m.vy; m.life -= 0.01;
+    m.x += m.vx;
+    m.y += m.vy;
+    m.life -= 0.01;
     if(m.x > W + 200 || m.y > H + 200 || m.life <= 0) meteors.splice(i,1);
   }
 
@@ -195,11 +193,22 @@ function frame(){
 }
 frame();
 
-window.addEventListener('scroll', () => { spawnMeteor(true); });
+/* spawn extra meteors on scroll (throttled) */
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const now = Date.now();
+  if(now - lastScroll > 80){
+    spawnMeteor(true);
+    lastScroll = now;
+  }
+});
 
-/* rebuild stars on resize */
+/* rebuild stars on resize with throttling */
 let resizeTimer;
 window.addEventListener('resize', ()=> {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(()=> buildStars(Math.max(120, Math.floor((innerWidth*innerHeight)/9000))), 200);
 });
+
+/* ensure links open normally (anchors use target="_blank" where appropriate) */
+/* READY */
