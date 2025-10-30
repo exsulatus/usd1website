@@ -40,12 +40,22 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
   font-family:"Fredoka One",sans-serif;font-size:20px;font-weight:900;
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:400% 100%;
-  animation:shimmer 2.8s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 10px rgba(255, 215, 0, 0.35),
-    0 0 25px rgba(255, 240, 180, 0.25);
+  background-size:400% 100%;animation:shimmer 2.8s linear infinite;
 }
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{
+  color:#fff;text-decoration:none;font-weight:800;
+  font-family:"Fredoka One",sans-serif;font-size:18px;
+}
+.nav-links a:hover{text-decoration:underline}
+.nav-socials{display:flex;gap:10px;align-items:center}
+.nav-socials .social{
+  display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;
+  color:#000;font-weight:900;background:var(--rbw);background-size:400% 100%;
+  animation:rainMove 6s linear infinite;
+}
+
+main{position:relative;z-index:10;padding-top:110px}
 
 /* =========================================================
    TEXT EFFECTS
@@ -59,31 +69,29 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
   margin:40px 0 18px;
 }
 
-.gold-shimmer {
-  background: linear-gradient(90deg, #fff8b5, #ffe36e, #ffd700, #fff6cc, #f7e9a6);
+.gold-shimmer, 
+.brand-usd {
+  background: linear-gradient(90deg, #e6c200, #fff6cc, #f7e9a6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  background-size: 350% 100%;
-  animation: shimmer 2.6s linear infinite, goldGlow 2s ease-in-out infinite alternate;
+  background-size: 400% 100%;
+  animation: shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
   text-shadow:
-    0 0 12px rgba(255, 230, 160, 0.6),
-    0 0 30px rgba(255, 210, 90, 0.45),
-    0 0 45px rgba(255, 200, 70, 0.35);
+    0 0 8px rgba(255, 215, 0, 0.25),
+    0 0 16px rgba(255, 255, 200, 0.15);
 }
 
 @keyframes goldGlow {
   0% {
-    filter: brightness(1);
     text-shadow:
-      0 0 12px rgba(255, 230, 160, 0.6),
-      0 0 25px rgba(255, 210, 90, 0.4);
+      0 0 8px rgba(255, 215, 0, 0.25),
+      0 0 16px rgba(255, 255, 200, 0.15);
   }
   100% {
-    filter: brightness(1.3);
     text-shadow:
-      0 0 25px rgba(255, 240, 180, 0.8),
-      0 0 45px rgba(255, 220, 100, 0.55);
+      0 0 20px rgba(255, 255, 150, 0.5),
+      0 0 35px rgba(255, 220, 150, 0.25);
   }
 }
 
@@ -110,10 +118,7 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   background-size:400% 100%;
-  animation:shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 10px rgba(255, 215, 0, 0.3),
-    0 0 20px rgba(255, 240, 180, 0.2);
+  animation:shimmer 2.6s linear infinite;
 }
 
 /* --- CA ROW (label + bubble perfectly aligned) --- */
@@ -244,15 +249,7 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
 }
 .card{min-width:240px;max-width:320px;text-align:center}
 .card h3{font-size:14px;margin-bottom:8px;color:#fff}
-.card-value{
-  font-size:26px;
-  font-weight:900;
-  text-align:center;
-}
-.card-value.gold-shimmer{
-  font-size:28px;
-  text-align:center;
-}
+.card-value{font-size:20px;font-weight:900}
 .rainbow-btn{
   display:inline-block;padding:10px 14px;border-radius:10px;
   color:#000;font-weight:900;border:0;cursor:pointer;text-decoration:none;
