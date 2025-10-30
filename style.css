@@ -3,7 +3,7 @@
    ========================================================= */
 :root{
   --rbw: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  --grey: rgba(28,28,28,0.92); /* dark, non-animated fill for text bubbles */
+  --grey: rgba(28,28,28,0.92);
 }
 
 /* =========================================================
@@ -37,7 +37,7 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
 
 .brand{display:flex;flex-direction:column}
 .brand-rainbow{font-family:"Fredoka One",sans-serif;font-size:28px;font-weight:900}
-.brand-rainbow span{display:inline-block} /* colored per-letter via JS */
+.brand-rainbow span{display:inline-block}
 .brand-usd{
   font-family:"Fredoka One",sans-serif;font-size:20px;font-weight:900;
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
@@ -59,7 +59,6 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
   animation:rainMove 6s linear infinite;
 }
 
-/* Push content below header */
 main{position:relative;z-index:10;padding-top:110px}
 
 /* =========================================================
@@ -74,7 +73,7 @@ main{position:relative;z-index:10;padding-top:110px}
   margin:40px 0 18px;
 }
 
-/* Hero line (JOIN THE $USD1 CULT) — shimmering gold */
+/* HERO LINE */
 .hero-line{
   font-size:44px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;
 }
@@ -89,30 +88,33 @@ main{position:relative;z-index:10;padding-top:110px}
 .panel{padding:52px 20px 80px;min-height:64vh}
 
 /* =========================================================
-   CA BUTTON (grey fill + rainbow perimeter + subtle spark)
+   CA BUTTON (RAINBOW FILL)
    ========================================================= */
 .ca-wrap{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
 .ca-bubble{
-  background:var(--grey);color:#fff;font-weight:800;
-  padding:12px 18px;border-radius:14px;border:2px solid transparent;cursor:pointer;
-  position:relative;font-family:monospace;
+  background:var(--rbw);
+  background-size:400% 100%;
+  animation:rainMove 6s linear infinite;
+  color:#000;
+  font-weight:800;
+  padding:12px 18px;
+  border-radius:14px;
+  border:2px solid transparent;
+  cursor:pointer;
+  position:relative;
+  font-family:monospace;
+  text-shadow:0 0 3px rgba(255,255,255,0.5);
 }
 .ca-bubble::before{
   content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
   filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
-.ca-bubble::after{
-  content:'';position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;
-  background:conic-gradient(from var(--a,0deg),#fff0 0deg,#fff7 45deg,#fff0 90deg);
-  mix-blend-mode:screen;animation:spark 2.4s linear infinite;
-}
-@keyframes spark{to{--a:360deg}}
-.copy-note{font-size:12px;opacity:.95}
+.ca-bubble::after{display:none}
+.copy-note{font-size:12px;opacity:.95;color:#fff}
 
 /* =========================================================
-   UNIVERSAL TEXT BUBBLES (About body, How-to body, Cards, FAQ Q)
-   Dark grey fill + animated rainbow outline ONLY
+   UNIVERSAL TEXT BUBBLES (dark grey fill + rainbow perimeter)
    ========================================================= */
 .panel-body,
 .how-content,
@@ -146,7 +148,7 @@ main{position:relative;z-index:10;padding-top:110px}
 .how-arrow{display:inline-block;transition:transform .28s ease}
 .hidden{display:none}
 
-/* TOKENOMICS CARDS ROW */
+/* TOKENOMICS */
 .token-row{
   display:flex;gap:18px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin-top:18px
 }
@@ -154,7 +156,7 @@ main{position:relative;z-index:10;padding-top:110px}
 .card h3{font-size:14px;margin-bottom:8px;color:#fff}
 .card-value{font-size:20px;font-weight:900}
 
-/* Rainbow button (Streamflow etc.) */
+/* Rainbow button */
 .rainbow-btn{
   display:inline-block;padding:10px 14px;border-radius:10px;
   color:#000;font-weight:900;border:0;cursor:pointer;text-decoration:none;
@@ -168,26 +170,24 @@ main{position:relative;z-index:10;padding-top:110px}
 .faq-item{position:relative}
 .faq-q{
   width:100%;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
-  font-weight:800;font-size:18px; /* ensure readable size */
+  font-weight:800;font-size:18px;
 }
 .faq-a{
   margin-top:8px;padding:14px 18px;border-radius:12px;max-width:980px;margin-inline:auto;
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
-  color:#000; /* black text on rainbow answer */
+  color:#000;
 }
 
 /* =========================================================
-   GALLERY 3x3 + CAROUSEL (underneath)
+   GALLERY + CAROUSEL
    ========================================================= */
 .gallery-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:18px auto;
 }
-.meme-slot, .gallery-grid img{
+.meme-slot,.gallery-grid img{
   background:rgba(255,255,255,0.03);border-radius:10px;min-height:120px;
   display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;
 }
-
-/* Simple carousel shell (kept minimal; your JS handles slides) */
 .carousel-container{position:relative;width:min(1080px,92%);margin:20px auto}
 .carousel{position:relative;height:320px;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.4)}
 .carousel-item{position:absolute;inset:0;opacity:0;transition:opacity .35s}
@@ -200,7 +200,7 @@ main{position:relative;z-index:10;padding-top:110px}
 .carousel-btn.prev{left:10px}.carousel-btn.next{right:10px}
 
 /* =========================================================
-   FOOTER (4 cols on desktop)
+   FOOTER
    ========================================================= */
 .footer-dark{background:#000;padding:36px 0 24px}
 .footer-grid{
