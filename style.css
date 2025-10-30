@@ -77,48 +77,47 @@ main{position:relative;z-index:10;padding-top:110px}
 .panel{padding:52px 20px 80px;min-height:64vh;text-align:center}
 
 /* =========================================================
-   HOME SECTION — $USD1 shimmer + inline CA + centered content
+   HOME SECTION
    ========================================================= */
 .home-hero{text-align:center;margin-bottom:20px}
 
-/* Big shimmering $USD1 above CA */
+/* $USD1 shimmering gold */
 .home-usd1{
   font-family:"Fredoka One",sans-serif;
   font-weight:900;
   font-size:72px;
   line-height:1.05;
   text-align:center;
-  margin:10px 0 8px;
+  margin:20px 0 40px;
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   background-size:400% 100%;
   animation:shimmer 2.6s linear infinite;
 }
 
-/* Inline “CA:” + button on one line (wraps on small screens) */
+/* Inline CA row */
 .ca-inline{
   display:flex;
   justify-content:center;
   align-items:center;
   gap:12px;
   flex-wrap:wrap;
-  margin-bottom:22px;
+  margin-bottom:40px;
 }
 
-/* Rainbow “CA:” label sized to match button height */
+/* Rainbow “CA:” label */
 .ca-label{
   font-family:"Fredoka One",sans-serif;
   font-weight:900;
-  font-size:38px;
+  font-size:40px;
   line-height:1;
-  padding:12px 0;                 /* visually matches button height */
+  padding:14px 0;
   background:var(--rbw);background-size:400% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;
   animation:rainMove 5s linear infinite;
-  text-shadow:0 0 8px rgba(255,255,255,0.18);
 }
 
-/* CA bubble: snug to text (no extra space), single line */
+/* Tight CA bubble */
 .ca-bubble{
   background:var(--rbw);
   background-size:400% 100%;
@@ -133,8 +132,6 @@ main{position:relative;z-index:10;padding-top:110px}
   font-family:monospace;
   text-shadow:0 0 3px rgba(255,255,255,0.5);
   font-size:20px;
-
-  /* make it fit the text exactly */
   width:auto;
   display:inline-block;
   white-space:nowrap;
@@ -154,12 +151,12 @@ main{position:relative;z-index:10;padding-top:110px}
   text-align:center;
   font-weight:900;
   flex-wrap:wrap;
-  margin:24px 0 16px;
+  margin:40px 0 16px;
 }
 
-/* HOW TO BUY section centered + larger button */
+/* HOW TO BUY */
 .howto-wrap{
-  margin-top:24px;
+  margin-top:28px;
   text-align:center;
   display:flex;
   flex-direction:column;
@@ -304,13 +301,13 @@ main{position:relative;z-index:10;padding-top:110px}
   .section-title{font-size:36px}
   .gallery-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
-  /* make label/button stack well on phones */
   .ca-label{font-size:30px;padding:10px 0}
   .ca-bubble{font-size:16px;padding:12px 14px}
 }
 
-/* Small quality tweaks for mid breakpoints */
-@media (max-width:900px){
-  .home-usd1{font-size:56px}
-  .hero-line{font-size:34px}
-}
+/* =========================================================
+   CLEANUP FIX — REMOVE EXTRA HOW TO BUY & BALANCE SPACING
+   ========================================================= */
+#home .home-usd1 { margin-bottom: 40px; }
+#home .ca-inline { margin-bottom: 40px; }
+#home .howto-wrap:first-of-type ~ .howto-wrap { display:none !important; }
