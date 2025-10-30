@@ -288,3 +288,28 @@ main{position:relative;z-index:10;padding-top:110px}
   .footer-grid{grid-template-columns:1fr}
   .ca-bubble{width:95%}
 }
+/* --- Shimmering $USD1 title above CA (uses your existing .gold-shimmer effect) --- */
+.home-usd1{
+  font-family: "Fredoka One", sans-serif;
+  font-weight: 900;
+  font-size: 72px;        /* desktop size */
+  line-height: 1.05;
+  text-align: center;
+  margin: 10px 0 8px;     /* a little breathing room above CA */
+}
+
+/* --- Make the CA text inside the rainbow bubble larger --- */
+.ca-bubble{
+  font-size: 20px;        /* was smaller; bumps readability */
+  padding: 18px 22px;     /* keeps the bigger text comfy */
+}
+
+/* Responsive tweaks so mobile still looks clean */
+@media (max-width: 900px){
+  .home-usd1{ font-size: 56px; }
+  .ca-bubble{ font-size: 17px; padding: 16px 20px; }
+}
+@media (max-width: 560px){
+  .home-usd1{ font-size: 44px; }
+  .ca-bubble{ font-size: 16px; padding: 14px 18px; }
+}
