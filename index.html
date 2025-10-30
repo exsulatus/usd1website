@@ -38,40 +38,31 @@
   </header>
 
   <main id="main">
-    <!-- HOME -->
-    <section id="home" class="panel">
-      <h2 class="section-title">HOME</h2>
+   <!-- HOME -->
+<section id="home" class="panel home-section">
+  <h1 class="section-title">CA:</h1>
 
-      <h1 class="hero-line">
-        <span class="gold-shimmer">JOIN THE $USD1 CULT</span>
-      </h1>
+  <!-- Inline CA label + button -->
+  <div class="ca-inline">
+    <button id="caButton" class="ca-bubble">
+      5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk
+    </button>
+  </div>
+  <div class="copy-note">click to copy CA</div>
 
-      <!-- CA bubble (RAINBOW FILL per your latest choice) -->
-      <div class="ca-wrap">
-        <button id="caButton" class="ca-bubble" aria-label="Copy contract address">
-          CA: <span class="mono">5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk</span>
-        </button>
-        <div class="copy-note">click to copy</div>
-      </div>
+  <h2 class="hero-line gold-shimmer">JOIN THE UNICORNSHEEPDOG CULT</h2>
 
-      <!-- HOW TO BUY collapsed by default (centered under CA) -->
-      <div class="howto-wrap">
-        <div style="text-align:center">
-          <button id="howToggle" class="how-toggle" aria-expanded="false">
-            HOW TO BUY <span class="how-arrow">▾</span>
-          </button>
-        </div>
-
-        <div id="howContent" class="how-content hidden" aria-hidden="true">
-          <ol>
-            <li>Create a Solana wallet (we recommend <a href="https://phantom.com/" target="_blank" rel="noopener">Phantom</a>).</li>
-            <li>Fund your wallet with SOL from an exchange.</li>
-            <li>Go to <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank" rel="noopener">Jupiter</a>, paste the contract, and swap SOL → USD1.</li>
-            <li>Welcome to the CULT.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
+  <!-- HOW TO BUY -->
+  <button id="howToggle" class="how-toggle">HOW TO BUY ▾</button>
+  <div id="howContent" class="how-content hidden">
+    <ol>
+      <li>Create a Solana wallet (we recommend <a href="https://phantom.com/" target="_blank">Phantom</a>).</li>
+      <li>Fund your wallet with SOL.</li>
+      <li>Go to <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank">Jupiter</a> and swap SOL → USD1.</li>
+      <li>Welcome to the CULT.</li>
+    </ol>
+  </div>
+</section>
 
     <!-- ABOUT -->
     <section id="about" class="panel">
