@@ -68,13 +68,36 @@ main{position:relative;z-index:10;padding-top:110px}
   animation:rainMove 5s linear infinite;
   margin:40px 0 18px;
 }
-.gold-shimmer{
-  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:400% 100%;animation:shimmer 2.6s linear infinite;
+
+.gold-shimmer, 
+.brand-usd {
+  background: linear-gradient(90deg, #e6c200, #fff6cc, #f7e9a6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 400% 100%;
+  animation: shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 8px rgba(255, 215, 0, 0.25),
+    0 0 16px rgba(255, 255, 200, 0.15);
 }
+
+@keyframes goldGlow {
+  0% {
+    text-shadow:
+      0 0 8px rgba(255, 215, 0, 0.25),
+      0 0 16px rgba(255, 255, 200, 0.15);
+  }
+  100% {
+    text-shadow:
+      0 0 20px rgba(255, 255, 150, 0.5),
+      0 0 35px rgba(255, 220, 150, 0.25);
+  }
+}
+
 @keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
 @keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
+
 
 /* consistent padding across all sections */
 .panel{padding:52px 20px 120px;min-height:64vh;text-align:center}
