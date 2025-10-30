@@ -76,7 +76,8 @@ main{position:relative;z-index:10;padding-top:110px}
 @keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
 @keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
 
-.panel{padding:52px 20px 80px;min-height:64vh;text-align:center}
+/* consistent padding across all sections */
+.panel{padding:52px 20px 120px;min-height:64vh;text-align:center}
 
 /* =========================================================
    HOME SECTION
@@ -101,10 +102,10 @@ main{position:relative;z-index:10;padding-top:110px}
 .ca-row{
   display:flex;
   justify-content:center;
-  align-items:center;          /* vertical alignment fix */
+  align-items:center;
   gap:14px;
   flex-wrap:wrap;
-  margin:0 auto 14px;          /* space before copy note */
+  margin:0 auto 14px;
   width:min(1000px,92vw);
 }
 
@@ -117,23 +118,21 @@ main{position:relative;z-index:10;padding-top:110px}
   background:var(--rbw);background-size:400% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;
   animation:rainMove 5s linear infinite;
-
-  /* Match bubble height */
   font-size:56px;
   line-height:56px;
   display:flex;
   align-items:center;
 }
 
-/* CA bubble: tighter vertical size, text centered */
+/* CA bubble: tight vertical size, text centered */
 .ca-bubble{
   background:var(--rbw);
   background-size:400% 100%;
   animation:rainMove 6s linear infinite;
   color:#000;
   font-weight:800;
-  height:56px;                 /* fixed height to align with label */
-  padding:0 18px;              /* horizontal only */
+  height:56px;
+  padding:0 18px;
   border-radius:14px;
   border:2px solid transparent;
   cursor:pointer;
@@ -149,7 +148,7 @@ main{position:relative;z-index:10;padding-top:110px}
   filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
 
-/* Copy note sits snug under the bubble */
+/* Copy note under bubble */
 .copy-note{
   font-size:12px;opacity:.95;margin-top:4px;margin-bottom:28px;
 }
@@ -166,7 +165,7 @@ main{position:relative;z-index:10;padding-top:110px}
   margin:24px 0 16px;
 }
 
-/* HOW TO BUY (centered & bigger button) */
+/* HOW TO BUY */
 .howto-wrap{
   margin-top:24px;
   text-align:center;
@@ -191,9 +190,6 @@ main{position:relative;z-index:10;padding-top:110px}
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
   filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
-
-/* Extra breathing room at bottom of HOME to match other sections */
-#home.panel{padding-bottom:240px}
 
 /* =========================================================
    UNIVERSAL TEXT BUBBLES
