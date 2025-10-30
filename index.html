@@ -8,19 +8,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="stars"></canvas>
+  <canvas id="stars" aria-hidden="true"></canvas>
 
-  <!-- HEADER -->
-  <header class="navbar">
+  <!-- NAV -->
+  <header class="navbar" role="banner">
     <div class="nav-left">
       <img id="mascot" src="usd1.base.png" alt="mascot" />
       <div class="brand">
         <div id="brandRainbow" class="brand-rainbow">UnicornSheepDog1</div>
-        <div class="brand-usd">$USD1</div>
+        <div id="brandUsd" class="brand-usd">$USD1</div>
       </div>
     </div>
 
-    <nav class="nav-links">
+    <nav class="nav-links" role="navigation" aria-label="Main">
       <a href="#home">HOME</a>
       <a href="#about">ABOUT</a>
       <a href="#tokenomics">TOKENOMICS</a>
@@ -30,42 +30,43 @@
     </nav>
 
     <div class="nav-socials">
-      <a class="social" href="https://x.com/UnicornSheepDog" target="_blank">X / Twitter</a>
-      <a class="social" href="https://t.me/UnicornSheepDogPortal" target="_blank">Telegram</a>
-      <a class="social" href="https://www.tiktok.com/@unicornsheepdog" target="_blank">TikTok</a>
-      <a class="social" href="https://dexscreener.com/solana/32vjneqs23a7vhh6g8gcuwem14ffssj1kdzz59hz5nyk" target="_blank">DexScreener</a>
+      <a class="social" href="https://x.com/UnicornSheepDog" target="_blank" rel="noopener">X / Twitter</a>
+      <a class="social" href="https://t.me/UnicornSheepDogPortal" target="_blank" rel="noopener">Telegram</a>
+      <a class="social" href="https://www.tiktok.com/@unicornsheepdog" target="_blank" rel="noopener">TikTok</a>
+      <a class="social" href="https://dexscreener.com/solana/32vjneqs23a7vhh6g8gcuwem14ffssj1kdzz59hz5nyk" target="_blank" rel="noopener">DexScreener</a>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <!-- HOME -->
-    <section id="home" class="panel home-section">
-      <!-- Sparkling $USD1 with meme background -->
-      <div class="usd1-banner">
-        <img src="https://picsum.photos/1200/350?blur=3" alt="meme background" class="usd1-bg">
-        <h1 class="usd1-title gold-shimmer">$USD1</h1>
-      </div>
+    <section id="home" class="panel">
+      <h2 class="section-title">HOME</h2>
 
-      <!-- Inline CA label and button -->
-      <div class="ca-inline">
-        <h2 class="section-title small">CA:</h2>
-        <button id="caButton" class="ca-bubble-inline">
-          5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk
+      <h1 class="hero-line">
+        <span class="gold-shimmer">JOIN THE $USD1 CULT</span>
+      </h1>
+
+      <!-- CA bubble (RAINBOW FILL per your latest choice) -->
+      <div class="ca-wrap">
+        <button id="caButton" class="ca-bubble" aria-label="Copy contract address">
+          CA: <span class="mono">5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk</span>
         </button>
+        <div class="copy-note">click to copy</div>
       </div>
-      <div class="copy-note-inline">click to copy</div>
 
-      <!-- Hero line -->
-      <h1 class="hero-line gold-shimmer">JOIN THE UNICORNSHEEPDOG CULT</h1>
-
-      <!-- HOW TO BUY -->
+      <!-- HOW TO BUY collapsed by default (centered under CA) -->
       <div class="howto-wrap">
-        <button id="howToggle" class="how-toggle">HOW TO BUY <span class="how-arrow">▾</span></button>
-        <div id="howContent" class="how-content hidden">
+        <div style="text-align:center">
+          <button id="howToggle" class="how-toggle" aria-expanded="false">
+            HOW TO BUY <span class="how-arrow">▾</span>
+          </button>
+        </div>
+
+        <div id="howContent" class="how-content hidden" aria-hidden="true">
           <ol>
-            <li>Create a Solana wallet (we recommend <a href="https://phantom.com/" target="_blank">Phantom</a>).</li>
-            <li>Fund your wallet with SOL.</li>
-            <li>Go to <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank">Jupiter</a> and swap SOL → USD1.</li>
+            <li>Create a Solana wallet (we recommend <a href="https://phantom.com/" target="_blank" rel="noopener">Phantom</a>).</li>
+            <li>Fund your wallet with SOL from an exchange.</li>
+            <li>Go to <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank" rel="noopener">Jupiter</a>, paste the contract, and swap SOL → USD1.</li>
             <li>Welcome to the CULT.</li>
           </ol>
         </div>
@@ -75,25 +76,34 @@
     <!-- ABOUT -->
     <section id="about" class="panel">
       <h2 class="section-title">ABOUT</h2>
+
       <div class="panel-body">
-        <p>UnicornSheepDog1 ($USD1), launched on bonk.fun, is a Solana memecoin with a mythic edge — Unicorn magic meets Sheepdog loyalty. We’re a tight-knit cult shaping a bold, unforgettable identity on the blockchain. Together, we create chaos with purpose — one meme at a time.</p>
-        <p class="cute-line">Just look at how cute our mascot is.</p>
+        <p>UnicornSheepDog1 (<strong>$USD1</strong>), launched on bonk.fun, is a Solana memecoin with a mythic edge — Unicorn magic meets Sheepdog loyalty. We’re a tight-knit cult shaping a bold, unforgettable identity on the blockchain.</p>
+
+        <div class="meme-under">
+          <div class="meme-placeholder">TOP COMMUNITY MEME</div>
+        </div>
+
+        <p class="cute-line" style="text-align:center">Just look at how cute our mascot is.</p>
       </div>
     </section>
 
     <!-- TOKENOMICS -->
     <section id="tokenomics" class="panel">
       <h2 class="section-title">TOKENOMICS</h2>
+
       <div class="token-row">
         <div class="card">
           <h3>TOTAL SUPPLY</h3>
           <div class="card-value">1,000,000,000</div>
         </div>
+
         <div class="card">
           <h3>LOCKED TOKENS</h3>
           <div class="card-value">2% (locked until 10/8/2026)</div>
-          <a class="rainbow-btn" href="https://app.streamflow.finance/token-dashboard/solana/mainnet/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank">View Locked Tokens</a>
+          <a class="rainbow-btn" id="streamflowBtn" href="https://app.streamflow.finance/token-dashboard/solana/mainnet/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank" rel="noopener">View Locked Tokens</a>
         </div>
+
         <div class="card">
           <h3>TOTAL TAX</h3>
           <div class="card-value">1.55%</div>
@@ -104,10 +114,99 @@
     <!-- FAQ -->
     <section id="faq" class="panel">
       <h2 class="section-title">WHAT DA FAQ?!</h2>
+
       <div class="faq-grid">
         <div class="faq-item">
           <button class="faq-q">What is UnicornSheepDog1?</button>
-          <div class="faq-a hidden">A Solana memecoin born from chaos and cult energy — a mix of Unicorn magic and Sheepdog loyalty.</div>
+          <div class="faq-a hidden">USD1 is a Solana memecoin launched on bonk.fun. It's a cult-driven project building a bold, mythical brand on Solana.</div>
         </div>
+
         <div class="faq-item">
-          <button class="faq-q">Is there a roadmap?</button>
+          <button class="faq-q">Is there a whitepaper or roadmap?</button>
+          <div class="faq-a hidden">Millions will shhh... Trust THE WOOL, Trust THE HORN, THE CULT WILL KEEP YOU SAFE.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Why a Unicorn & Sheepdog?</button>
+          <div class="faq-a hidden">Unicorns bring magic & beauty; sheepdogs bring grit & loyalty. Together they're a quirky, iconic mascot for our BONKers.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">How do I join the Cult?</button>
+          <div class="faq-a hidden">Buy $USD1 tokens and join the (CULT)mmunity. Follow How to Buy and connect with the community.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ART GALLERY -->
+    <section id="artgallery" class="panel">
+      <h2 class="section-title">ART GALLERY</h2>
+
+      <!-- 3x3 Grid -->
+      <div class="gallery-grid">
+        <img src="https://picsum.photos/400?random=1" alt="art1">
+        <img src="https://picsum.photos/400?random=2" alt="art2">
+        <img src="https://picsum.photos/400?random=3" alt="art3">
+        <img src="https://picsum.photos/400?random=4" alt="art4">
+        <img src="https://picsum.photos/400?random=5" alt="art5">
+        <img src="https://picsum.photos/400?random=6" alt="art6">
+        <img src="https://picsum.photos/400?random=7" alt="art7">
+        <img src="https://picsum.photos/400?random=8" alt="art8">
+        <img src="https://picsum.photos/400?random=9" alt="art9">
+      </div>
+
+      <!-- Carousel -->
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-item active"><img src="https://picsum.photos/1080/320?random=10" alt="carousel 1"></div>
+          <div class="carousel-item"><img src="https://picsum.photos/1080/320?random=11" alt="carousel 2"></div>
+          <div class="carousel-item"><img src="https://picsum.photos/1080/320?random=12" alt="carousel 3"></div>
+
+          <button class="carousel-btn prev" aria-label="Previous">❮</button>
+          <button class="carousel-btn next" aria-label="Next">❯</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="panel footer-dark">
+      <h2 class="section-title">CONTACT US</h2>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 class="footer-rainbow">Explore</h4>
+          <p><a href="https://explorer.solana.com/address/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk?cluster=mainnet-beta" target="_blank" rel="noopener">Solana Explorer</a></p>
+          <p><a href="https://phantom.com/" target="_blank" rel="noopener">Phantom Wallet</a></p>
+          <p><a href="https://jup.ag/" target="_blank" rel="noopener">Jupiter</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-rainbow">Socials</h4>
+          <p><a href="https://x.com/UnicornSheepDog" target="_blank" rel="noopener">X / Twitter</a></p>
+          <p><a href="https://t.me/UnicornSheepDogPortal" target="_blank" rel="noopener">Telegram</a></p>
+          <p><a href="https://www.tiktok.com/@unicornsheepdog" target="_blank" rel="noopener">TikTok</a></p>
+          <p><a href="https://dexscreener.com/solana/32vjneqs23a7vhh6g8gcuwem14ffssj1kdzz59hz5nyk" target="_blank" rel="noopener">DexScreener</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-rainbow">Support</h4>
+          <p><a href="mailto:support@theunicornsheep.dog">support@theunicornsheep.dog</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-rainbow">Meme Spot</h4>
+          <img src="usd1.base.png" alt="meme" class="footer-meme">
+          <p class="muted">Share on socials & tag @UnicornSheepDog</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <small>© UnicornSheepDog1 — Built with <span class="footer-rainbow">cult</span> love.</small>
+      </div>
+    </footer>
+  </main>
+
+  <div id="toast-root" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
