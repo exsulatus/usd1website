@@ -313,3 +313,55 @@ main{position:relative;z-index:10;padding-top:110px}
   .home-usd1{ font-size: 44px; }
   .ca-bubble{ font-size: 16px; padding: 14px 18px; }
 }
+/* Shimmering $USD1 above CA (big but responsive) */
+.home-usd1{
+  font-family:"Fredoka One",sans-serif;
+  font-weight:900;
+  font-size:clamp(40px,6vw,72px);
+  line-height:1.05;
+  text-align:center;
+  margin:8px 0 6px;
+}
+
+/* Inline CA: + Button layout */
+.ca-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;              /* stacks on narrow screens */
+  margin:8px auto 6px;
+  width:min(1000px,92vw);      /* keeps the row centered and tidy */
+}
+
+/* CA label reused from .section-title but remove extra margins */
+.ca-row .ca-label{
+  margin:0;
+  font-size:clamp(32px,4.4vw,64px);
+}
+
+/* Wider CA bubble + larger text that still fits on phones */
+.ca-row .ca-bubble{
+  width:min(980px,86vw);
+  text-align:center;
+  padding:18px 22px;
+  border-radius:14px;
+  font-size:clamp(14px,1.1vw + 12px,22px); /* grows on desktop, shrinks on mobile */
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* Tuck the helper note under the row */
+.copy-note{
+  text-align:center;
+  margin-top:4px;
+  font-size:12px;
+  opacity:.95;
+}
+
+/* Extra spacing so HOW TO BUY sits under the headline */
+#home .howto-wrap{
+  margin-top:18px;
+}
