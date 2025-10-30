@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UnicornSheepDog1 ($USD1)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -24,7 +23,7 @@
       <a href="#home">HOME</a>
       <a href="#about">ABOUT</a>
       <a href="#tokenomics">TOKENOMICS</a>
-      <a href="#faq">FAQ</a>
+      <a href="#faq">FAQ</a> <!-- header menu uses FAQ -->
       <a href="#artgallery">ART GALLERY</a>
       <a href="#contact">CONTACT US</a>
     </nav>
@@ -48,7 +47,7 @@
         <span class="rainbow-flow">CULT</span>
       </h1>
 
-      <!-- CA bubble (grey background, rainbow outline) -->
+      <!-- CA bubble + click note -->
       <div class="ca-wrap">
         <button id="caButton" class="ca-bubble" aria-label="Copy contract address">
           CA: <span class="mono">5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk</span>
@@ -56,14 +55,11 @@
         <div class="copy-note">click to copy</div>
       </div>
 
-      <!-- HOW TO BUY collapsed by default (centered under CA) -->
+      <!-- HOW TO BUY collapsed by default -->
       <div class="howto-wrap">
-        <div style="text-align:center">
-          <button id="howToggle" class="how-toggle" aria-expanded="false">
-            HOW TO BUY <span class="how-arrow">▾</span>
-          </button>
-        </div>
-
+        <button id="howToggle" class="how-toggle" aria-expanded="false">
+          HOW TO BUY <span class="how-arrow">▾</span>
+        </button>
         <div id="howContent" class="how-content hidden" aria-hidden="true">
           <ol>
             <li>Create a Solana wallet (we recommend <a href="https://phantom.com/" target="_blank" rel="noopener">Phantom</a>).</li>
@@ -78,7 +74,6 @@
     <!-- ABOUT -->
     <section id="about" class="panel">
       <h2 class="section-title">ABOUT</h2>
-
       <div class="panel-body">
         <p>UnicornSheepDog1 (<strong>$USD1</strong>), launched on bonk.fun, is a Solana memecoin with a mythic edge — Unicorn magic meets Sheepdog loyalty. We’re a tight-knit cult shaping a bold, unforgettable identity on the blockchain.</p>
 
@@ -118,23 +113,23 @@
       <h2 class="section-title">WHAT DA FAQ?!</h2>
 
       <div class="faq-grid">
-        <div class="faq-item">
-          <button class="faq-q rainbow-fill">What is UnicornSheepDog1?</button>
-          <div class="faq-a hidden">USD1 is a Solana memecoin launched on bonk.fun. It's a cult-driven project building a bold, mythical brand on Solana.</div>
+        <div class="faq-item rainbow-box">
+          <button class="faq-q">What is UnicornSheepDog1?</button>
+          <div class="faq-a hidden">$USD1 is a Solana memecoin launched on bonk.fun. It's a cult-driven project building a bold, mythical brand on Solana.</div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-q rainbow-fill">Is there a whitepaper or roadmap?</button>
+        <div class="faq-item rainbow-box">
+          <button class="faq-q">Is there a whitepaper or roadmap?</button>
           <div class="faq-a hidden">Millions will shhh... Trust THE WOOL, Trust THE HORN, THE CULT WILL KEEP YOU SAFE.</div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-q rainbow-fill">Why a Unicorn & Sheepdog?</button>
-          <div class="faq-a hidden">Unicorns bring magic & beauty; sheepdogs bring grit & loyalty. Together they're a quirky, iconic mascot for our BONKers.</div>
+        <div class="faq-item rainbow-box">
+          <button class="faq-q">Why a Unicorn & Sheepdog?</button>
+          <div class="faq-a hidden">Unicorns bring magic & beauty; sheepdogs bring grit & loyalty. Together they're a quirky iconic mascot for our BONKers.</div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-q rainbow-fill">How do I join the Cult?</button>
+        <div class="faq-item rainbow-box">
+          <button class="faq-q">How do I join the Cult?</button>
           <div class="faq-a hidden">Buy $USD1 tokens and join the (CULT)mmunity. Follow How to Buy and connect with the community.</div>
         </div>
       </div>
@@ -153,17 +148,17 @@
 
     <!-- CONTACT / FOOTER -->
     <footer id="contact" class="panel footer-dark">
-      <h2 class="section-title footer-heading">CONTACT US</h2>
+      <h2 class="section-title">CONTACT US</h2>
       <div class="footer-grid">
         <div class="footer-col">
-          <h4 class="footer-rainbow">Explore</h4>
+          <h4>Explore</h4>
           <p><a href="https://explorer.solana.com/address/5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk?cluster=mainnet-beta" target="_blank" rel="noopener">Solana Explorer</a></p>
           <p><a href="https://phantom.com/" target="_blank" rel="noopener">Phantom Wallet</a></p>
           <p><a href="https://jup.ag/" target="_blank" rel="noopener">Jupiter</a></p>
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-rainbow">Socials</h4>
+          <h4>Socials</h4>
           <p><a href="https://x.com/UnicornSheepDog" target="_blank" rel="noopener">X / Twitter</a></p>
           <p><a href="https://t.me/UnicornSheepDogPortal" target="_blank" rel="noopener">Telegram</a></p>
           <p><a href="https://www.tiktok.com/@unicornsheepdog" target="_blank" rel="noopener">TikTok</a></p>
@@ -171,12 +166,12 @@
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-rainbow">Support</h4>
+          <h4>Support</h4>
           <p><a href="mailto:support@theunicornsheep.dog">support@theunicornsheep.dog</a></p>
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-rainbow">Meme Spot</h4>
+          <h4>Meme Spot</h4>
           <img src="usd1.base.png" alt="meme" class="footer-meme">
           <p class="muted">Share on socials & tag @UnicornSheepDog</p>
         </div>
