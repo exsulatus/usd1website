@@ -77,11 +77,7 @@ main{position:relative;z-index:10;padding-top:110px}
 @keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
 
 /* consistent padding across all sections */
-.panel{
-  padding:52px 20px 220px;  /* increased bottom padding */
-  min-height:64vh;
-  text-align:center;
-}
+.panel{padding:52px 20px 120px;min-height:64vh;text-align:center}
 
 /* =========================================================
    HOME SECTION
@@ -112,8 +108,6 @@ main{position:relative;z-index:10;padding-top:110px}
   margin:0 auto 14px;
   width:min(1000px,92vw);
 }
-
-/* CA label: rainbow, same line height as bubble, no extra margins */
 .ca-label{
   margin:0;
   padding:0;
@@ -127,8 +121,6 @@ main{position:relative;z-index:10;padding-top:110px}
   display:flex;
   align-items:center;
 }
-
-/* CA bubble: tight vertical size, text centered */
 .ca-bubble{
   background:var(--rbw);
   background-size:400% 100%;
@@ -151,13 +143,7 @@ main{position:relative;z-index:10;padding-top:110px}
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
   filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
-
-/* Copy note under bubble */
-.copy-note{
-  font-size:12px;opacity:.95;margin-top:4px;margin-bottom:28px;
-}
-
-/* Headline after CA */
+.copy-note{font-size:12px;opacity:.95;margin-top:4px;margin-bottom:28px}
 .hero-line{
   font-size:44px;
   display:flex;
@@ -169,9 +155,10 @@ main{position:relative;z-index:10;padding-top:110px}
   margin:24px 0 16px;
 }
 
-/* HOW TO BUY */
+/* HOW TO BUY (centered & bigger button) */
 .howto-wrap{
   margin-top:24px;
+  margin-bottom:140px; /* ✅ Added spacing below HOW TO BUY */
   text-align:center;
   display:flex;
   flex-direction:column;
