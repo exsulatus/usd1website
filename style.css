@@ -3,7 +3,7 @@
    ========================================================= */
 :root{
   --rbw: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  --grey: rgba(28,28,28,0.92); /* dark, non-animated fill for text bubbles */
+  --grey: rgba(28,28,28,0.92);
 }
 
 /* =========================================================
@@ -19,7 +19,6 @@ body{
   line-height:1.55;
   overflow-x:hidden;
 }
-
 canvas#stars{position:fixed;inset:0;z-index:0;display:block}
 
 /* =========================================================
@@ -34,36 +33,30 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
 }
 .nav-left{display:flex;align-items:center;gap:12px}
 #mascot{width:64px;height:64px;border-radius:12px;object-fit:cover}
-
 .brand{display:flex;flex-direction:column}
 .brand-rainbow{font-family:"Fredoka One",sans-serif;font-size:28px;font-weight:900}
-.brand-rainbow span{display:inline-block} /* colored per-letter via JS */
 .brand-usd{
   font-family:"Fredoka One",sans-serif;font-size:20px;font-weight:900;
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   background-size:400% 100%;animation:shimmer 2.8s linear infinite;
 }
-
 .nav-links{display:flex;gap:18px;align-items:center}
 .nav-links a{
   color:#fff;text-decoration:none;font-weight:800;
   font-family:"Fredoka One",sans-serif;font-size:18px;
 }
 .nav-links a:hover{text-decoration:underline}
-
 .nav-socials{display:flex;gap:10px;align-items:center}
 .nav-socials .social{
   display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;
   color:#000;font-weight:900;background:var(--rbw);background-size:400% 100%;
   animation:rainMove 6s linear infinite;
 }
-
-/* Push content below header */
 main{position:relative;z-index:10;padding-top:110px}
 
 /* =========================================================
-   SECTION TITLES (animated rainbow text)
+   TEXT EFFECTS
    ========================================================= */
 .section-title{
   font-family:"Fredoka One",sans-serif;
@@ -73,11 +66,6 @@ main{position:relative;z-index:10;padding-top:110px}
   animation:rainMove 5s linear infinite;
   margin:40px 0 18px;
 }
-
-/* Hero line (JOIN THE $USD1 CULT) — shimmering gold */
-.hero-line{
-  font-size:44px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;
-}
 .gold-shimmer{
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -86,12 +74,39 @@ main{position:relative;z-index:10;padding-top:110px}
 @keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
 @keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
 
-.panel{padding:52px 20px 80px;min-height:64vh}
+.panel{padding:52px 20px 80px;min-height:64vh;text-align:center}
 
 /* =========================================================
-   CA BUTTON (RAINBOW FILL) — your chosen style
+   HOME SECTION — $USD1 shimmer + inline CA + centered content
    ========================================================= */
-.ca-wrap{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.home-hero{
+  text-align:center;
+  margin-bottom:20px;
+}
+.home-usd1{
+  font-family:"Fredoka One",sans-serif;
+  font-size:64px;font-weight:900;
+  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:400% 100%;
+  animation:shimmer 2.6s linear infinite;
+  margin-bottom:20px;
+}
+.ca-inline{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:28px;
+}
+.ca-inline span{
+  font-size:32px;
+  font-family:"Fredoka One",sans-serif;
+  font-weight:900;
+  color:#fff;
+  text-shadow:0 0 8px rgba(255,255,255,0.2);
+}
 .ca-bubble{
   background:var(--rbw);
   background-size:400% 100%;
@@ -111,17 +126,62 @@ main{position:relative;z-index:10;padding-top:110px}
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
   filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
-.ca-bubble::after{display:none}
-.copy-note{font-size:12px;opacity:.95}
+.copy-note{font-size:12px;opacity:.95;margin-top:6px}
+.hero-line{
+  font-size:44px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-weight:900;
+  flex-wrap:wrap;
+  margin:16px 0;
+}
+
+/* HOW TO BUY section centered */
+.howto-wrap{
+  margin-top:16px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.how-toggle{
+  background:#222;
+  border:0;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.how-arrow{display:inline-block;transition:transform .28s ease}
+.hidden{display:none}
+.how-content{
+  background:var(--grey);
+  color:#fff;
+  border:2px solid transparent;
+  border-radius:14px;
+  position:relative;
+  padding:18px 22px;
+  max-width:980px;
+  margin:14px auto 0;
+  text-align:left;
+}
+.how-content::before{
+  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
+  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
+}
 
 /* =========================================================
-   UNIVERSAL TEXT BUBBLES (About body, How-to body, Cards, FAQ Q)
-   Dark grey fill + animated rainbow outline ONLY
+   UNIVERSAL TEXT BUBBLES
    ========================================================= */
-.panel-body,
-.how-content,
-.card,
-.faq-q{
+.panel-body,.card,.faq-q{
   background:var(--grey);
   color:#fff;
   border:2px solid transparent;
@@ -132,33 +192,26 @@ main{position:relative;z-index:10;padding-top:110px}
   margin:0 auto 16px;
   text-align:left;
 }
-.panel-body::before,
-.how-content::before,
-.card::before,
-.faq-q::before{
+.panel-body::before,.card::before,.faq-q::before{
   content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
   filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
 }
 
-/* HOW TO BUY toggle button */
-.howto-wrap{margin-top:16px;text-align:center}
-.how-toggle{
-  background:#222;border:0;color:#fff;padding:12px 18px;border-radius:10px;cursor:pointer;
-  font-weight:800;display:inline-flex;align-items:center;gap:10px
-}
-.how-arrow{display:inline-block;transition:transform .28s ease}
-.hidden{display:none}
-
-/* TOKENOMICS CARDS ROW */
+/* =========================================================
+   TOKENOMICS
+   ========================================================= */
 .token-row{
-  display:flex;gap:18px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin-top:18px
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  align-items:stretch;
+  flex-wrap:wrap;
+  margin-top:18px;
 }
-.card{min-width:240px;max-width:320px}
+.card{min-width:240px;max-width:320px;text-align:center}
 .card h3{font-size:14px;margin-bottom:8px;color:#fff}
 .card-value{font-size:20px;font-weight:900}
-
-/* Rainbow button (Streamflow etc.) */
 .rainbow-btn{
   display:inline-block;padding:10px 14px;border-radius:10px;
   color:#000;font-weight:900;border:0;cursor:pointer;text-decoration:none;
@@ -172,16 +225,16 @@ main{position:relative;z-index:10;padding-top:110px}
 .faq-item{position:relative}
 .faq-q{
   width:100%;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
-  font-weight:800;font-size:18px; /* ensure readable size */
+  font-weight:800;font-size:18px;
 }
 .faq-a{
   margin-top:8px;padding:14px 18px;border-radius:12px;max-width:980px;margin-inline:auto;
   background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
-  color:#000; /* black text on rainbow answer */
+  color:#000;
 }
 
 /* =========================================================
-   GALLERY 3x3 + CAROUSEL (underneath)
+   GALLERY + CAROUSEL
    ========================================================= */
 .gallery-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:18px auto;
@@ -203,7 +256,7 @@ main{position:relative;z-index:10;padding-top:110px}
 .carousel-btn.prev{left:10px}.carousel-btn.next{right:10px}
 
 /* =========================================================
-   FOOTER (4 cols on desktop)
+   FOOTER
    ========================================================= */
 .footer-dark{background:#000;padding:36px 0 24px}
 .footer-grid{
