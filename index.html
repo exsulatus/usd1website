@@ -38,19 +38,33 @@
   </header>
 
   <main id="main">
-   <!-- HOME -->
+  <!-- HOME -->
 <section id="home" class="panel home-section">
-  <h1 class="section-title">CA:</h1>
+  
+  <!-- Shimmering $USD1 title above CA -->
+  <div class="home-usd1 gold-shimmer">$USD1</div>
 
   <!-- Inline CA label + button -->
-  <div class="ca-inline">
-    <button id="caButton" class="ca-bubble">
-      5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk
+  <div class="ca-row">
+    <span class="ca-label section-title">CA:</span>
+    <button id="caButton" class="ca-bubble" aria-label="Copy contract address">
+      <span class="mono">5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk</span>
     </button>
   </div>
+
   <div class="copy-note">click to copy CA</div>
 
   <h2 class="hero-line gold-shimmer">JOIN THE UNICORNSHEEPDOG CULT</h2>
+
+  <div class="howto-wrap">
+    <button id="howToggle" class="how-toggle">
+      HOW TO BUY <span class="how-arrow">▼</span>
+    </button>
+    <div id="howContent" class="how-content hidden">
+      <!-- your how-to-buy instructions -->
+    </div>
+  </div>
+</section>
 
   <!-- HOW TO BUY -->
   <button id="howToggle" class="how-toggle">HOW TO BUY ▾</button>
