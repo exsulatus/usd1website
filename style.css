@@ -77,7 +77,11 @@ main{position:relative;z-index:10;padding-top:110px}
 @keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
 
 /* consistent padding across all sections */
-.panel{padding:52px 20px 120px;min-height:64vh;text-align:center}
+.panel{
+  padding:52px 20px 220px;  /* increased bottom padding */
+  min-height:64vh;
+  text-align:center;
+}
 
 /* =========================================================
    HOME SECTION
