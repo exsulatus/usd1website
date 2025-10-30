@@ -40,7 +40,11 @@ canvas#stars{position:fixed;inset:0;z-index:0;display:block}
   font-family:"Fredoka One",sans-serif;font-size:20px;font-weight:900;
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:400% 100%;animation:shimmer 2.8s linear infinite;
+  background-size:400% 100%;
+  animation:shimmer 2.8s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.3),
+    0 0 20px rgba(255, 240, 180, 0.2);
 }
 .nav-links{display:flex;gap:18px;align-items:center}
 .nav-links a{
@@ -71,27 +75,28 @@ main{position:relative;z-index:10;padding-top:110px}
 
 .gold-shimmer, 
 .brand-usd {
-  background: linear-gradient(90deg, #e6c200, #fff6cc, #f7e9a6);
+  background: linear-gradient(90deg, #ffe36e, #fff8b5, #ffd700, #fff6cc, #f7e9a6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   background-size: 400% 100%;
-  animation: shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
+  animation: shimmer 2.6s linear infinite, goldGlow 2.2s ease-in-out infinite alternate;
   text-shadow:
-    0 0 8px rgba(255, 215, 0, 0.25),
-    0 0 16px rgba(255, 255, 200, 0.15);
+    0 0 10px rgba(255, 230, 160, 0.6),
+    0 0 25px rgba(255, 210, 80, 0.4),
+    0 0 40px rgba(255, 200, 60, 0.25);
 }
 
 @keyframes goldGlow {
   0% {
     text-shadow:
-      0 0 8px rgba(255, 215, 0, 0.25),
-      0 0 16px rgba(255, 255, 200, 0.15);
+      0 0 10px rgba(255, 230, 160, 0.6),
+      0 0 25px rgba(255, 210, 80, 0.4);
   }
   100% {
     text-shadow:
-      0 0 20px rgba(255, 255, 150, 0.5),
-      0 0 35px rgba(255, 220, 150, 0.25);
+      0 0 25px rgba(255, 240, 180, 0.8),
+      0 0 45px rgba(255, 220, 100, 0.55);
   }
 }
 
@@ -118,7 +123,10 @@ main{position:relative;z-index:10;padding-top:110px}
   background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   background-size:400% 100%;
-  animation:shimmer 2.6s linear infinite;
+  animation:shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.3),
+    0 0 20px rgba(255, 240, 180, 0.2);
 }
 
 /* --- CA ROW (label + bubble perfectly aligned) --- */
@@ -249,7 +257,15 @@ main{position:relative;z-index:10;padding-top:110px}
 }
 .card{min-width:240px;max-width:320px;text-align:center}
 .card h3{font-size:14px;margin-bottom:8px;color:#fff}
-.card-value{font-size:20px;font-weight:900}
+.card-value{
+  font-size:20px;
+  font-weight:900;
+  text-align:center;
+}
+.card-value.gold-shimmer{
+  font-size:28px;
+  text-align:center;
+}
 .rainbow-btn{
   display:inline-block;padding:10px 14px;border-radius:10px;
   color:#000;font-weight:900;border:0;cursor:pointer;text-decoration:none;
