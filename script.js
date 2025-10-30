@@ -25,6 +25,7 @@ applyRainbowPerLetter('#brandRainbow');
 /* ============================
    CA copy + rainbow toast
    ============================ */
+const caButton = document.getElementById('caButton');
 function showRainbowToast(msg){
   const t = document.createElement('div');
   t.textContent = msg;
@@ -32,19 +33,21 @@ function showRainbowToast(msg){
     position:'fixed', left:'50%', bottom:'28px', transform:'translateX(-50%)',
     padding:'10px 18px', borderRadius:'999px', fontWeight:800, zIndex:9999, color:'#000',
     background:'linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff)',
-    backgroundSize:'400% 100%', animation:'rbwMove 6s linear infinite'
+    backgroundSize:'400% 100%', animation:'rainMove 6s linear infinite'
   });
   document.body.appendChild(t);
   setTimeout(()=> { t.style.transition='opacity .4s'; t.style.opacity=0; setTimeout(()=> t.remove(),400); }, 1500);
 }
-document.getElementById('caButton')?.addEventListener('click', async () => {
-  try{
-    await navigator.clipboard.writeText(TOKEN);
-    showRainbowToast('Contract copied to clipboard');
-  }catch(e){
-    alert('Contract: ' + TOKEN);
-  }
-});
+if(caButton){
+  caButton.addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(TOKEN);
+      showRainbowToast('Contract copied to clipboard');
+    }catch(e){
+      alert('Contract: ' + TOKEN);
+    }
+  });
+}
 
 /* ============================
    HOW TO BUY toggle (collapsed default)
@@ -55,11 +58,12 @@ if(howToggle && howContent){
   howContent.classList.add('hidden');
   howToggle.setAttribute('aria-expanded', 'false');
   howToggle.addEventListener('click', () => {
-    const hidden = howContent.classList.toggle('hidden');
+    howContent.classList.toggle('hidden');
     howToggle.setAttribute('aria-expanded', String(!howContent.classList.contains('hidden')));
     const arrow = howToggle.querySelector('.how-arrow');
     if(arrow) arrow.style.transform = howContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
 
+    // slide animation
     if(!howContent.classList.contains('hidden')){
       howContent.style.display = 'block';
       howContent.style.height = '0px';
@@ -76,10 +80,7 @@ if(howToggle && howContent){
         howContent.style.transition = 'height 260ms ease';
         howContent.style.height = '0px';
       });
-      setTimeout(()=> {
-        howContent.style.display = 'none';
-        howContent.style.height = ''; howContent.style.transition = '';
-      }, 300);
+      setTimeout(()=> { howContent.style.display = 'none'; howContent.style.height = ''; howContent.style.transition = ''; }, 300);
     }
   });
 }
@@ -89,52 +90,16 @@ if(howToggle && howContent){
    ============================ */
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
-    const a = btn.parentElement.querySelector('.faq-a');
+    const a = btn.nextElementSibling;
     if(!a) return;
-    const willShow = a.classList.contains('hidden');
-    if(willShow){
-      a.classList.remove('hidden');
-      a.style.display = 'block';
-    }else{
-      a.classList.add('hidden');
-      a.style.display = 'none';
-    }
+    a.classList.toggle('hidden');
+    a.style.display = a.classList.contains('hidden') ? 'none' : 'block';
   });
 });
 
 /* ============================
-   Carousel (auto-slide + arrows)
-   ============================ */
-(function setupCarousel(){
-  const container = document.querySelector('.carousel');
-  if(!container) return;
-  const items = Array.from(container.querySelectorAll('.carousel-item'));
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const nextBtn = document.querySelector('.carousel-btn.next');
-
-  let idx = items.findIndex(i => i.classList.contains('active'));
-  if(idx < 0) idx = 0;
-  let timer;
-
-  function show(i){
-    items.forEach((el, n)=> el.classList.toggle('active', n === i));
-    idx = i;
-  }
-  function next(){ show((idx + 1) % items.length); resetTimer(); }
-  function prev(){ show((idx - 1 + items.length) % items.length); resetTimer(); }
-
-  prevBtn?.addEventListener('click', prev);
-  nextBtn?.addEventListener('click', next);
-
-  function resetTimer(){
-    clearInterval(timer);
-    timer = setInterval(next, 4000);
-  }
-  resetTimer();
-})();
-
-/* ============================
-   Canvas: pulsing stars + colored meteors (TL -> BR)
+   Canvas: pulsing white stars + colored meteor dots
+   top-left -> bottom-right with matching trail
    ============================ */
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
@@ -175,6 +140,8 @@ function spawnMeteor(force=false){
     });
   }
 }
+
+/* draw meteor dot + short trail in same direction */
 function drawMeteor(m){
   const ex = m.x - m.vx * (m.len/ (m.vx + m.vy));
   const ey = m.y - m.vy * (m.len/ (m.vx + m.vy));
@@ -236,3 +203,29 @@ window.addEventListener('resize', ()=> {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(()=> buildStars(Math.max(120, Math.floor((innerWidth*innerHeight)/9000))), 200);
 });
+
+/* ============================
+   Carousel autoslide + arrows
+   ============================ */
+const slides = document.querySelectorAll('.carousel-item');
+const nextBtn = document.querySelector('.carousel-btn.next');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+let idx = 0;
+
+function showSlide(n){
+  slides.forEach((s,i)=> s.classList.toggle('active', i===n));
+}
+if(nextBtn && prevBtn && slides.length){
+  nextBtn.addEventListener('click', ()=>{
+    idx = (idx + 1) % slides.length;
+    showSlide(idx);
+  });
+  prevBtn.addEventListener('click', ()=>{
+    idx = (idx - 1 + slides.length) % slides.length;
+    showSlide(idx);
+  });
+  setInterval(()=>{
+    idx = (idx + 1) % slides.length;
+    showSlide(idx);
+  }, 4000);
+}
