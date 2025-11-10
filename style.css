@@ -462,15 +462,17 @@ main{position:relative;z-index:10;padding-top:110px}
    ========================================================= */
 .about-meme {
   display: block;
-  margin: 1.5rem auto;
-  max-width: 90%;
+  margin: 1.5rem auto 0.75rem;
+  max-width: 60%;          /* smaller, cleaner width */
   height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.12);
 }
 
 .cute-line {
   text-align: center;
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.6rem;       /* noticeably larger */
+  font-weight: 700;
   color: #fff;
+  margin-top: 1rem;
 }
-
