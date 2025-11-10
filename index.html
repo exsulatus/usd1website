@@ -6,6 +6,20 @@
   <title>UnicornSheepDog1 ($USD1)</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* --- FIXES --- */
+    /* Make header image smaller and responsive */
+    .navbar img {
+      height: 60px;       /* adjust to your liking (try 50–70px) */
+      width: auto;
+    }
+
+    /* Make sure header scrolls normally (not fixed/sticky) */
+    .navbar {
+      position: relative !important;
+    }
+  </style>
 </head>
 <body>
   <canvas id="stars" aria-hidden="true"></canvas>
@@ -130,7 +144,7 @@
 
         <div class="faq-item">
           <button class="faq-q">How do I join the Cult?</button>
-          <div class="faq-a hidden"Get $USD1 by following the How to Buy instructions in the "Home" section above. After that, join us on X and Telegram — you’re officially part of the Cult.</div>
+          <div class="faq-a hidden">Get $USD1 by following the How to Buy instructions in the "Home" section above. After that, join us on X and Telegram — you’re officially part of the Cult.</div>
         </div>
       </div>
     </section>
@@ -156,7 +170,7 @@
   <h2 class="section-title">ART GALLERY</h2>
   <div class="video-showcase">
     <video autoplay loop muted playsinline controls>
-      <source src="videos/usd1.video.moondance.mp4" type="video.mp4">
+      <source src="videos/usd1.video.moondance.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -188,7 +202,7 @@
 
         <div class="footer-col">
           <h4 class="footer-rainbow">Meme Spot</h4>
-          <img src="images/usd1.base.png" alt="UnicornSheepDog1" class="footer-meme">
+          <img src="images/usd1.base.png" alt="UnicornSheepDog1" class="footer-meme" style="height:80px;width:auto;">
           <p class="muted">Share on socials & tag @UnicornSheepDog</p>
         </div>
       </div>
