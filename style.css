@@ -457,4 +457,20 @@ main{position:relative;z-index:10;padding-top:110px}
   .home-usd1{font-size:44px}
   .ca-label{font-size:40px;line-height:52px}
   .ca-bubble{height:52px;padding:0 14px;font-size:16px}
+/* =========================================================
+   ABOUT SECTION
+   ========================================================= */
+.about-meme {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 90%;
+  height: auto;
 }
+
+.cute-line {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+}
+
