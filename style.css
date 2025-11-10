@@ -458,37 +458,49 @@ main{position:relative;z-index:10;padding-top:110px}
   .ca-label{font-size:40px;line-height:52px}
   .ca-bubble{height:52px;padding:0 14px;font-size:16px}
 /* =========================================================
-   ABOUT SECTION — Final Fix Override
+   ABOUT SECTION — Unified layout fix
    ========================================================= */
 .about-wrapper {
   text-align: center;
-}
-
-.about-meme {
-  display: block;
-  margin: 1.5rem auto 1.2rem;
-  width: 100%;
-  max-width: 700px;
-  border-radius: 12px;
-  height: auto;
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
 }
 
 .about-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem 0;
+  margin: 1.2rem auto;
+  width: 100%;
+  max-width: 950px; /* keeps the image same width as text bubble */
 }
 
-/* OVERRIDE previous .cute-line */
+.about-meme {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  max-width: 100%;
+  display: block;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Cute line stays proportional */
 .cute-line {
-  text-align: center !important;
-  font-size: 2.8rem !important;   /* 2.5–3× larger than the paragraph text */
-  font-weight: 800 !important;
-  color: #fff !important;
-  margin-top: 12px !important;
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 1rem;
   letter-spacing: 0.5px;
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive tune — keeps proportions consistent on phones */
+@media (max-width: 768px) {
+  .about-image-container {
+    max-width: 90%;
+  }
+  .cute-line {
+    font-size: 2rem;
+  }
 }
