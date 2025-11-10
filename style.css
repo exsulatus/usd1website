@@ -458,25 +458,37 @@ main{position:relative;z-index:10;padding-top:110px}
   .ca-label{font-size:40px;line-height:52px}
   .ca-bubble{height:52px;padding:0 14px;font-size:16px}
 /* =========================================================
-   ABOUT SECTION
+   ABOUT SECTION — Perfectly balanced layout
    ========================================================= */
+.about-wrapper {
+  text-align: center;
+}
+
 .about-meme {
   display: block;
-  margin: 1.5rem auto;
+  margin: 1.5rem auto 1.2rem;
   width: 100%;
-  max-width: 90%;
+  max-width: 700px;
   border-radius: 12px;
   height: auto;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
 }
 
+.about-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+/* This line is now 2.5x larger than the paragraph text */
 .cute-line {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 2.8rem; /* Adjust between 2.5–3rem if you want it even larger */
+  font-weight: 800;
   color: #fff;
-  margin-top: 10px;
-}
-
-  color: #fff;
-  margin-top: 1rem;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
 }
