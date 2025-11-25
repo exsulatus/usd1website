@@ -1,81 +1,248 @@
 /* =========================================================
-   VARIABLES
+   USD1 GLOBAL DESIGN
+   Sharp Glow (R16 / G3 / W1600 / F1)
    ========================================================= */
-:root{
-  --rbw: linear-gradient(90deg,#ff005e,#ff7a00,#ffd100,#3cff6a,#00d2ff,#5a6bff,#b84cff);
-  --grey: rgba(28,28,28,0.92);
+:root {
+  --bg-main: #020712;
+  --bg-panel: rgba(10, 12, 25, 0.94);
+  --bg-panel-soft: rgba(14, 18, 35, 0.96);
+  --text-main: #ffffff;
+  --muted: rgba(255, 255, 255, 0.68);
+
+  --rbw: linear-gradient(
+    120deg,
+    #ff005e,
+    #ff7a00,
+    #ffd100,
+    #3cff6a,
+    #00d2ff,
+    #5a6bff,
+    #b84cff
+  );
+
+  --gold: linear-gradient(
+    90deg,
+    #ffe36e,
+    #fff8b5,
+    #ffd700,
+    #fff6cc,
+    #f7e9a6
+  );
+
+  /* strong neon glow */
+  --glow-strong: 0 0 35px rgba(0, 255, 215, 0.35),
+                 0 0 60px rgba(120, 80, 255, 0.35),
+                 0 0 90px rgba(255, 0, 140, 0.25);
+
+  --radius-lg: 16px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --max-width-desktop: 1600px;
 }
 
 /* =========================================================
    BASE
    ========================================================= */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  background:#000;
-  color:#fff;
-  font-family:"Poppins",system-ui,Segoe UI,Roboto,Arial;
-  -webkit-font-smoothing:antialiased;
-  line-height:1.55;
-  overflow-x:hidden;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-canvas#stars{position:fixed;inset:0;z-index:0;display:block}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at top, #111730 0, #02040b 50%, #000 100%);
+  color: var(--text-main);
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* starfield canvas */
+canvas#stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* utility */
+.mono {
+  font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* simple hidden helper (script expects this) */
+.hidden {
+  display: none !important;
+}
 
 /* =========================================================
-   NAV / BRAND
+   NAVBAR
    ========================================================= */
-.navbar{
-  position:fixed;top:0;left:0;width:100%;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 24px;z-index:100;
-  background:rgba(0,0,0,0.92);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.nav-left{display:flex;align-items:center;gap:12px}
-#mascot{width:64px;height:64px;border-radius:12px;object-fit:cover}
-.brand{display:flex;flex-direction:column}
-.brand-rainbow{font-family:"Fredoka One",sans-serif;font-size:28px;font-weight:900}
-.brand-rainbow span{display:inline-block}
-.brand-usd{
-  font-family:"Fredoka One",sans-serif;font-size:20px;font-weight:900;
-  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:400% 100%;
-  animation:shimmer 2.8s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 10px rgba(255, 215, 0, 0.3),
-    0 0 20px rgba(255, 240, 180, 0.2);
-}
-.nav-links{display:flex;gap:18px;align-items:center}
-.nav-links a{
-  color:#fff;text-decoration:none;font-weight:800;
-  font-family:"Fredoka One",sans-serif;font-size:18px;
-}
-.nav-links a:hover{text-decoration:underline}
-.nav-socials{display:flex;gap:10px;align-items:center}
-.nav-socials .social{
-  display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;
-  color:#000;font-weight:900;background:var(--rbw);background-size:400% 100%;
-  animation:rainMove 6s linear infinite;
+.navbar {
+  position: relative; /* scrolls with page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 80;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 14px 28px;
+  background: radial-gradient(circle at top left, #171c3b 0, #050713 35%, #000 90%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
-main{position:relative;z-index:10;padding-top:110px}
-
-/* =========================================================
-   TEXT EFFECTS
-   ========================================================= */
-.section-title{
-  font-family:"Fredoka One",sans-serif;
-  font-size:64px;font-weight:900;letter-spacing:2px;text-align:center;
-  background:var(--rbw);background-size:400% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:rainMove 5s linear infinite;
-  margin:40px 0 18px;
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.gold-shimmer, 
+.navbar img {
+  height: 72px;
+  width: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 26px rgba(255, 255, 255, 0.2);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-rainbow {
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.brand-rainbow span {
+  display: inline-block;
+}
+
 .brand-usd {
-  background: linear-gradient(90deg, #ffe36e, #fff8b5, #ffd700, #fff6cc, #f7e9a6);
+  margin-top: 2px;
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+
+  background: var(--gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 400% 100%;
+  animation: shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 12px rgba(255, 230, 160, 0.7),
+    0 0 28px rgba(255, 210, 80, 0.5),
+    0 0 45px rgba(255, 200, 60, 0.35);
+}
+
+/* nav links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-family: "Fredoka One", system-ui, sans-serif;
+}
+
+.nav-links a {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--rbw);
+  transition: width 0.18s ease-out;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* socials */
+.nav-socials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-socials .social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+
+  color: #000;
+  font-weight: 900;
+  font-size: 14px;
+
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+}
+
+/* main layout */
+main {
+  position: relative;
+  z-index: 10;
+  padding-top: 32px;
+}
+
+/* =========================================================
+   TYPOGRAPHY EFFECTS
+   ========================================================= */
+.section-title {
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 40px 0 18px;
+
+  background: var(--rbw);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  animation: rainMove 5s linear infinite;
+}
+
+.gold-shimmer,
+.brand-usd {
+  background: var(--gold);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -85,6 +252,16 @@ main{position:relative;z-index:10;padding-top:110px}
     0 0 12px rgba(255, 230, 160, 0.7),
     0 0 28px rgba(255, 210, 80, 0.5),
     0 0 45px rgba(255, 200, 60, 0.35);
+}
+
+/* keyframes */
+@keyframes shimmer {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes goldGlow {
@@ -100,472 +277,660 @@ main{position:relative;z-index:10;padding-top:110px}
   }
 }
 
-@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
-@keyframes rainMove{from{background-position:0% 50%}to{background-position:100% 50%}}
+@keyframes rainMove {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
 
+/* =========================================================
+   PANELS / SHARED CARD STYLE
+   ========================================================= */
+.panel {
+  position: relative;
+  padding: 64px 20px 120px;
+  min-height: 64vh;
 
-/* consistent padding across all sections */
-.panel{padding:52px 20px 120px;min-height:64vh;text-align:center}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.panel-inner {
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+}
+
+/* glowing content bubble */
+.panel-body,
+.card,
+.faq-q {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 18px;
+
+  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
+  color: #fff;
+
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 20px 24px;
+
+  overflow: hidden;
+}
+
+.panel-body::before,
+.card::before,
+.faq-q::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+  opacity: 0.32;
+  z-index: -2;
+}
+
+.panel-body::after,
+.card::after,
+.faq-q::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at top, var(--bg-panel) 0, #02040c 65%);
+  z-index: -1;
+  box-shadow: var(--glow-strong);
+}
 
 /* =========================================================
    HOME SECTION
    ========================================================= */
-.home-hero{text-align:center;margin-bottom:20px}
-
-/* $USD1 shimmering gold (big, centered) */
-.home-usd1{
-  font-family:"Fredoka One",sans-serif;
-  font-weight:900;
-  font-size:72px;
-  line-height:1.05;
-  text-align:center;
-  margin:20px 0 40px;
-  background:linear-gradient(90deg,#e6c200,#fff6cc,#f7e9a6);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  background-size:400% 100%;
-  animation:shimmer 2.6s linear infinite, goldGlow 2.4s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 10px rgba(255, 215, 0, 0.3),
-    0 0 20px rgba(255, 240, 180, 0.2);
+.home-section {
+  padding-top: 72px;
 }
 
-/* --- CA ROW (label + bubble perfectly aligned) --- */
-.ca-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-  margin:0 auto 14px;
-  width:min(1000px,92vw);
-}
-.ca-label{
-  margin:0;
-  padding:0;
-  font-family:"Fredoka One",sans-serif;
-  font-weight:900;
-  background:var(--rbw);background-size:400% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:rainMove 5s linear infinite;
-  font-size:56px;
-  line-height:56px;
-  display:flex;
-  align-items:center;
-}
-.ca-bubble{
-  background:var(--rbw);
-  background-size:400% 100%;
-  animation:rainMove 6s linear infinite;
-  color:#000;
-  font-weight:800;
-  height:56px;
-  padding:0 18px;
-  border-radius:14px;
-  border:2px solid transparent;
-  cursor:pointer;
-  position:relative;
-  display:flex;align-items:center;justify-content:center;
-  white-space:nowrap;
-  text-shadow:0 0 3px rgba(255,255,255,0.5);
-  font-size:20px;
-}
-.ca-bubble::before{
-  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
-  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
-  filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
-}
-.copy-note{font-size:12px;opacity:.95;margin-top:4px;margin-bottom:28px}
-.hero-line{
-  font-size:44px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  font-weight:900;
-  flex-wrap:wrap;
-  margin:24px 0 16px;
+.home-section .panel-inner {
+  text-align: center;
 }
 
-/* HOW TO BUY (centered & bigger button, fixed spacing) */
-.howto-wrap{
-  margin-top:24px;
-  margin-bottom:140px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-.how-toggle{
-  background:#222;border:0;color:#fff;
-  padding:18px 32px;border-radius:12px;cursor:pointer;
-  font-weight:800;font-size:20px;display:inline-flex;align-items:center;gap:10px;
-}
-.how-arrow{display:inline-block;transition:transform .28s ease}
-.hidden{display:none}
-.how-content{
-  background:var(--grey);color:#fff;border:2px solid transparent;border-radius:14px;
-  position:relative;padding:18px 22px;max-width:980px;margin:14px auto 0;text-align:left;
-}
-.how-content::before{
-  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
-  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
-  filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
+/* big $USD1 */
+.home-usd1 {
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 1.06;
+  margin: 16px 0 32px;
 }
 
-/* =========================================================
-   HOW TO BUY LINKS — Rainbow Animated Style
-   ========================================================= */
-.how-content a{
-  font-weight:800;
-  text-decoration:none;
-  background:var(--rbw);
-  background-size:400% 100%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:rainMove 6s linear infinite;
-  transition:opacity .2s ease;
-}
-.how-content a:hover{opacity:.8}
-
-/* =========================================================
-   UNIVERSAL TEXT BUBBLES
-   ========================================================= */
-.panel-body,.card,.faq-q{
-  background:var(--grey);
-  color:#fff;
-  border:2px solid transparent;
-  border-radius:14px;
-  position:relative;
-  padding:18px 22px;
-  max-width:980px;
-  margin:0 auto 16px;
-  text-align:left;
-}
-.panel-body::before,.card::before,.faq-q::before{
-  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
-  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
-  filter:drop-shadow(0 0 6px rgba(255,255,255,0.25));
-}
-
-/* =========================================================
-   TOKENOMICS
-   ========================================================= */
-.token-row{
-  display:flex;
-  gap:24px;
-  justify-content:center;
-  align-items:stretch;
-  flex-wrap:wrap;
-  margin-top:24px;
-}
-
-.card{
-  min-width:260px;
-  max-width:360px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:30px 20px;
-}
-
-.card h3{
-  font-size:16px;
-  margin-bottom:12px;
-  color:#fff;
-}
-
-.card-value{
-  font-size:36px;
-  font-weight:900;
-  line-height:1.2;
-  text-align:center;
-  background: linear-gradient(90deg, #ffe36e, #fff8b5, #ffd700, #fff6cc, #f7e9a6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  background-size: 400% 100%;
-  animation: shimmer 2.6s linear infinite, goldGlow 2.2s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 12px rgba(255, 230, 160, 0.7),
-    0 0 28px rgba(255, 210, 80, 0.5),
-    0 0 45px rgba(255, 200, 60, 0.35);
-}
-
-.rainbow-btn{
-  display:inline-block;padding:10px 14px;border-radius:10px;
-  color:#000;font-weight:900;border:0;cursor:pointer;text-decoration:none;
-  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;
-}
-
-/* =========================================================
-   FAQ
-   ========================================================= */
-.faq-grid{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.faq-item{position:relative}
-.faq-q{
-  width:100%;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
-  font-weight:800;font-size:18px;
-}
-.faq-a{
-  margin-top:8px;padding:14px 18px;border-radius:12px;max-width:980px;margin-inline:auto;
-  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;color:#000;
-}
-
-/* =========================================================
-   GALLERY + CAROUSEL
-   ========================================================= */
-.gallery-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:18px auto;
-}
-.gallery-grid img{
-  width:100%;border-radius:10px;display:block;aspect-ratio:1/1;object-fit:cover;
-  border:2px solid transparent;position:relative;background:#111;
-}
-.carousel-container{position:relative;width:min(1080px,92%);margin:28px auto 0}
-.carousel{position:relative;height:320px;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.4)}
-.carousel img{width:100%;height:100%;object-fit:cover}
-.carousel-item{position:absolute;inset:0;opacity:0;transition:opacity .35s}
-.carousel-item.active{opacity:1}
-.carousel-btn{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(0,0,0,0.6);color:#fff;font-size:20px
-}
-.carousel-btn.prev{left:10px}.carousel-btn.next{right:10px}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.footer-dark{background:#000;padding:36px 0 24px}
-.footer-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
-  max-width:1400px;margin:0 auto;padding:0 20px;text-align:left;
-}
-.footer-col a{color:#fff;text-decoration:underline}
-.footer-rainbow{
-  background:var(--rbw);background-size:400% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:rainMove 6s linear infinite;font-weight:900;font-family:"Fredoka One",sans-serif
-}
-.footer-bottom{margin-top:18px;text-align:center;color:rgba(255,255,255,0.6)}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-@media (max-width:1000px){
-  .section-title{font-size:48px}
-  .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-grid{grid-template-columns:repeat(2,1fr)}
-  .home-usd1{font-size:56px}
-  .ca-label{font-size:48px;line-height:56px}
-}
-@media (max-width:560px){
-  .nav-links{display:none}
-  .section-title{font-size:36px}
-  .gallery-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .home-usd1{font-size:44px}
-  .ca-label{font-size:40px;line-height:52px}
-  .ca-bubble{height:52px;padding:0 14px;font-size:16px}
-}
-
-
-/* =========================================================
-   FAQ
-   ========================================================= */
-.faq-grid{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.faq-item{position:relative}
-.faq-q{
-  width:100%;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
-  font-weight:800;font-size:18px;
-}
-.faq-a{
-  margin-top:8px;padding:14px 18px;border-radius:12px;max-width:980px;margin-inline:auto;
-  background:var(--rbw);background-size:400% 100%;animation:rainMove 6s linear infinite;color:#000;
-}
-
-/* =========================================================
-   VIDEO SHOWCASE (replaces carousel)
-   ========================================================= */
-.video-showcase {
+/* CA row */
+.ca-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: min(1080px, 92%);
-  margin: 40px auto;
-  border-radius: 14px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-}
-
-.video-showcase video {
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 auto 12px;
   width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 14px;
-  outline: none;
+  max-width: 950px;
 }
 
-/* soft glow overlay effect */
-.video-showcase::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 65%);
-  box-shadow: 0 0 30px rgba(255, 255, 200, 0.25),
-              0 0 60px rgba(255, 215, 100, 0.15);
-  pointer-events: none;
+.ca-label {
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  line-height: 1;
+  background: var(--rbw);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainMove 5s linear infinite;
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.footer-dark{background:#000;padding:36px 0 24px}
-.footer-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
-  max-width:1400px;margin:0 auto;padding:0 20px;text-align:left;
-}
-.footer-col a{color:#fff;text-decoration:underline}
-.footer-rainbow{
-  background:var(--rbw);background-size:400% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:rainMove 6s linear infinite;font-weight:900;font-family:"Fredoka One",sans-serif
-}
-.footer-bottom{margin-top:18px;text-align:center;color:rgba(255,255,255,0.6)}
+/* CA bubble button */
+.ca-bubble {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-@media (max-width:1000px){
-  .section-title{font-size:48px}
-  .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-grid{grid-template-columns:repeat(2,1fr)}
-  .home-usd1{font-size:56px}
-  .ca-label{font-size:48px;line-height:56px}
+  padding: 0 18px;
+  height: 58px;
+  max-width: 100%;
+
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  font-weight: 800;
+  font-size: 18px;
+  white-space: nowrap;
+  color: #000;
+
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 30px rgba(0, 0, 0, 0.7);
 }
-@media (max-width:560px){
-  .nav-links{display:none}
-  .section-title{font-size:36px}
-  .gallery-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .home-usd1{font-size:44px}
-  .ca-label{font-size:40px;line-height:52px}
-  .ca-bubble{height:52px;padding:0 14px;font-size:16px}
-/* =========================================================
-   ABOUT SECTION — Unified layout fix
-   ========================================================= */
-.about-wrapper {
+
+.ca-bubble span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-note {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 2px;
+  margin-bottom: 26px;
+}
+
+/* hero line */
+.hero-line {
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
   text-align: center;
+  margin: 18px auto 10px;
+  max-width: 900px;
+}
+
+/* =========================================================
+   HOW TO BUY
+   ========================================================= */
+.howto-wrap {
+  margin-top: 30px;
+  margin-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.how-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 16px 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+
+  background: radial-gradient(circle at top, #171e3f 0, #050713 55%);
+  color: #ffffff;
+
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.9),
+    0 0 28px rgba(0, 255, 215, 0.4);
+}
+
+.how-arrow {
+  display: inline-block;
+  transition: transform 0.26s ease;
+}
+
+/* dropdown content */
+.how-content {
+  margin-top: 14px;
+  width: 100%;
+  max-width: 900px;
+
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.how-content ol {
+  padding-left: 1.25rem;
+}
+
+.how-content li + li {
+  margin-top: 0.4rem;
+}
+
+.how-content a {
+  font-weight: 800;
+  text-decoration: none;
+  background: var(--rbw);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainMove 6s linear infinite;
+  transition: opacity 0.2s ease;
+}
+
+.how-content a:hover {
+  opacity: 0.85;
+}
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+#about .panel-inner {
+  max-width: 1050px;
+}
+
+.about-wrapper {
+  text-align: left;
+}
+
+.about-wrapper p {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.98rem;
 }
 
 .about-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.2rem auto;
+  margin: 1.5rem auto 1rem;
   width: 100%;
-  max-width: 950px; /* keeps the image same width as text bubble */
 }
 
 .about-meme {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  object-fit: contain;
-  max-width: 100%;
   display: block;
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  width: 70%;
+  max-width: 720px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--glow-strong);
 }
 
-/* Cute line stays proportional */
+/* cute line */
 .cute-line {
   text-align: center;
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   font-weight: 800;
-  color: #fff;
-  margin-top: 1rem;
+  color: #ffffff;
+  margin-top: 1.1rem;
   letter-spacing: 0.5px;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
 }
 
-/* Responsive tune — keeps proportions consistent on phones */
-@media (max-width: 768px) {
-  .about-image-container {
-    max-width: 90%;
-  }
-  .cute-line {
-    font-size: 2rem;
-  }
-}
-/* ===================== HERO LINE OVERRIDES ===================== */
-
-/* Default / desktop: make it a bit larger */
-.hero-line {
-  font-size: 52px;
+/* =========================================================
+   TOKENOMICS
+   ========================================================= */
+.token-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 22px;
 }
 
-/* Mobile: make it about half the size */
-@media (max-width: 560px) {
-  .hero-line {
-    font-size: 24px;
-    line-height: 1.2;
-  }
-}
-/* ===================== ABOUT IMAGE OVERRIDES — FINAL ===================== */
+.card {
+  min-width: 260px;
+  max-width: 360px;
 
-/* Make sure container centers everything */
-#about .about-image-container {
+  text-align: center;
+  padding: 26px 20px;
+}
+
+.card h3 {
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #f5f5f5;
+}
+
+.card-value {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.2;
+
+  background: var(--gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 400% 100%;
+  animation: shimmer 2.6s linear infinite, goldGlow 2.2s ease-in-out infinite alternate;
+}
+
+.rainbow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 12px;
+  padding: 10px 16px;
+
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  color: #000;
+  font-weight: 900;
+  font-size: 14px;
+  text-decoration: none;
+
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.35);
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq-grid {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  position: relative;
+}
+
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.faq-a {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 100%;
+
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+
+  color: #000;
+  font-weight: 500;
+}
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+.gallery-grid {
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 18px auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+
+  box-shadow: 0 0 26px rgba(0, 0, 0, 0.9);
+}
+
+/* =========================================================
+   VIDEO SHOWCASE
+   ========================================================= */
+.video-showcase {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.2rem auto;
+
   width: 100%;
-  max-width: 950px;
+  max-width: var(--max-width-desktop);
+  margin: 40px auto 0;
+
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+
+  box-shadow: var(--glow-strong);
 }
 
-/* Desktop/tablet: smaller image to match text proportions */
-#about .about-meme {
-  display: block;
-  margin: 1.5rem auto 1rem;
-  width: 65%;
-  max-width: 600px;
+.video-showcase video {
+  width: 100%;
   height: auto;
-  border-radius: 12px;
-  object-fit: contain;
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
-  transition: all 0.25s ease-in-out;
+  display: block;
+  outline: none;
 }
 
-/* Mobile: full width inside grey bubble */
-@media (max-width: 768px) {
-  #about .about-meme {
+/* glow overlay */
+.video-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.08),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer-dark {
+  background: #000;
+  padding: 36px 0 24px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.footer-col h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.footer-col p + p {
+  margin-top: 4px;
+}
+
+.footer-col a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.footer-rainbow {
+  background: var(--rbw);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainMove 6s linear infinite;
+  font-weight: 900;
+  font-family: "Fredoka One", system-ui, sans-serif;
+}
+
+.footer-meme {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  margin-top: 18px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* tablets & small laptops */
+@media (max-width: 1100px) {
+  .navbar {
+    padding: 10px 14px;
+  }
+
+  .navbar img {
+    height: 60px;
+  }
+
+  .brand-rainbow {
+    font-size: 24px;
+  }
+
+  .brand-usd {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: none; /* still no hamburger; simple hide */
+  }
+
+  main {
+    padding-top: 12px;
+  }
+
+  .panel {
+    padding: 52px 16px 96px;
+  }
+
+  .home-usd1 {
+    font-size: 56px;
+  }
+
+  .ca-label {
+    font-size: 40px;
+  }
+
+  .hero-line {
+    font-size: 32px;
+  }
+
+  .section-title {
+    font-size: 40px;
+  }
+
+  .about-meme {
     width: 100%;
     max-width: 100%;
   }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-/* Cute line larger & balanced */
-#about .cute-line {
-  text-align: center;
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #fff;
-  margin-top: 1rem;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-}
+/* phones */
+@media (max-width: 640px) {
+  .navbar {
+    gap: 8px;
+  }
 
-/* Optional: slightly reduce paragraph font size for balance */
-#about .panel-body p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
+  .navbar img {
+    height: 50px;
+  }
 
+  .brand-rainbow {
+    font-size: 20px;
+  }
+
+  .brand-usd {
+    font-size: 16px;
+  }
+
+  .nav-socials {
+    display: none;
+  }
+
+  .panel {
+    padding: 46px 12px 80px;
+  }
+
+  .home-usd1 {
+    font-size: 40px;
+  }
+
+  .ca-row {
+    flex-direction: column;
+  }
+
+  .ca-label {
+    font-size: 32px;
+  }
+
+  .ca-bubble {
+    width: 100%;
+    height: auto;
+    min-height: 46px;
+    font-size: 14px;
+    padding: 6px 12px;
+    white-space: normal;
+  }
+
+  .hero-line {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .panel-body,
+  .card,
+  .faq-q {
+    padding: 16px 16px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cute-line {
+    font-size: 1.8rem;
+  }
+}
