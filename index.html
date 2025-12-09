@@ -54,18 +54,29 @@
 <main id="main">
   <!-- HOME -->
   <section id="home" class="panel home-section">
-    
-    <!-- Full-screen background video -->
-    <div class="home-video-bg">
-      <video class="home-video" autoplay loop muted playsinline>
+
+    <!-- Full-bleed background video -->
+    <div class="home-video-wrap">
+      <video
+        class="home-bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="images/usd1.moondance-poster.jpg"
+      >
+        <!-- Use both if you have them; browser picks best one -->
+        <source src="videos/usd1.video.moondance.webm" type="video/webm">
         <source src="videos/usd1.video.moondance.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+
+      <!-- Dark overlay so text stays readable on top -->
       <div class="home-video-overlay"></div>
     </div>
 
-    <!-- Foreground content -->
-    <div class="home-inner">
+    <!-- All hero content sits on top of the video -->
+    <div class="home-content">
       <!-- Shimmering $USD1 title above CA -->
       <div class="home-usd1 gold-shimmer">Shhh... it's the UnicornSheepDog</div>
 
@@ -86,23 +97,14 @@
 
         <div id="howContent" class="how-content hidden">
           <ol>
-            <li>Create a Solana wallet (we recommend
-              <a href="https://phantom.com/" target="_blank">Phantom</a>) and fund it with SOL.
-            </li>
-            <li>Go to
-              <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk"
-                 target="_blank">Jupiter</a>
-              and swap SOL → UnicornSheepDog1.
-            </li>
+            <li>Create a Solana wallet (we recommend <a href="https://phantom.com/" target="_blank">Phantom</a>) and fund it with SOL.</li>
+            <li>Go to <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=5H1jkA7erRxwD8uqH8KimMD74ctjUYBd32rbp2jubonk" target="_blank">Jupiter</a> and swap SOL → UnicornSheepDog1.</li>
             <li>That’s it — you’re in the Cult. Welcome home.</li>
           </ol>
         </div>
       </div>
     </div>
-
   </section>
-  
-  <!-- other sections (ABOUT, TOKENOMICS, FAQ, etc.) stay the same -->
 </main>
 
 <!-- ABOUT -->
