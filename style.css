@@ -351,56 +351,58 @@ main {
 }
 
 /* =========================================================
-   HOME SECTION
+   HOME SECTION — full-screen background video hero
    ========================================================= */
 .home-section {
   position: relative;
-  padding: 90px 20px 120px;
+  padding: 0;                     /* we control padding inside .home-content */
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
 
-/* container for foreground content */
-.home-inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* full-screen background video */
-.home-video-bg {
+/* wrapper that holds the video behind the content */
+.home-video-wrap {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  pointer-events: none; /* so clicks go to buttons, not video */
 }
 
-.home-video {
+/* actual video that covers the whole section */
+.home-bg-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;              /* important: fills, keeps aspect */
+  object-position: center center;
 }
 
-/* darken video for readability (works on mobile too) */
+/* subtle dark overlay so text is readable */
 .home-video-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.75) 55%,
-    rgba(0, 0, 0, 0.95) 100%
-  );
+  background:
+    radial-gradient(circle at top, rgba(0,0,0,0.15), transparent 55%),
+    linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
 }
 
-/* big $USD1 */
+/* all content that sits on top of the video */
+.home-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+  padding: 120px 16px 100px;      /* space from nav + bottom */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* big title */
 .home-usd1 {
   font-family: "Fredoka One", system-ui, sans-serif;
   font-weight: 900;
@@ -486,11 +488,11 @@ main {
 }
 
 /* =========================================================
-   HOW TO BUY
+   HOW TO BUY — styled bubble over the video
    ========================================================= */
 .howto-wrap {
   margin-top: 30px;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -524,7 +526,7 @@ main {
   transition: transform 0.26s ease;
 }
 
-/* dropdown content – styled like an ABOUT bubble, with bigger font */
+/* dropdown content – about-style bubble with bigger font */
 .how-content {
   margin-top: 18px;
   width: 100%;
@@ -588,14 +590,10 @@ main {
   opacity: 0.85;
 }
 
-/* mobile tweaks for hero so it still looks clean */
+/* mobile tweaks so hero still looks good */
 @media (max-width: 640px) {
-  .home-section {
-    padding: 80px 14px 80px;
-  }
-
-  .home-inner {
-    max-width: 100%;
+  .home-content {
+    padding: 96px 12px 80px;
   }
 
   .home-usd1 {
@@ -604,6 +602,15 @@ main {
 
   .ca-label {
     font-size: 32px;
+  }
+
+  .ca-bubble {
+    width: 100%;
+    height: auto;
+    min-height: 46px;
+    font-size: 14px;
+    padding: 6px 12px;
+    white-space: normal;
   }
 
   .how-content {
