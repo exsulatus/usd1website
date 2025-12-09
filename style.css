@@ -747,13 +747,48 @@ main {
 /* =========================================================
    FAQ
    ========================================================= */
-.faq-grid {
+
+/* new 2-column layout */
+.faq-layout {
   width: 100%;
-  max-width: min(1200px, 90vw);
+  max-width: var(--max-width-desktop);
   margin: 0 auto;
   display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* left side: questions */
+.faq-left {
+  flex: 1.1; /* slightly wider than image side */
+}
+
+/* right side: graphic */
+.faq-right {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.faq-graphic {
+  width: 100%;
+  max-width: 420px;   /* tweak to taste */
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--glow-strong);
+  object-fit: cover;
+}
+
+/* your existing FAQ bubble styles, adjusted for full width inside LEFT */
+.faq-grid {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .faq-item {
@@ -768,17 +803,48 @@ main {
 
   cursor: pointer;
   font-weight: 800;
-  font-size: 19px;
-  padding: 22px 24px;
+  font-size: 20px;          /* bumped a little for readability */
+  line-height: 1.4;
+
+  position: relative;
+  width: 100%;
+
+  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 20px 24px;
 }
 
+.faq-q::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+  opacity: 0.25;
+  z-index: -2;
+}
+
+.faq-q::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at top, var(--bg-panel) 0, #02040c 65%);
+  z-index: -1;
+}
+
+/* answer bubble */
 .faq-a {
   margin-top: 8px;
   width: 100%;
   max-width: 100%;
 
   border-radius: var(--radius-md);
-  padding: 14px 18px;
+  padding: 16px 20px;
 
   background: var(--rbw);
   background-size: 400% 100%;
@@ -786,6 +852,40 @@ main {
 
   color: #000;
   font-weight: 500;
+  font-size: 16px;
+}
+
+/* keep your .hidden helper as-is elsewhere:
+   .hidden { display: none !important; } */
+
+/* =========================================================
+   FAQ – responsive fallback (mobile / tablet)
+   ========================================================= */
+@media (max-width: 1000px) {
+  .faq-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .faq-right {
+    order: -1;           /* image above questions; remove if you want below */
+    justify-content: center;
+  }
+
+  .faq-graphic {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .faq-q {
+    font-size: 18px;
+    padding: 18px 18px;
+  }
+
+  .faq-a {
+    font-size: 15px;
+  }
 }
 
 /* =========================================================
