@@ -748,53 +748,29 @@ main {
    FAQ
    ========================================================= */
 
-/* new 2-column layout */
+/* Wrapper that lines up with tokenomics width */
 .faq-layout {
   width: 100%;
   max-width: var(--max-width-desktop);
   margin: 0 auto;
   display: flex;
-  align-items: flex-start;
-  gap: 40px;
+  flex-direction: column; /* mobile default */
+  gap: 24px;
 }
 
-/* left side: questions */
-.faq-left {
-  flex: 1.1; /* slightly wider than image side */
-}
-
-/* right side: graphic */
-.faq-right {
-  flex: 0.9;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.faq-graphic {
-  width: 100%;
-  max-width: 420px;   /* tweak to taste */
-  height: auto;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: var(--glow-strong);
-  object-fit: cover;
-}
-
-/* your existing FAQ bubble styles, adjusted for full width inside LEFT */
+/* Existing grid of questions – full-width on mobile */
 .faq-grid {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .faq-item {
   position: relative;
 }
 
+/* Question bubble (same look as your other bubbles) */
 .faq-q {
   display: flex;
   align-items: center;
@@ -803,17 +779,15 @@ main {
 
   cursor: pointer;
   font-weight: 800;
-  font-size: 20px;          /* bumped a little for readability */
-  line-height: 1.4;
-
-  position: relative;
-  width: 100%;
+  font-size: 19px;
+  padding: 22px 24px;
 
   background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
   color: #fff;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
 }
 
 .faq-q::before {
@@ -824,7 +798,7 @@ main {
   background: var(--rbw);
   background-size: 400% 100%;
   animation: rainMove 6s linear infinite;
-  opacity: 0.25;
+  opacity: 0.3;
   z-index: -2;
 }
 
@@ -837,14 +811,13 @@ main {
   z-index: -1;
 }
 
-/* answer bubble */
+/* Answer bubble */
 .faq-a {
   margin-top: 8px;
   width: 100%;
   max-width: 100%;
-
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: 14px 18px;
 
   background: var(--rbw);
   background-size: 400% 100%;
@@ -852,39 +825,42 @@ main {
 
   color: #000;
   font-weight: 500;
-  font-size: 16px;
 }
 
-/* keep your .hidden helper as-is elsewhere:
-   .hidden { display: none !important; } */
+/* RIGHT-SIDE IMAGE – hidden on mobile by default */
+.faq-side {
+  display: none; /* mobile/tablet default */
+}
 
-/* =========================================================
-   FAQ – responsive fallback (mobile / tablet)
-   ========================================================= */
-@media (max-width: 1000px) {
+/* ==================== DESKTOP LAYOUT ==================== */
+@media (min-width: 1024px) {
   .faq-layout {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     align-items: stretch;
-    gap: 24px;
+    column-gap: 40px;
   }
 
-  .faq-right {
-    order: -1;           /* image above questions; remove if you want below */
+  /* Let the grid occupy only the left side */
+  .faq-grid {
+    max-width: 100%;
+  }
+
+  /* Show the image on the right and make it match height-ish */
+  .faq-side {
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
-  .faq-graphic {
-    max-width: 320px;
-    margin: 0 auto;
-  }
-
-  .faq-q {
-    font-size: 18px;
-    padding: 18px 18px;
-  }
-
-  .faq-a {
-    font-size: 15px;
+  .faq-side img {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover; /* big hero-style graphic */
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--glow-strong);
   }
 }
 
