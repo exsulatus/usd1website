@@ -796,6 +796,131 @@ main {
 }
 
 /* =========================================================
+   DESKTOP OVERRIDES (ONLY > 1100px)
+   ========================================================= */
+@media (min-width: 1101px) {
+  /* overall section sizing */
+  .panel {
+    padding: 80px 40px 150px;
+  }
+
+  .panel-inner {
+    max-width: 1400px;
+  }
+
+  .section-title {
+    font-size: 60px;
+    margin-top: 60px;
+  }
+
+  /* home hero */
+  .home-usd1 {
+    font-size: 80px;
+  }
+
+  .hero-line {
+    font-size: 44px;
+    max-width: 1000px;
+  }
+
+  .ca-label {
+    font-size: 56px;
+  }
+
+  .ca-bubble {
+    height: 60px;
+    font-size: 20px;
+    padding: 0 22px;
+  }
+
+  /* ABOUT: slightly smaller bubble/image so it fits cleaner */
+  #about .panel-inner {
+    max-width: 1200px;
+  }
+
+  .about-wrapper p {
+    font-size: 1.05rem;
+  }
+
+  .about-meme {
+    width: 60%;
+    max-width: 640px;
+  }
+
+  .cute-line {
+    font-size: 2.8rem;
+  }
+
+  /* TOKENOMICS: make cards much larger */
+  .token-row {
+    max-width: 1200px;
+    margin-top: 32px;
+    gap: 32px;
+  }
+
+  .card {
+    flex: 1 1 30%;
+    min-width: 340px;
+    max-width: 420px;
+    padding: 38px 26px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card-value {
+    font-size: 40px;
+  }
+
+  /* FAQ: bigger bubbles + fonts, wider column */
+  .faq-grid {
+    max-width: 1200px;
+  }
+
+  .faq-q {
+    font-size: 20px;
+    padding: 24px 28px;
+  }
+
+  .faq-a {
+    font-size: 18px;
+    padding: 20px 24px;
+  }
+
+  /* gallery slightly wider */
+  .gallery-grid {
+    max-width: 1400px;
+    gap: 18px;
+  }
+
+  /* CONTACT / FOOTER: make it feel like a real footer bar */
+  .footer-dark {
+    padding: 70px 0 40px;
+    margin-top: 40px;
+    background: radial-gradient(circle at top, #060814 0, #000 60%);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .footer-grid {
+    max-width: 1200px;
+    gap: 40px;
+  }
+
+  .footer-col h4 {
+    font-size: 20px;
+  }
+
+  .footer-col a {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 
@@ -932,92 +1057,5 @@ main {
 
   .cute-line {
     font-size: 1.8rem;
-  }
-}
-
-/* =========================================================
-   DESKTOP-ONLY TUNING (>= 1100px)
-   - Make ABOUT bubble smaller & tighter
-   - Make TOKENOMICS / FAQ / CONTACT lanes consistent width
-   - Make FOOTER larger and easier to read
-   ========================================================= */
-@media (min-width: 1100px) {
-  /* unify lane width for all gradient-outline sections */
-  #about .panel-inner,
-  #tokenomics .panel-inner,
-  #faq .panel-inner,
-  #artgallery .panel-inner,
-  #gallery .panel-inner,
-  #contact .panel-inner {
-    max-width: 1000px;
-  }
-
-  /* ABOUT: slightly smaller bubble + image so it fits nicely */
-  #about .panel-body {
-    max-width: 1000px;
-    padding: 24px 30px;
-  }
-
-  #about .about-meme {
-    width: 60%;
-    max-width: 560px;
-  }
-
-  /* TOKENOMICS: cards feel bigger because lane is narrower
-     + slightly larger text */
-  #tokenomics .token-row {
-    max-width: 1000px;
-    margin-inline: auto;
-  }
-
-  #tokenomics .card {
-    flex: 1 1 0;
-    min-width: 280px;
-    max-width: 340px;
-    padding: 30px 24px;
-  }
-
-  #tokenomics .card h3 {
-    font-size: 18px;
-  }
-
-  #tokenomics .card-value {
-    font-size: 36px;
-  }
-
-  /* FAQ: same lane width as about/tokenomics, slightly bigger text */
-  #faq .faq-grid {
-    max-width: 1000px;
-  }
-
-  #faq .faq-q {
-    font-size: 18px;
-    padding: 20px 24px;
-  }
-
-  #faq .faq-a {
-    font-size: 16px;
-  }
-
-  /* FOOTER: larger and more readable */
-  .footer-dark {
-    padding: 64px 0 40px;
-  }
-
-  .footer-grid {
-    max-width: 1000px;
-    gap: 32px;
-  }
-
-  .footer-col h4 {
-    font-size: 20px;
-  }
-
-  .footer-col a {
-    font-size: 16px;
-  }
-
-  .footer-bottom {
-    font-size: 13px;
   }
 }
