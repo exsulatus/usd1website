@@ -188,29 +188,36 @@ canvas#stars {
   width: 100%;
 }
 
-/* socials */
+/* socials → image buttons */
 .nav-socials {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .nav-socials .social {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 14px;
-  border-radius: 999px;
   text-decoration: none;
+  /* no pill background anymore */
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
 
-  color: #000;
-  font-weight: 900;
-  font-size: 14px;
+.nav-socials .social img {
+  display: block;
+  height: 40px;   /* tweak this to match your final assets */
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.85));
+  transition: transform 0.18s ease-out, filter 0.18s ease-out;
+}
 
-  background: var(--rbw);
-  background-size: 400% 100%;
-  animation: rainMove 6s linear infinite;
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+.nav-socials .social:hover img {
+  transform: translateY(-1px) scale(1.05);
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
 }
 
 /* main layout */
