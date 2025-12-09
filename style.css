@@ -39,10 +39,6 @@
   --radius-sm: 10px;
 
   --max-width-desktop: 1600px;
-
-  /* shared section width for ABOUT / TOKENOMICS / FAQ / FOOTER on desktop */
-  --section-wide: 80vw;      /* ~70–80% of screen */
-  --section-tight: 1150px;   /* max content width */
 }
 
 /* =========================================================
@@ -61,6 +57,7 @@ body {
   height: 100%;
 }
 
+/* make footer sit at bottom on short pages */
 body {
   background: radial-gradient(circle at top, #111730 0, #02040b 50%, #000 100%);
   color: var(--text-main);
@@ -70,7 +67,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 
-  /* so footer sits at bottom when page is short */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -226,7 +223,8 @@ main {
   position: relative;
   z-index: 10;
   padding-top: 32px;
-  flex: 1 0 auto; /* for sticky footer behavior */
+
+  flex: 1; /* push footer to bottom */
 }
 
 /* =========================================================
@@ -532,12 +530,7 @@ main {
    ABOUT
    ========================================================= */
 #about .panel-inner {
-  max-width: 100%;
-}
-
-/* make ABOUT bubble slightly narrower than screen on desktop */
-#about .panel-body {
-  max-width: min(var(--section-wide), var(--section-tight));
+  max-width: 1050px;
 }
 
 .about-wrapper {
@@ -550,7 +543,6 @@ main {
   font-size: 0.98rem;
 }
 
-/* container for mascot image aligned with tokenomics width */
 .about-image-container {
   display: flex;
   justify-content: center;
@@ -559,11 +551,10 @@ main {
   width: 100%;
 }
 
-/* mascot image ~ same width as tokenomics row */
 .about-meme {
   display: block;
-  width: 100%;
-  max-width: min(70vw, 1100px);
+  width: 70%;
+  max-width: 720px;
   height: auto;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -588,32 +579,28 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 28px;
-  margin-top: 30px;
-
-  /* align width with about & mascot */
-  max-width: min(var(--section-wide), var(--section-tight));
-  width: 100%;
+  gap: 24px;
+  margin-top: 22px;
 }
 
 .card {
-  min-width: 320px;
-  max-width: 380px;
+  min-width: 260px;
+  max-width: 360px;
 
   text-align: center;
-  padding: 32px 24px;
+  padding: 26px 20px;
 }
 
 .card h3 {
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #f5f5f5;
 }
 
 .card-value {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 900;
   line-height: 1.2;
 
@@ -630,8 +617,8 @@ main {
   align-items: center;
   justify-content: center;
 
-  margin-top: 16px;
-  padding: 12px 20px;
+  margin-top: 12px;
+  padding: 10px 16px;
 
   border-radius: 999px;
   border: none;
@@ -639,7 +626,7 @@ main {
 
   color: #000;
   font-weight: 900;
-  font-size: 15px;
+  font-size: 14px;
   text-decoration: none;
 
   background: var(--rbw);
@@ -653,18 +640,17 @@ main {
    ========================================================= */
 .faq-grid {
   width: 100%;
-  max-width: min(var(--section-wide), var(--section-tight));
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .faq-item {
   position: relative;
 }
 
-/* bigger bubbles & text for desktop */
 .faq-q {
   display: flex;
   align-items: center;
@@ -673,9 +659,7 @@ main {
 
   cursor: pointer;
   font-weight: 800;
-  font-size: 20px;
-  line-height: 1.4;
-  padding: 22px 28px;
+  font-size: 17px;
 }
 
 .faq-a {
@@ -684,7 +668,7 @@ main {
   max-width: 100%;
 
   border-radius: var(--radius-md);
-  padding: 18px 22px;
+  padding: 14px 18px;
 
   background: var(--rbw);
   background-size: 400% 100%;
@@ -692,7 +676,6 @@ main {
 
   color: #000;
   font-weight: 500;
-  font-size: 17px;
 }
 
 /* =========================================================
@@ -762,30 +745,28 @@ main {
 }
 
 /* =========================================================
-   FOOTER / CONTACT
+   FOOTER
    ========================================================= */
 .footer-dark {
-  background: #010208;
-  padding: 60px 0 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.9);
+  background: #000;
+  padding: 36px 0 24px;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
+  gap: 24px;
 
   width: 100%;
-  max-width: min(var(--section-wide), var(--section-tight));
+  max-width: var(--max-width-desktop);
   margin: 0 auto;
   padding: 0 20px;
   text-align: left;
 }
 
 .footer-col h4 {
-  margin-bottom: 12px;
-  font-size: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .footer-col p + p {
@@ -795,7 +776,7 @@ main {
 .footer-col a {
   color: #ffffff;
   text-decoration: underline;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .footer-rainbow {
@@ -815,10 +796,10 @@ main {
 }
 
 .footer-bottom {
-  margin-top: 22px;
+  margin-top: 18px;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 /* =========================================================
@@ -958,5 +939,104 @@ main {
 
   .cute-line {
     font-size: 1.8rem;
+  }
+}
+
+/* =========================================================
+   DESKTOP UPSCALE (ONLY > 1100px)
+   ========================================================= */
+@media (min-width: 1100px) {
+
+  /* section titles & hero line */
+  .section-title {
+    font-size: 56px;
+    margin-top: 52px;
+  }
+
+  .hero-line {
+    font-size: 52px;
+    max-width: 1100px;
+  }
+
+  /* ABOUT — wider bubble & bigger text */
+  #about .panel-inner {
+    max-width: 1400px;
+  }
+
+  #about .panel-body {
+    max-width: 1300px;
+  }
+
+  .about-wrapper p {
+    font-size: 1.08rem;
+  }
+
+  .about-meme {
+    width: 80%;
+    max-width: 1100px; /* roughly tokenomics row width */
+  }
+
+  .cute-line {
+    font-size: 3rem;
+  }
+
+  /* TOKENOMICS — larger cards */
+  .token-row {
+    max-width: 1400px;
+    margin-inline: auto;
+    gap: 32px;
+  }
+
+  .card {
+    min-width: 340px;
+    max-width: 440px;
+    padding: 32px 28px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card-value {
+    font-size: 40px;
+  }
+
+  /* FAQ — wider & bigger text/bubbles */
+  .faq-grid {
+    max-width: 1200px;
+  }
+
+  .faq-q {
+    font-size: 21px;
+    padding: 20px 24px;
+  }
+
+  .faq-a {
+    font-size: 16px;
+    padding: 16px 20px;
+  }
+
+  /* FOOTER / CONTACT — more presence & full-width feel */
+  .footer-dark {
+    padding: 64px 0 36px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.9);
+  }
+
+  .footer-grid {
+    max-width: 1300px;
+    gap: 32px;
+  }
+
+  .footer-col h4 {
+    font-size: 20px;
+  }
+
+  .footer-col a {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
   }
 }
