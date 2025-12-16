@@ -225,14 +225,27 @@
       </div>
     </div>
 
-    <!-- RIGHT: placeholder graphic (desktop only via CSS) -->
-    <div class="faq-side">
-      <video
-        autoplay
-        muted
-        src="videos/usd1.video.qa.mp4"
-        alt="USD1 Crafting Answers"
-      />
+   <section id="faq" class="panel">
+  <div class="panel-inner">
+    <h2 class="section-title">WHAT DA FAQ?!</h2>
+
+    <div class="faq-split">
+      <!-- LEFT: existing FAQ grid -->
+      <div class="faq-left">
+        <div class="faq-grid">
+          <!-- keep your existing faq items exactly as-is -->
+          <!-- .faq-item > .faq-q + .faq-a (hidden) -->
+        </div>
+      </div>
+
+      <!-- RIGHT: video (desktop only via CSS) -->
+      <div class="faq-right" aria-hidden="true">
+        <div class="faq-media">
+          <video class="faq-video" autoplay loop muted playsinline preload="metadata">
+            <source src="videos/usd1.video.qa.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
     </div>
   </div>
 </section>
