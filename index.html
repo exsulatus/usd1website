@@ -188,13 +188,14 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="panel">
+  <!-- FAQ -->
+<section id="faq" class="panel">
   <h2 class="section-title">WHAT DA FAQ?!</h2>
 
-  <!-- New layout wrapper: left = questions, right = image -->
+  <!-- layout wrapper: left = questions, right = video (desktop) / below (mobile) -->
   <div class="faq-layout">
-    <!-- LEFT: existing FAQ grid (unchanged inside) -->
+
+    <!-- LEFT: existing FAQ grid -->
     <div class="faq-grid">
       <div class="faq-item">
         <button class="faq-q">What is UnicornSheepDog1?</button>
@@ -225,36 +226,26 @@
       </div>
     </div>
 
-   <section id="faq" class="panel">
-  <div class="panel-inner">
-    <h2 class="section-title">WHAT DA FAQ?!</h2>
+    <!-- RIGHT (desktop) / BELOW (mobile): video -->
+    <div class="faq-side">
+      <video
+        class="faq-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="images/faq-video-poster.jpg"
+        aria-label="USD1 crafting answers"
+      >
+        <source src="videos/usd1.video.qa.webm" type="video/webm">
+        <source src="videos/usd1.video.qa.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
 
-    <div class="faq-split">
-      <!-- LEFT: existing FAQ grid -->
-      <div class="faq-left">
-        <div class="faq-grid">
-          <!-- keep your existing faq items exactly as-is -->
-          <!-- .faq-item > .faq-q + .faq-a (hidden) -->
-        </div>
-      </div>
-
-    <!-- RIGHT: desktop-only side media -->
-<div class="faq-side" aria-hidden="true">
-  <div class="faq-media">
-    <video
-      class="faq-side-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      poster="images/faq-mascot-placeholder.png"
-    >
-      <source src="videos/usd1.video.qa.webm" type="video/webm" />
-      <source src="videos/usd1.video.qa.mp4" type="video/mp4" />
-    </video>
   </div>
-</div>
+</section>
 
     <!-- ART GALLERY -->
     <section id="artgallery" class="panel">
