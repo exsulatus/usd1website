@@ -802,7 +802,7 @@ main {
   .faq-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: start;
+    align-items: stretch; /* 🔥 KEY LINE */
     column-gap: 40px;
   }
 
