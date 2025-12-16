@@ -200,7 +200,6 @@ canvas#stars {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  /* no pill background anymore */
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -209,7 +208,7 @@ canvas#stars {
 
 .nav-socials .social img {
   display: block;
-  height: 40px;   /* tweak this to match your final assets */
+  height: 40px;
   width: auto;
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.85));
   transition: transform 0.18s ease-out, filter 0.18s ease-out;
@@ -263,12 +262,8 @@ main {
 
 /* keyframes */
 @keyframes shimmer {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
 }
 
 @keyframes goldGlow {
@@ -285,12 +280,8 @@ main {
 }
 
 @keyframes rainMove {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
 }
 
 /* =========================================================
@@ -315,7 +306,7 @@ main {
 /* glowing content bubble */
 .panel-body,
 .card,
-.-q {
+.faq-q {
   position: relative;
   width: 100%;
   max-width: 88vw;
@@ -362,7 +353,7 @@ main {
    ========================================================= */
 .home-section {
   position: relative;
-  padding: 0;                     /* we control padding inside .home-content */
+  padding: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -370,7 +361,6 @@ main {
   overflow: hidden;
 }
 
-/* wrapper that holds the video behind the content */
 .home-video-wrap {
   position: absolute;
   inset: 0;
@@ -378,15 +368,13 @@ main {
   overflow: hidden;
 }
 
-/* actual video that covers the whole section */
 .home-bg-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;              /* important: fills, keeps aspect */
+  object-fit: cover;
   object-position: center center;
 }
 
-/* subtle dark overlay so text is readable */
 .home-video-overlay {
   position: absolute;
   inset: 0;
@@ -395,21 +383,19 @@ main {
     linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
 }
 
-/* all content that sits on top of the video */
 .home-content {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: var(--max-width-desktop);
   margin: 0 auto;
-  padding: 120px 16px 100px;      /* space from nav + bottom */
+  padding: 120px 16px 100px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* big title */
 .home-usd1 {
   font-family: "Fredoka One", system-ui, sans-serif;
   font-weight: 900;
@@ -418,7 +404,6 @@ main {
   margin: 16px 0 32px;
 }
 
-/* CA row */
 .ca-row {
   display: flex;
   justify-content: center;
@@ -443,7 +428,6 @@ main {
   animation: rainMove 5s linear infinite;
 }
 
-/* CA bubble button */
 .ca-bubble {
   position: relative;
   display: inline-flex;
@@ -484,19 +468,6 @@ main {
   margin-bottom: 26px;
 }
 
-/* hero line (if you use it elsewhere) */
-.hero-line {
-  font-family: "Fredoka One", system-ui, sans-serif;
-  font-size: 40px;
-  font-weight: 900;
-  text-align: center;
-  margin: 18px auto 10px;
-  max-width: 900px;
-}
-
-/* =========================================================
-   HOW TO BUY — styled bubble over the video
-   ========================================================= */
 .howto-wrap {
   margin-top: 30px;
   margin-bottom: 60px;
@@ -533,7 +504,6 @@ main {
   transition: transform 0.26s ease;
 }
 
-/* dropdown content – about-style bubble with bigger font */
 .how-content {
   margin-top: 18px;
   width: 100%;
@@ -599,17 +569,9 @@ main {
 
 /* mobile tweaks so hero still looks good */
 @media (max-width: 640px) {
-  .home-content {
-    padding: 96px 12px 80px;
-  }
-
-  .home-usd1 {
-    font-size: 40px;
-  }
-
-  .ca-label {
-    font-size: 32px;
-  }
+  .home-content { padding: 96px 12px 80px; }
+  .home-usd1 { font-size: 40px; }
+  .ca-label { font-size: 32px; }
 
   .ca-bubble {
     width: 100%;
@@ -629,27 +591,19 @@ main {
 /* =========================================================
    ABOUT
    ========================================================= */
-
-/* both ABOUT bubbles wider than the hero text area */
 #about .panel-body {
   max-width: min(1400px, 90vw);
 }
 
-/* text card */
-.about-text-card {
-  text-align: center;
-}
+.about-text-card { text-align: center; }
 
 .about-text-card p {
-  font-size: 1.08rem;        /* larger, more readable */
+  font-size: 1.08rem;
   line-height: 1.75;
   color: var(--muted);
 }
 
-/* image + caption card */
-.about-media-card {
-  text-align: center;
-}
+.about-media-card { text-align: center; }
 
 .about-image-container {
   display: flex;
@@ -669,7 +623,6 @@ main {
   box-shadow: var(--glow-strong);
 }
 
-/* Cute line big + loud */
 .cute-line {
   text-align: center;
   font-size: 2.6rem;
@@ -745,75 +698,39 @@ main {
 }
 
 /* =========================================================
-   FAQ
+   FAQ (UPDATED TO SUPPORT VIDEO)
    ========================================================= */
 
-/* match Tokenomics horizontal bounds */
-#faq .faq-split {
+/* mobile default: stacked */
+.faq-layout {
   width: 100%;
-  max-width: min(1400px, 92vw);  /* same vibe as .token-row */
+  max-width: var(--max-width-desktop);
   margin: 0 auto;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* left questions, right media */
-  gap: 28px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* LEFT */
-#faq .faq-left { width: 100%; }
-
-/* RIGHT */
-#faq .faq-right { width: 100%; }
-
-/* right media box: same size “block” as the question stack */
-#faq .faq-media {
-  position: sticky;
-  top: 120px;
-
+.faq-grid {
   width: 100%;
-  height: calc((24px * 4) + (22px * 4 * 1.35) + (16px * 3)); 
-  /* ↑ approximate 4 question buttons + gaps. tweak if you want */
-
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  overflow: hidden;
-  box-shadow: var(--glow-strong);
-  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
-}
-
-#faq .faq-video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-/* your existing FAQ stack */
-#faq .faq-grid {
-  width: 100%;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-#faq .faq-item { position: relative; }
+.faq-item { position: relative; }
 
-#faq .faq-q {
+.faq-q {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 
   cursor: pointer;
-  font-weight: 900;
-  font-size: 22px;
-  line-height: 1.35;
+  font-weight: 800;
+  font-size: 19px;
+  padding: 22px 24px;
 
-  padding: 24px 26px;
-
-  /* keep your bubble look consistent */
   background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
   color: #fff;
   border-radius: var(--radius-lg);
@@ -822,7 +739,7 @@ main {
   overflow: hidden;
 }
 
-#faq .faq-q::before {
+.faq-q::before {
   content: "";
   position: absolute;
   inset: -1px;
@@ -830,11 +747,11 @@ main {
   background: var(--rbw);
   background-size: 400% 100%;
   animation: rainMove 6s linear infinite;
-  opacity: 0.30;
+  opacity: 0.3;
   z-index: -2;
 }
 
-#faq .faq-q::after {
+.faq-q::after {
   content: "";
   position: absolute;
   inset: 1px;
@@ -843,40 +760,60 @@ main {
   z-index: -1;
 }
 
-/* answer bubble */
-#faq .faq-a {
-  margin-top: 10px;
+.faq-a {
+  margin-top: 8px;
   width: 100%;
+  max-width: 100%;
   border-radius: var(--radius-md);
-  padding: 18px 22px;
+  padding: 14px 18px;
 
   background: var(--rbw);
   background-size: 400% 100%;
   animation: rainMove 6s linear infinite;
 
   color: #000;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 500;
 }
 
-/* MOBILE: keep your current “full width FAQ”, no graphic */
-@media (max-width: 900px) {
-  #faq .faq-split {
-    grid-template-columns: 1fr;
+/* media container: on mobile it sits UNDER questions */
+.faq-side {
+  width: 100%;
+  max-width: 88vw;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--glow-strong);
+}
+
+/* the video itself */
+.faq-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* desktop: split into 2 columns and make the video fill the right column height */
+@media (min-width: 1024px) {
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    column-gap: 40px;
+    align-items: stretch;
   }
 
-  #faq .faq-right {
-    display: none;
+  .faq-side {
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
   }
 
-  #faq .faq-q {
-    font-size: 18px;
-    padding: 18px 18px;
-  }
-
-  #faq .faq-a {
-    font-size: 15px;
-    padding: 14px 16px;
+  /* important: make it match height of left column */
+  .faq-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -932,7 +869,6 @@ main {
   outline: none;
 }
 
-/* glow overlay */
 .video-showcase::before {
   content: "";
   position: absolute;
@@ -1007,117 +943,42 @@ main {
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-
-/* tablets & small laptops */
 @media (max-width: 1100px) {
-  .navbar {
-    padding: 10px 14px;
-  }
+  .navbar { padding: 10px 14px; }
+  .navbar img { height: 60px; }
+  .brand-rainbow { font-size: 24px; }
+  .brand-usd { font-size: 18px; }
+  .nav-links { display: none; }
 
-  .navbar img {
-    height: 60px;
-  }
+  main { padding-top: 12px; }
+  .panel { padding: 52px 16px 96px; }
 
-  .brand-rainbow {
-    font-size: 24px;
-  }
+  .home-usd1 { font-size: 56px; }
+  .ca-label { font-size: 40px; }
+  .hero-line { font-size: 32px; }
+  .section-title { font-size: 40px; }
 
-  .brand-usd {
-    font-size: 18px;
-  }
+  #about .panel-body { max-width: 100%; }
+  .about-text-card p { font-size: 0.98rem; text-align: left; }
+  .about-meme { width: 100%; max-width: 100%; }
+  .cute-line { font-size: 2rem; }
 
-  .nav-links {
-    display: none; /* still no hamburger; simple hide */
-  }
-
-  main {
-    padding-top: 12px;
-  }
-
-  .panel {
-    padding: 52px 16px 96px;
-  }
-
-  .home-usd1 {
-    font-size: 56px;
-  }
-
-  .ca-label {
-    font-size: 40px;
-  }
-
-  .hero-line {
-    font-size: 32px;
-  }
-
-  .section-title {
-    font-size: 40px;
-  }
-
-  #about .panel-body {
-    max-width: 100%;
-  }
-
-  .about-text-card p {
-    font-size: 0.98rem;
-    text-align: left;
-  }
-
-  .about-meme {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .cute-line {
-    font-size: 2rem;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .footer-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* phones */
 @media (max-width: 640px) {
-  .navbar {
-    gap: 8px;
-  }
+  .navbar { gap: 8px; }
+  .navbar img { height: 50px; }
+  .brand-rainbow { font-size: 20px; }
+  .brand-usd { font-size: 16px; }
+  .nav-socials { display: none; }
 
-  .navbar img {
-    height: 50px;
-  }
+  .panel { padding: 46px 12px 80px; }
+  .home-usd1 { font-size: 40px; }
 
-  .brand-rainbow {
-    font-size: 20px;
-  }
-
-  .brand-usd {
-    font-size: 16px;
-  }
-
-  .nav-socials {
-    display: none;
-  }
-
-  .panel {
-    padding: 46px 12px 80px;
-  }
-
-  .home-usd1 {
-    font-size: 40px;
-  }
-
-  .ca-row {
-    flex-direction: column;
-  }
-
-  .ca-label {
-    font-size: 32px;
-  }
+  .ca-row { flex-direction: column; }
+  .ca-label { font-size: 32px; }
 
   .ca-bubble {
     width: 100%;
@@ -1128,14 +989,8 @@ main {
     white-space: normal;
   }
 
-  .hero-line {
-    font-size: 22px;
-    line-height: 1.25;
-  }
-
-  .section-title {
-    font-size: 32px;
-  }
+  .hero-line { font-size: 22px; line-height: 1.25; }
+  .section-title { font-size: 32px; }
 
   .panel-body,
   .card,
@@ -1145,16 +1000,10 @@ main {
     padding: 16px 16px;
   }
 
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 16px; }
+  .cute-line { font-size: 1.8rem; }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .cute-line {
-    font-size: 1.8rem;
-  }
+  /* keeps the FAQ video centered on mobile */
+  .faq-side { max-width: 100%; }
 }
