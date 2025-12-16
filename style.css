@@ -698,19 +698,20 @@ main {
 }
 
 /* =========================================================
-   FAQ (UPDATED TO SUPPORT VIDEO)
+   FAQ
    ========================================================= */
 
-/* mobile default: stacked */
+/* Wrapper that lines up with tokenomics width */
 .faq-layout {
   width: 100%;
   max-width: var(--max-width-desktop);
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 18px;
+  flex-direction: column; /* mobile default */
+  gap: 24px;
 }
 
+/* Existing grid of questions – full-width on mobile */
 .faq-grid {
   width: 100%;
   display: flex;
@@ -718,8 +719,11 @@ main {
   gap: 16px;
 }
 
-.faq-item { position: relative; }
+.faq-item {
+  position: relative;
+}
 
+/* Question bubble (same look as your other bubbles) */
 .faq-q {
   display: flex;
   align-items: center;
@@ -737,6 +741,10 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   overflow: hidden;
+
+  /* IMPORTANT: if your script sets button styles, keep it stable */
+  width: 100%;
+  text-align: left;
 }
 
 .faq-q::before {
@@ -760,6 +768,7 @@ main {
   z-index: -1;
 }
 
+/* Answer bubble */
 .faq-a {
   margin-top: 8px;
   width: 100%;
@@ -775,45 +784,53 @@ main {
   font-weight: 500;
 }
 
-/* media container: on mobile it sits UNDER questions */
+/* Media container — shows under questions on mobile */
 .faq-side {
   width: 100%;
-  max-width: 88vw;
-  margin: 0 auto;
+  max-width: 88vw;            /* matches your other bubbles */
+  margin: 0 auto;             /* centers on mobile */
   border-radius: var(--radius-lg);
-  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
   box-shadow: var(--glow-strong);
+  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
 }
 
-/* the video itself */
+/* The actual video */
 .faq-video {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
+  outline: none;
 }
 
-/* desktop: split into 2 columns and make the video fill the right column height */
+/* ==================== DESKTOP LAYOUT ==================== */
 @media (min-width: 1024px) {
   .faq-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
     column-gap: 40px;
-    align-items: stretch;
   }
 
+  /* left side is just the FAQ */
+  .faq-grid {
+    max-width: 100%;
+  }
+
+  /* right side: video fills the column and feels “tall” */
   .faq-side {
     max-width: 100%;
     margin: 0;
     height: 100%;
+    min-height: 420px;   /* gives it presence next to 4 questions */
   }
 
-  /* important: make it match height of left column */
   .faq-video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;   /* fills the container like a poster */
   }
 }
 
