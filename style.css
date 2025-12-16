@@ -813,11 +813,13 @@ main {
   display: flex;
 }
 
-  .faq-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+ .faq-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* cinematic crop, no distortion */
+  display: block;
+}
+
 }
 
 /* =========================================================
