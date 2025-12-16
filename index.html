@@ -238,17 +238,23 @@
         </div>
       </div>
 
-      <!-- RIGHT: video (desktop only via CSS) -->
-      <div class="faq-right" aria-hidden="true">
-        <div class="faq-media">
-          <video class="faq-video" autoplay loop muted playsinline preload="metadata">
-            <source src="videos/usd1.video.qa.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
+    <!-- RIGHT: desktop-only side media -->
+<div class="faq-side" aria-hidden="true">
+  <div class="faq-media">
+    <video
+      class="faq-side-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="images/faq-mascot-placeholder.png"
+    >
+      <source src="videos/usd1.video.qa.webm" type="video/webm" />
+      <source src="videos/usd1.video.qa.mp4" type="video/mp4" />
+    </video>
   </div>
-</section>
+</div>
 
     <!-- ART GALLERY -->
     <section id="artgallery" class="panel">
