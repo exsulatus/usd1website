@@ -800,39 +800,35 @@ main {
 /* ==================== DESKTOP LAYOUT ==================== */
 @media (min-width: 1024px) {
   .faq-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: stretch;
-    column-gap: 40px;
+    display: flex;               /* <-- change from grid to flex */
+    flex-direction: row;
+    gap: 40px;
+    align-items: stretch;        /* <-- makes both columns same height */
   }
 
-  /* RIGHT side stays exactly the same */
+  .faq-grid {
+    flex: 1.1;
+    max-width: none;
+  }
+
   .faq-side {
-    max-width: 100%;
+    flex: 0.9;
+    max-width: none;
     margin: 0;
-    height: 100%;
+
+    /* IMPORTANT: let it stretch to match the left column */
+    height: auto;
+    align-self: stretch;
+
+    /* keeps the nice “outlined box” look */
     display: flex;
   }
 
   .faq-video {
     width: 100%;
-    height: 100%;
+    height: 100%;               /* <-- fill the stretched container */
     object-fit: cover;
     display: block;
-  }
-
-  /* ✅ LEFT: make the 4 questions fill the same height as the video */
-  .faq-grid {
-    height: 100%;                 /* key */
-    display: flex;                /* key */
-    flex-direction: column;       /* key */
-    justify-content: space-between; /* key: spreads them out */
-    gap: 0;                       /* let space-between do the spacing */
-  }
-
-  /* optional: ensures each item doesn't collapse weirdly */
-  .faq-item {
-    flex: 0 0 auto;
   }
 }
 
