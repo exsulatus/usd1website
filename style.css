@@ -701,7 +701,6 @@ main {
    FAQ
    ========================================================= */
 
-/* Wrapper that lines up with tokenomics width */
 .faq-layout {
   width: 100%;
   max-width: var(--max-width-desktop);
@@ -711,7 +710,6 @@ main {
   gap: 24px;
 }
 
-/* Existing grid of questions – full-width on mobile */
 .faq-grid {
   width: 100%;
   display: flex;
@@ -719,11 +717,8 @@ main {
   gap: 16px;
 }
 
-.faq-item {
-  position: relative;
-}
+.faq-item { position: relative; }
 
-/* Question bubble (same look as your other bubbles) */
 .faq-q {
   display: flex;
   align-items: center;
@@ -742,7 +737,6 @@ main {
   position: relative;
   overflow: hidden;
 
-  /* IMPORTANT: if your script sets button styles, keep it stable */
   width: 100%;
   text-align: left;
 }
@@ -768,7 +762,6 @@ main {
   z-index: -1;
 }
 
-/* Answer bubble */
 .faq-a {
   margin-top: 8px;
   width: 100%;
@@ -784,11 +777,11 @@ main {
   font-weight: 500;
 }
 
-/* Media container — shows under questions on mobile */
+/* This is your “outlined box” container */
 .faq-side {
   width: 100%;
-  max-width: 88vw;            /* matches your other bubbles */
-  margin: 0 auto;             /* centers on mobile */
+  max-width: 88vw;
+  margin: 0 auto;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
@@ -796,7 +789,6 @@ main {
   background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
 }
 
-/* The actual video */
 .faq-video {
   width: 100%;
   height: auto;
@@ -814,23 +806,17 @@ main {
     column-gap: 40px;
   }
 
-  /* left side is just the FAQ */
-  .faq-grid {
-    max-width: 100%;
-  }
-
-  /* right side: video fills the column and feels “tall” */
   .faq-side {
     max-width: 100%;
     margin: 0;
     height: 100%;
-    min-height: 420px;   /* gives it presence next to 4 questions */
+    min-height: 420px;
   }
 
   .faq-video {
     width: 100%;
     height: 100%;
-    object-fit: cover;   /* fills the container like a poster */
+    object-fit: cover;
   }
 }
 
