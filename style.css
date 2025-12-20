@@ -798,6 +798,15 @@ main {
 }
 
 /* ==================== DESKTOP LAYOUT ==================== */
+/* ==== FAQ sizing fixes (keep everything else the same) ==== */
+
+/* HARD override the global bubble rule that adds margin-bottom to .faq-q */
+#faq .faq-q {
+  margin: 0;          /* kills the inherited "0 auto 18px" */
+  max-width: 100%;    /* kills inherited max-width: 88vw */
+}
+
+/* ==================== DESKTOP LAYOUT ==================== */
 @media (min-width: 1024px) {
   .faq-layout {
     display: flex;               /* <-- change from grid to flex */
