@@ -188,35 +188,29 @@ canvas#stars {
   width: 100%;
 }
 
-/* socials → image buttons */
+/* socials */
 .nav-socials {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .nav-socials .social {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
   text-decoration: none;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
 
-.nav-socials .social img {
-  display: block;
-  height: 40px;
-  width: auto;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.85));
-  transition: transform 0.18s ease-out, filter 0.18s ease-out;
-}
+  color: #000;
+  font-weight: 900;
+  font-size: 14px;
 
-.nav-socials .social:hover img {
-  transform: translateY(-1px) scale(1.05);
-  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
 }
 
 /* main layout */
@@ -262,8 +256,12 @@ main {
 
 /* keyframes */
 @keyframes shimmer {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes goldGlow {
@@ -280,8 +278,12 @@ main {
 }
 
 @keyframes rainMove {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 /* =========================================================
@@ -309,7 +311,7 @@ main {
 .faq-q {
   position: relative;
   width: 100%;
-  max-width: 88vw;
+  max-width: 100%;
   margin: 0 auto 18px;
 
   background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
@@ -349,53 +351,17 @@ main {
 }
 
 /* =========================================================
-   HOME SECTION — full-screen background video hero
+   HOME SECTION
    ========================================================= */
 .home-section {
-  position: relative;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  padding-top: 72px;
 }
 
-.home-video-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.home-bg-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-
-.home-video-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top, rgba(0,0,0,0.15), transparent 55%),
-    linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
-}
-
-.home-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--max-width-desktop);
-  margin: 0 auto;
-  padding: 120px 16px 100px;
+.home-section .panel-inner {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
+/* big $USD1 */
 .home-usd1 {
   font-family: "Fredoka One", system-ui, sans-serif;
   font-weight: 900;
@@ -404,6 +370,7 @@ main {
   margin: 16px 0 32px;
 }
 
+/* CA row */
 .ca-row {
   display: flex;
   justify-content: center;
@@ -428,6 +395,7 @@ main {
   animation: rainMove 5s linear infinite;
 }
 
+/* CA bubble button */
 .ca-bubble {
   position: relative;
   display: inline-flex;
@@ -468,9 +436,22 @@ main {
   margin-bottom: 26px;
 }
 
+/* hero line */
+.hero-line {
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+  margin: 18px auto 10px;
+  max-width: 900px;
+}
+
+/* =========================================================
+   HOW TO BUY
+   ========================================================= */
 .howto-wrap {
   margin-top: 30px;
-  margin-bottom: 60px;
+  margin-bottom: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -504,51 +485,22 @@ main {
   transition: transform 0.26s ease;
 }
 
+/* dropdown content */
 .how-content {
-  margin-top: 18px;
+  margin-top: 14px;
   width: 100%;
-  max-width: 86vw;
-  font-size: 1.02rem;
+  max-width: 900px;
+
+  font-size: 15px;
   color: var(--text-main);
-  text-align: left;
-
-  position: relative;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 22px 26px;
-
-  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
-  overflow: hidden;
-}
-
-.how-content::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: var(--rbw);
-  background-size: 400% 100%;
-  animation: rainMove 6s linear infinite;
-  opacity: 0.32;
-  z-index: -2;
-}
-
-.how-content::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  background: radial-gradient(circle at top, var(--bg-panel) 0, #02040c 65%);
-  z-index: -1;
-  box-shadow: var(--glow-strong);
 }
 
 .how-content ol {
-  padding-left: 1.4rem;
+  padding-left: 1.25rem;
 }
 
 .how-content li + li {
-  margin-top: 0.55rem;
+  margin-top: 0.4rem;
 }
 
 .how-content a {
@@ -567,43 +519,22 @@ main {
   opacity: 0.85;
 }
 
-/* mobile tweaks so hero still looks good */
-@media (max-width: 640px) {
-  .home-content { padding: 96px 12px 80px; }
-  .home-usd1 { font-size: 40px; }
-  .ca-label { font-size: 32px; }
-
-  .ca-bubble {
-    width: 100%;
-    height: auto;
-    min-height: 46px;
-    font-size: 14px;
-    padding: 6px 12px;
-    white-space: normal;
-  }
-
-  .how-content {
-    max-width: 100%;
-    padding: 18px 18px;
-  }
-}
-
 /* =========================================================
    ABOUT
    ========================================================= */
-#about .panel-body {
-  max-width: min(1400px, 90vw);
+#about .panel-inner {
+  max-width: 1050px;
 }
 
-.about-text-card { text-align: center; }
+.about-wrapper {
+  text-align: left;
+}
 
-.about-text-card p {
-  font-size: 1.08rem;
-  line-height: 1.75;
+.about-wrapper p {
+  margin-bottom: 1rem;
   color: var(--muted);
+  font-size: 0.98rem;
 }
-
-.about-media-card { text-align: center; }
 
 .about-image-container {
   display: flex;
@@ -615,21 +546,22 @@ main {
 
 .about-meme {
   display: block;
-  width: 80%;
-  max-width: 900px;
+  width: 70%;
+  max-width: 720px;
   height: auto;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--glow-strong);
 }
 
+/* cute line */
 .cute-line {
   text-align: center;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   font-weight: 800;
   color: #ffffff;
-  margin-top: 0.8rem;
-  letter-spacing: 0.6px;
+  margin-top: 1.1rem;
+  letter-spacing: 0.5px;
   text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
 }
 
@@ -640,17 +572,16 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 28px;
-  margin-top: 26px;
-  width: 100%;
-  max-width: min(1400px, 92vw);
+  gap: 24px;
+  margin-top: 22px;
 }
 
 .card {
-  min-width: 320px;
-  max-width: 420px;
+  min-width: 260px;
+  max-width: 360px;
+
   text-align: center;
-  padding: 30px 24px;
+  padding: 26px 20px;
 }
 
 .card h3 {
@@ -662,7 +593,7 @@ main {
 }
 
 .card-value {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 900;
   line-height: 1.2;
 
@@ -700,24 +631,18 @@ main {
 /* =========================================================
    FAQ
    ========================================================= */
-
-.faq-layout {
-  width: 100%;
-  max-width: var(--max-width-desktop);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column; /* mobile default */
-  gap: 24px;
-}
-
 .faq-grid {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
-.faq-item { position: relative; }
+.faq-item {
+  position: relative;
+}
 
 .faq-q {
   display: flex;
@@ -727,45 +652,14 @@ main {
 
   cursor: pointer;
   font-weight: 800;
-  font-size: 19px;
-  padding: 22px 24px;
-
-  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
-  color: #fff;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  position: relative;
-  overflow: hidden;
-
-  width: 100%;
-  text-align: left;
-}
-
-.faq-q::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: var(--rbw);
-  background-size: 400% 100%;
-  animation: rainMove 6s linear infinite;
-  opacity: 0.3;
-  z-index: -2;
-}
-
-.faq-q::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  background: radial-gradient(circle at top, var(--bg-panel) 0, #02040c 65%);
-  z-index: -1;
+  font-size: 17px;
 }
 
 .faq-a {
   margin-top: 8px;
   width: 100%;
   max-width: 100%;
+
   border-radius: var(--radius-md);
   padding: 14px 18px;
 
@@ -775,93 +669,6 @@ main {
 
   color: #000;
   font-weight: 500;
-}
-
-/* This is your “outlined box” container */
-.faq-side {
-  width: 100%;
-  max-width: 88vw;
-  margin: 0 auto;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-  box-shadow: var(--glow-strong);
-  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
-}
-
-.faq-video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  outline: none;
-}
-
-/* ==================== DESKTOP LAYOUT ==================== */
-/* ==== FAQ sizing fixes (keep everything else the same) ==== */
-
-/* HARD override the global bubble rule that adds margin-bottom to .faq-q */
-#faq .faq-q {
-  margin: 0;          /* kills the inherited "0 auto 18px" */
-  max-width: 100%;    /* kills inherited max-width: 88vw */
-}
-
-/* ==================== DESKTOP LAYOUT ==================== */
-@media (min-width: 1024px) {
-  /* tweak these two numbers until it matches PERFECTLY */
-  :root {
-    --faq-q-h: 74px;   /* height of one unexpanded question */
-    --faq-gap: 16px;   /* must match .faq-grid gap */
-  }
-
-  .faq-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: start;
-    column-gap: 40px;
-  }
-
-  .faq-grid {
-    gap: var(--faq-gap);
-  }
-
-  /* lock each question button to a consistent height */
-  #faq .faq-q {
-    min-height: var(--faq-q-h);
-    display: flex;
-    align-items: center;
-  }
-
-  /* video box = 4 questions + 3 gaps */
-  .faq-side {
-    max-width: 100%;
-    margin: 0;
-    height: calc((4 * var(--faq-q-h)) + (3 * var(--faq-gap)));
-    display: block;          /* important: don't flex-stretch it */
-  }
-
-  .faq-video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-}
-
-  .faq-side {
-  max-width: 100%;
-  margin: 0;
-  height: 100%;           /* fill grid row */
-  display: flex;
-}
-
- .faq-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* cinematic crop, no distortion */
-  display: block;
-}
-
 }
 
 /* =========================================================
@@ -916,6 +723,7 @@ main {
   outline: none;
 }
 
+/* glow overlay */
 .video-showcase::before {
   content: "";
   position: absolute;
@@ -940,10 +748,10 @@ main {
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
+  gap: 24px;
 
   width: 100%;
-  max-width: min(1400px, 92vw);
+  max-width: var(--max-width-desktop);
   margin: 0 auto;
   padding: 0 20px;
   text-align: left;
@@ -988,44 +796,231 @@ main {
 }
 
 /* =========================================================
-   RESPONSIVE
+   DESKTOP OVERRIDES (ONLY > 1100px)
    ========================================================= */
-@media (max-width: 1100px) {
-  .navbar { padding: 10px 14px; }
-  .navbar img { height: 60px; }
-  .brand-rainbow { font-size: 24px; }
-  .brand-usd { font-size: 18px; }
-  .nav-links { display: none; }
+@media (min-width: 1101px) {
+  /* overall section sizing */
+  .panel {
+    padding: 80px 40px 150px;
+  }
 
-  main { padding-top: 12px; }
-  .panel { padding: 52px 16px 96px; }
+  .panel-inner {
+    max-width: 1400px;
+  }
 
-  .home-usd1 { font-size: 56px; }
-  .ca-label { font-size: 40px; }
-  .hero-line { font-size: 32px; }
-  .section-title { font-size: 40px; }
+  .section-title {
+    font-size: 60px;
+    margin-top: 60px;
+  }
 
-  #about .panel-body { max-width: 100%; }
-  .about-text-card p { font-size: 0.98rem; text-align: left; }
-  .about-meme { width: 100%; max-width: 100%; }
-  .cute-line { font-size: 2rem; }
+  /* home hero */
+  .home-usd1 {
+    font-size: 80px;
+  }
 
-  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-line {
+    font-size: 44px;
+    max-width: 1000px;
+  }
+
+  .ca-label {
+    font-size: 56px;
+  }
+
+  .ca-bubble {
+    height: 60px;
+    font-size: 20px;
+    padding: 0 22px;
+  }
+
+  /* ABOUT: slightly smaller bubble/image so it fits cleaner */
+  #about .panel-inner {
+    max-width: 1200px;
+  }
+
+  .about-wrapper p {
+    font-size: 1.05rem;
+  }
+
+  .about-meme {
+    width: 60%;
+    max-width: 640px;
+  }
+
+  .cute-line {
+    font-size: 2.8rem;
+  }
+
+  /* TOKENOMICS: make cards much larger */
+  .token-row {
+    max-width: 1200px;
+    margin-top: 32px;
+    gap: 32px;
+  }
+
+  .card {
+    flex: 1 1 30%;
+    min-width: 340px;
+    max-width: 420px;
+    padding: 38px 26px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card-value {
+    font-size: 40px;
+  }
+
+  /* FAQ: bigger bubbles + fonts, wider column */
+  .faq-grid {
+    max-width: 1200px;
+  }
+
+  .faq-q {
+    font-size: 20px;
+    padding: 24px 28px;
+  }
+
+  .faq-a {
+    font-size: 18px;
+    padding: 20px 24px;
+  }
+
+  /* gallery slightly wider */
+  .gallery-grid {
+    max-width: 1400px;
+    gap: 18px;
+  }
+
+  /* CONTACT / FOOTER: make it feel like a real footer bar */
+  .footer-dark {
+    padding: 70px 0 40px;
+    margin-top: 40px;
+    background: radial-gradient(circle at top, #060814 0, #000 60%);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .footer-grid {
+    max-width: 1200px;
+    gap: 40px;
+  }
+
+  .footer-col h4 {
+    font-size: 20px;
+  }
+
+  .footer-col a {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
 }
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* tablets & small laptops */
+@media (max-width: 1100px) {
+  .navbar {
+    padding: 10px 14px;
+  }
+
+  .navbar img {
+    height: 60px;
+  }
+
+  .brand-rainbow {
+    font-size: 24px;
+  }
+
+  .brand-usd {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: none; /* still no hamburger; simple hide */
+  }
+
+  main {
+    padding-top: 12px;
+  }
+
+  .panel {
+    padding: 52px 16px 96px;
+  }
+
+  .home-usd1 {
+    font-size: 56px;
+  }
+
+  .ca-label {
+    font-size: 40px;
+  }
+
+  .hero-line {
+    font-size: 32px;
+  }
+
+  .section-title {
+    font-size: 40px;
+  }
+
+  .about-meme {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* phones */
 @media (max-width: 640px) {
-  .navbar { gap: 8px; }
-  .navbar img { height: 50px; }
-  .brand-rainbow { font-size: 20px; }
-  .brand-usd { font-size: 16px; }
-  .nav-socials { display: none; }
+  .navbar {
+    gap: 8px;
+  }
 
-  .panel { padding: 46px 12px 80px; }
-  .home-usd1 { font-size: 40px; }
+  .navbar img {
+    height: 50px;
+  }
 
-  .ca-row { flex-direction: column; }
-  .ca-label { font-size: 32px; }
+  .brand-rainbow {
+    font-size: 20px;
+  }
+
+  .brand-usd {
+    font-size: 16px;
+  }
+
+  .nav-socials {
+    display: none;
+  }
+
+  .panel {
+    padding: 46px 12px 80px;
+  }
+
+  .home-usd1 {
+    font-size: 40px;
+  }
+
+  .ca-row {
+    flex-direction: column;
+  }
+
+  .ca-label {
+    font-size: 32px;
+  }
 
   .ca-bubble {
     width: 100%;
@@ -1036,21 +1031,31 @@ main {
     white-space: normal;
   }
 
-  .hero-line { font-size: 22px; line-height: 1.25; }
-  .section-title { font-size: 32px; }
+  .hero-line {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
 
   .panel-body,
   .card,
-  .faq-q,
-  .how-content {
-    max-width: 100%;
+  .faq-q {
     padding: 16px 16px;
   }
 
-  .gallery-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: 16px; }
-  .cute-line { font-size: 1.8rem; }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
 
-  /* keeps the FAQ video centered on mobile */
-  .faq-side { max-width: 100%; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cute-line {
+    font-size: 1.8rem;
+  }
 }
