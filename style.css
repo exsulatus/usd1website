@@ -808,37 +808,60 @@ main {
 
 /* ==================== DESKTOP LAYOUT ==================== */
 @media (min-width: 1024px) {
+  /* tweak these two numbers until it matches PERFECTLY */
+  :root {
+    --faq-q-h: 74px;   /* height of one unexpanded question */
+    --faq-gap: 16px;   /* must match .faq-grid gap */
+  }
+
   .faq-layout {
-    display: flex;               /* <-- change from grid to flex */
-    flex-direction: row;
-    gap: 40px;
-    align-items: stretch;        /* <-- makes both columns same height */
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
+    column-gap: 40px;
   }
 
   .faq-grid {
-    flex: 1.1;
-    max-width: none;
+    gap: var(--faq-gap);
   }
 
-  .faq-side {
-    flex: 0.9;
-    max-width: none;
-    margin: 0;
-
-    /* IMPORTANT: let it stretch to match the left column */
-    height: auto;
-    align-self: stretch;
-
-    /* keeps the nice “outlined box” look */
+  /* lock each question button to a consistent height */
+  #faq .faq-q {
+    min-height: var(--faq-q-h);
     display: flex;
+    align-items: center;
+  }
+
+  /* video box = 4 questions + 3 gaps */
+  .faq-side {
+    max-width: 100%;
+    margin: 0;
+    height: calc((4 * var(--faq-q-h)) + (3 * var(--faq-gap)));
+    display: block;          /* important: don't flex-stretch it */
   }
 
   .faq-video {
     width: 100%;
-    height: 100%;               /* <-- fill the stretched container */
-    object-fit: cover;
+    height: 100%;
     display: block;
+    object-fit: cover;
   }
+}
+
+  .faq-side {
+  max-width: 100%;
+  margin: 0;
+  height: 100%;           /* fill grid row */
+  display: flex;
+}
+
+ .faq-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* cinematic crop, no distortion */
+  display: block;
+}
+
 }
 
 /* =========================================================
