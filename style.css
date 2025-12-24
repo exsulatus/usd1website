@@ -688,7 +688,7 @@ main {
 
 .card {
   min-width: 600px;
-  max-width: 800px;
+  max-width: 700px;
   text-align: center;
   padding: 30px 24px;
 }
@@ -740,6 +740,81 @@ main {
 /* =========================================================
    FAQ
    ========================================================= */
+/* ===== TOKENOMICS: bigger on desktop only ===== */
+@media (min-width: 1024px) {
+  #tokenomics .token-row{
+    max-width: min(1500px, 92vw);
+    gap: 36px;
+  }
+
+  #tokenomics .card{
+    max-width: 520px;     /* was 420 */
+    min-width: 380px;     /* slightly bigger floor */
+    padding: 36px 28px;   /* more breathing room */
+  }
+
+  #tokenomics .card h3{
+    font-size: 18px;
+  }
+
+  #tokenomics .card-value{
+    font-size: 44px;      /* was 36 */
+  }
+
+  #tokenomics .rainbow-btn{
+    font-size: 15px;
+    padding: 12px 18px;
+  }
+}
+/* ===== FAQ layout wrapper (mobile default = stacked) ===== */
+.faq-layout{
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;   /* mobile stays stacked */
+  gap: 18px;
+}
+
+/* Video container (uses your existing glow look) */
+.faq-side{
+  width: 100%;
+  max-width: min(1200px, 90vw);
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--glow-strong);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
+}
+
+.faq-video{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ===== DESKTOP ONLY: two columns ===== */
+@media (min-width: 1024px){
+  #faq .faq-layout{
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: start;
+    column-gap: 36px;
+  }
+
+  #faq .faq-grid{
+    max-width: 100%;
+    margin: 0;
+  }
+
+  #faq .faq-side{
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
 .faq-grid {
   width: 100%;
   max-width: min(1200px, 90vw);
@@ -1058,4 +1133,31 @@ main {
   .cute-line {
     font-size: 1.8rem;
   }
+}
+/* ===== FAQ: stop clipping when answers expand (desktop + mobile safe) ===== */
+#faq .faq-layout,
+#faq .faq-grid,
+#faq .faq-item {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* If you ever used space-between to stretch the questions to match video height,
+   this will stop it from choking expanded answers. */
+#faq .faq-grid {
+  justify-content: flex-start !important;
+  align-content: start !important;
+}
+
+/* Make sure answers can grow naturally */
+#faq .faq-a {
+  overflow: visible !important;
+  white-space: normal !important;
+  word-break: normal;
+}
+
+/* Keep the video looking the same, but don't force the row height */
+@media (min-width: 1024px) {
+  #faq .faq-side { align-self: start; }
 }
