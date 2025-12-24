@@ -1166,3 +1166,160 @@ main {
 @media (min-width: 1024px) {
   #faq .faq-side { align-self: start; }
 }
+/* =========================================================
+   FAQ — FINAL (desktop 2-col + keeps original bubble styling)
+   Paste at VERY BOTTOM of style.css
+   ========================================================= */
+
+/* Mobile default stays stacked */
+#faq .faq-layout{
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Keep grid width sane on mobile */
+#faq .faq-grid{
+  width: 100%;
+  max-width: min(1200px, 90vw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* IMPORTANT: never clip the expanding answers */
+#faq .faq-item{ overflow: visible; }
+
+/* ---- Question bubbles (restore the “panel bubble” look) ---- */
+#faq .faq-q{
+  width: 100%;
+  text-align: left;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  cursor: pointer;
+
+  /* bigger + readable */
+  font-weight: 900;
+  font-size: 19px;
+  line-height: 1.25;
+
+  padding: 22px 24px;
+
+  /* bubble look */
+  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
+  color: #fff;
+
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  position: relative;
+  overflow: hidden; /* ok here (only the button), NOT the whole item */
+}
+
+#faq .faq-q::before{
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+  opacity: 0.30;
+  z-index: -2;
+}
+
+#faq .faq-q::after{
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at top, var(--bg-panel) 0, #02040c 65%);
+  z-index: -1;
+  box-shadow: var(--glow-strong);
+}
+
+/* ---- Answer bubbles (rainbow pill with BLACK text) ---- */
+#faq .faq-a{
+  margin-top: 8px;
+  width: 100%;
+
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+
+  background: var(--rbw);
+  background-size: 400% 100%;
+  animation: rainMove 6s linear infinite;
+
+  color: #000 !important;   /* force black text */
+  font-weight: 600;
+  line-height: 1.45;
+
+  overflow: visible;        /* never clip text */
+  white-space: normal;      /* allow wrapping */
+}
+
+/* ---- Video container (leave video behavior alone) ---- */
+#faq .faq-side{
+  width: 100%;
+  max-width: min(1200px, 90vw);
+  margin: 0 auto;
+
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--glow-strong);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
+}
+
+#faq .faq-video{
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* =========================================================
+   DESKTOP: 2 columns + “contained within video height”
+   ========================================================= */
+@media (min-width: 1024px){
+  #faq .faq-layout{
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    column-gap: 36px;
+    align-items: stretch; /* make both columns same height */
+  }
+
+  /* Force the video box to have a predictable height on desktop */
+  #faq .faq-side{
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
+    aspect-ratio: 1 / 1; /* adjust if you want (e.g. 4/3 or 16/9) */
+    display: flex;
+  }
+
+  #faq .faq-video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Left column fills the same height as the video */
+  #faq .faq-grid{
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
+
+    /* evenly space the 4 items in the available height */
+    justify-content: space-between;
+    gap: 14px;
+  }
+}
