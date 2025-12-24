@@ -795,65 +795,70 @@ main {
   object-fit: cover;
 }
 
-/* ===== DESKTOP ONLY: two columns ===== */
-@media (min-width: 1024px){
-  #faq .faq-layout{
+/* ===== FAQ: desktop two-column, same-height, no cut-off ===== */
+@media (min-width: 1024px) {
+  /* Control the overall height of the FAQ row via the video */
+  #faq .faq-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: start;
     column-gap: 36px;
+    align-items: stretch;      /* both columns match height */
+    max-width: min(1500px, 92vw);
+    margin: 0 auto;
   }
 
-  #faq .faq-grid{
+  /* Video defines the row height */
+  #faq .faq-side {
     max-width: 100%;
     margin: 0;
+    height: min(560px, 62vh);  /* tweak: bigger/smaller video on desktop */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--glow-strong);
+    border: 1px solid rgba(255,255,255,0.08);
+    background: radial-gradient(circle at top left, #121735 0, #060714 45%, #04050e 100%);
   }
 
-  #faq .faq-side{
+  #faq .faq-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Left column matches video height and scrolls instead of clipping */
+  #faq .faq-grid {
     max-width: 100%;
     margin: 0;
+    height: min(560px, 62vh);  /* must match faq-side height */
+    min-height: 0;             /* IMPORTANT for overflow to work in grid */
+    overflow-y: auto;          /* key: no cut-off */
+    padding-right: 10px;       /* space so scrollbar doesn't sit on text */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Make sure expanded answers can fully render */
+  #faq .faq-a {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
   }
 }
 
-.faq-grid {
-  width: 100%;
-  max-width: min(1200px, 90vw);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.faq-item {
-  position: relative;
-}
-
-.faq-q {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-
-  cursor: pointer;
-  font-weight: 800;
-  font-size: 19px;
-  padding: 22px 24px;
-}
-
-.faq-a {
-  margin-top: 8px;
-  width: 100%;
-  max-width: 100%;
-
-  border-radius: var(--radius-md);
-  padding: 14px 18px;
-
-  background: var(--rbw);
-  background-size: 400% 100%;
-  animation: rainMove 6s linear infinite;
-
-  color: #000;
-  font-weight: 500;
+/* Optional: nicer scrollbar (desktop only, harmless if unsupported) */
+@media (min-width: 1024px) {
+  #faq .faq-grid::-webkit-scrollbar { width: 10px; }
+  #faq .faq-grid::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+  }
+  #faq .faq-grid::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.25);
+    border-radius: 999px;
+  }
 }
 
 /* =========================================================
