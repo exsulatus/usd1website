@@ -6,6 +6,22 @@
   <title>UnicornSheepDog1 ($USD1)</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <div class="brand-usd">$USD1</div>
+<div class="nav-socials-mobile" aria-label="Social links">
+  <a class="social" href="https://x.com/UnicornSheepDog" target="_blank" rel="noopener" aria-label="X / Twitter">
+    <img src="images/social-x-placeholder.png" alt="X / Twitter" />
+  </a>
+  <a class="social" href="https://t.me/UnicornSheepDog1" target="_blank" rel="noopener" aria-label="Telegram">
+    <img src="images/social-telegram-placeholder.png" alt="Telegram" />
+  </a>
+  <a class="social" href="https://www.tiktok.com/@unicornsheepdog" target="_blank" rel="noopener" aria-label="TikTok">
+    <img src="images/social-tiktok-placeholder.png" alt="TikTok" />
+  </a>
+  <a class="social" href="https://dexscreener.com/solana/32vjneqs23a7vhh6g8gcuwem14ffssj1kdzz59hz5nyk" target="_blank" rel="noopener" aria-label="DexScreener">
+    <img src="images/social-dexscreener-placeholder.png" alt="DexScreener" />
+  </a>
+</div>
+
 
   <style>
     /* --- FIXES --- */
@@ -15,9 +31,6 @@
       width: auto;
     }
 
-    /* Make sure header scrolls normally (not fixed/sticky) */
-    .navbar {
-      position: relative !important;
     }
   </style>
 </head>
@@ -84,6 +97,22 @@
     <img src="images/dexs.whitenobg.png" alt="DexScreener" />
   </a>
 </div>
+ <!-- Mobile hamburger (mobile only) -->
+<button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Mobile nav drawer -->
+<div class="nav-backdrop" data-nav-close></div>
+
+<nav id="mobileNav" class="nav-drawer" aria-label="Mobile">
+  <a href="#home" data-nav-close>HOME</a>
+  <a href="#about" data-nav-close>ABOUT</a>
+  <a href="#tokenomics" data-nav-close>TOKENOMICS</a>
+  <a href="#faq" data-nav-close>FAQ</a>
+  <a href="#artgallery" data-nav-close>ART GALLERY</a>
+  <a href="#contact" data-nav-close>CONTACT US</a>
+</nav>   
 </header>
 
 <main id="main">
