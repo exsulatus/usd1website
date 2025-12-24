@@ -90,12 +90,12 @@ canvas#stars {
 /* =========================================================
    NAVBAR
    ========================================================= */
-.navbar {
-  position: relative; /* scrolls with page */
+/* Sticky header (always visible) */
+.navbar{
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 80;
+  z-index: 999;
+}
 
   display: flex;
   align-items: center;
@@ -930,8 +930,10 @@ main {
 /* =========================================================
    FOOTER
    ========================================================= */
-.footer-dark {
-  background: #000;
+.footer-dark{
+  background: radial-gradient(circle at top left, #171c3b 0, #050713 35%, #000 90%);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
   padding: 36px 0 24px;
 }
 
@@ -1322,4 +1324,115 @@ main {
     justify-content: space-between;
     gap: 14px;
   }
+}
+/* ===== Mobile hamburger + drawer ===== */
+.nav-toggle{
+  display: none; /* desktop hidden */
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #171c3b 0, #050713 55%, #000 95%);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-toggle span{
+  display: block;
+  height: 2px;
+  margin: 6px 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+}
+
+.nav-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+  z-index: 998;
+}
+
+.nav-drawer{
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(320px, 82vw);
+  padding: 90px 18px 18px;
+  background: radial-gradient(circle at top left, #171c3b 0, #050713 40%, #000 95%);
+  border-left: 1px solid rgba(255,255,255,0.10);
+  box-shadow: -20px 0 60px rgba(0,0,0,0.8);
+  transform: translateX(105%);
+  transition: transform 220ms ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-drawer a{
+  text-decoration: none;
+  color: #fff;
+  font-family: "Fredoka One", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 1px;
+
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: radial-gradient(circle at top, rgba(20,25,55,0.9), rgba(0,0,0,0.9));
+}
+
+body.nav-open .nav-drawer{
+  transform: translateX(0);
+}
+
+body.nav-open .nav-backdrop{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* show hamburger on mobile only */
+@media (max-width: 1100px){
+  .nav-toggle{ display: inline-flex; align-items: center; justify-content: center; }
+}
+/* Mobile socials row under $USD1, constrained to brand width */
+.nav-socials-mobile{
+  display: none;
+  margin-top: 6px;
+  width: 100%;
+  max-width: 260px; /* keeps it within the UnicornSheepDog1 text area */
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.nav-socials-mobile .social{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.nav-socials-mobile img{
+  height: 22px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.85));
+}
+
+/* Desktop stays top-right */
+.nav-socials{
+  display: flex;
+}
+
+/* On mobile: hide desktop socials, show mobile socials */
+@media (max-width: 1100px){
+  .nav-socials{ display: none; }
+  .nav-socials-mobile{ display: flex; }
 }
