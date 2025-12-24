@@ -229,3 +229,30 @@ if(nextBtn && prevBtn && slides.length){
     showSlide(idx);
   }, 4000);
 }
+
+/* ============================
+   Mobile hamburger menu
+   ============================ */
+const navToggle = document.querySelector('.nav-toggle');
+const navBackdrop = document.querySelector('.nav-backdrop');
+const mobileNav = document.getElementById('mobileNav');
+
+function setNav(open){
+  document.body.classList.toggle('nav-open', open);
+  if(navToggle) navToggle.setAttribute('aria-expanded', String(open));
+}
+
+if(navToggle){
+  navToggle.addEventListener('click', () => {
+    const open = !document.body.classList.contains('nav-open');
+    setNav(open);
+  });
+}
+
+document.addEventListener('click', (e) => {
+  if(e.target && e.target.matches('[data-nav-close]')) setNav(false);
+});
+
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') setNav(false);
+});
